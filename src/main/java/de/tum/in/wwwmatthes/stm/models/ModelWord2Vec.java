@@ -2,7 +2,6 @@ package de.tum.in.wwwmatthes.stm.models;
 
 import java.io.File;
 
-import org.deeplearning4j.models.paragraphvectors.ParagraphVectors;
 import org.deeplearning4j.models.word2vec.Word2Vec;
 import org.deeplearning4j.text.documentiterator.FileLabelAwareIterator;
 import org.deeplearning4j.text.documentiterator.LabelAwareIterator;

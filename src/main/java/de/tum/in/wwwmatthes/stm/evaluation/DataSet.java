@@ -14,7 +14,7 @@ public class DataSet {
 		this.map 	= new HashMap<String, DataSetItem>(); 
 		
 		for(DataSetItem item : items) {
-			this.map.put(item.getLabel(), item);
+			this.map.put(item.getKey(), item);
 		}
 	}
 	
@@ -24,7 +24,7 @@ public class DataSet {
 	 * @param label Identifier for specific dataset
 	 * @return dataset Dataset
 	 */
-	public DataSetItem dataSetItemForLabel(String label) {
+	public DataSetItem dataSetItemForKey(String label) {
 		return map.get(label);
 	}
 	

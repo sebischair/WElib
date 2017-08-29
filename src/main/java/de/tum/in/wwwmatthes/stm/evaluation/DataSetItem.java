@@ -4,18 +4,18 @@ import java.util.List;
 
 public class DataSetItem {
 	
-	private String label;
+	private String key;
 	private String input;
 	private List<String> output;
 	
-	public DataSetItem(String label, String input, List<String> output) {
-		this.label 	= label;
+	public DataSetItem(String key, String input, List<String> output) {
+		this.key 	= key;
 		this.input	= input;
 		this.output	= output;
 	}
 
-	public String getLabel() {
-		return label;
+	public String getKey() {
+		return key;
 	}
 
 	public String getInput() {
@@ -30,9 +30,9 @@ public class DataSetItem {
 	public String toString() {
 		int max = Math.min(input.length(), 20);
 		if (input.length() > max) {
-			return "DataSetItem [label=" + label + ", input=" + input.substring(0, max) + "... , output=" + output + "]";
+			return "DataSetItem [key=" + key + ", input=" + input.substring(0, max) + "... , output=" + output + "]";
 		} else {
-			return "DataSetItem [label=" + label + ", input=" + input + ", output=" + output + "]";
+			return "DataSetItem [key=" + key + ", input=" + input + ", output=" + output + "]";
 		}
 	}
 
