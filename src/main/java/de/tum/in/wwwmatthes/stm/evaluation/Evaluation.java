@@ -17,10 +17,14 @@ public class Evaluation {
 	public double evaluateWithMRR() {
 		double mrr = 0;
 		for(DataSetItem item : dataSet.getItems()) {
-			List<String> rankedDocuments = model.rankedDocumentsForText(item.getInput());
-			mrr += Evaluation.mrr(item.getOutput(), rankedDocuments);
+			mrr += evaluateWithMRR(item);
 		}
 		return mrr / dataSet.getItems().size();
+	}
+	
+	public double evaluateWithMRR(DataSetItem item) {
+		List<String> rankedDocuments = model.rankedDocumentsForText(item.getInput());
+		return Evaluation.mrr(item.getOutput(), rankedDocuments);
 	}
 
 	
