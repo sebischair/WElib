@@ -2,7 +2,7 @@ package de.tum.in.wwwmatthes.stm.evaluation;
 
 import java.util.List;
 
-import de.tum.in.wwwmatthes.stm.models.base.Model;
+import de.tum.in.wwwmatthes.stm.models.Model;
 
 public class Evaluation {
 	

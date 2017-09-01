@@ -1,11 +1,11 @@
-package de.tum.in.wwwmatthes.stm.models.base;
+package de.tum.in.wwwmatthes.stm.models;
 
 import java.util.List;
 
 import org.nd4j.linalg.primitives.Pair;
 
 public interface Model {
-
+	
 	/**
 	 * Trains the model.
 	 */
@@ -35,5 +35,13 @@ public interface Model {
 	 * @return documents List of ranked documents with their their similarities.
 	 */
 	public List<Pair<String, Double>> rankedDocumentsWithSimilaritiesForText(String text);
+	
+	/**
+	 * Returns the content for the given document label.
+	 * 
+	 * @param label Label of the document which content was requested.
+	 * @return content Content of the document 
+	 */
+	public String getContentForDocument(String label);
 	
 }

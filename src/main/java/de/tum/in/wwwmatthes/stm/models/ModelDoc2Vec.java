@@ -1,32 +1,30 @@
 package de.tum.in.wwwmatthes.stm.models;
 
-import java.io.File;
-
 import org.deeplearning4j.models.paragraphvectors.ParagraphVectors;
 import org.deeplearning4j.text.documentiterator.FileLabelAwareIterator;
 import org.deeplearning4j.text.documentiterator.LabelAwareIterator;
+
 import org.nd4j.linalg.api.ndarray.INDArray;
 
-import de.tum.in.wwwmatthes.stm.models.base.ModelImpl;
-import de.tum.in.wwwmatthes.stm.preprocessing.StopWords;
+import de.tum.in.wwwmatthes.stm.models.config.Config;
 
-public class ModelDoc2Vec extends ModelImpl {
+class ModelDoc2Vec extends ModelImpl {
 	
 	// Variables
 	private ParagraphVectors 	vectors;
 	private LabelAwareIterator 	corpusLabelAwareIterator;
 	
-	public ModelDoc2Vec(File documentsSourceFile, File corpusSourceFile) {
-		super(documentsSourceFile);
+	ModelDoc2Vec(Config config) {
+		super(config);
 		
 		corpusLabelAwareIterator = new FileLabelAwareIterator.Builder()
-	              .addSourceFolder(corpusSourceFile)
+	              .addSourceFolder(config.getCorpusSourceFile())
 	              .build();
 		
 		vectors = new ParagraphVectors.Builder()
-				.stopWords(StopWords.getStopWords())
+				.stopWords(config.getStopWords())
 	        		.batchSize(1000)
-	        		.epochs(20)
+	        		.epochs(config.getEpochs())
 	        		.iterate(corpusLabelAwareIterator)
 	        		.trainWordVectors(true)
 	        		.tokenizerFactory(tokenizerFactory)
@@ -41,7 +39,7 @@ public class ModelDoc2Vec extends ModelImpl {
 		vectors.fit();
 		
 		// Create Documents Lookup Table
-		this.updateDocumentsLookupTable();
+		updateDocumentsLookupTable();
 	}
 
 	@Override

@@ -1,6 +1,7 @@
-package de.tum.in.wwwmatthes.stm.models.base;
+package de.tum.in.wwwmatthes.stm.models;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -21,21 +22,25 @@ import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.ops.transforms.Transforms;
 import org.nd4j.linalg.primitives.Pair;
 
-public abstract class ModelImpl implements Model {
+import de.tum.in.wwwmatthes.stm.models.config.Config;
+
+abstract class ModelImpl implements Model {
 	
-	public Map<String, String> documentsContentLookupTable = new HashMap<String, String>(); // Only for debugging
+	private Map<String, String> documentsContentLookupTable = new HashMap<String, String>(); // Only for debugging
 	private Map<String, INDArray> documentsLookupTable = new HashMap<String, INDArray>();
 	
 	// Variables
 	protected LabelAwareIterator 	documentsLabelAwareIterator;
 	protected TokenizerFactory 		tokenizerFactory;
 	
-	public ModelImpl(File documentsSourceFile) {
+	// Private Variables
+	
+	ModelImpl(Config config) {
 		super();
 		
 		// Documents Label Aware Iterator
 		this.documentsLabelAwareIterator = new FileLabelAwareIterator.Builder()
-	              .addSourceFolder(documentsSourceFile)
+	              .addSourceFolder(config.getDocumentsSourceFile())
 	              .build();
 		
 		// Tokenizer Factory
@@ -135,6 +140,16 @@ public abstract class ModelImpl implements Model {
 	}
 	
 	/**
+	 * Returns the content for the given document label.
+	 * 
+	 * @param label Label of the document which content was requested.
+	 * @return content Content of the document 
+	 */
+	public String getContentForDocument(String label) {
+		return documentsContentLookupTable.get(label);
+	}
+		
+	/**
 	 * Updates Documents lookup table.
 	 */
 	protected void updateDocumentsLookupTable() {
@@ -142,7 +157,7 @@ public abstract class ModelImpl implements Model {
 		
 		// Reset
 		documentsLabelAwareIterator.reset();
-		
+
 		// Iterate
 		while(documentsLabelAwareIterator.hasNext()) {
 			LabelledDocument 	labelledDocument 		= documentsLabelAwareIterator.nextDocument();
@@ -158,5 +173,5 @@ public abstract class ModelImpl implements Model {
 		// Set
 		documentsLookupTable = lookupTable;
 	}
-
+	
 }

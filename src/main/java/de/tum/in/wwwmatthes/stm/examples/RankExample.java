@@ -1,7 +1,7 @@
 package de.tum.in.wwwmatthes.stm.examples;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,29 +10,47 @@ import org.datavec.api.util.ClassPathResource;
 import de.tum.in.wwwmatthes.stm.evaluation.DataSet;
 import de.tum.in.wwwmatthes.stm.evaluation.DataSetItem;
 import de.tum.in.wwwmatthes.stm.evaluation.Evaluation;
-import de.tum.in.wwwmatthes.stm.models.ModelDoc2Vec;
-import de.tum.in.wwwmatthes.stm.models.ModelTFIDF;
-import de.tum.in.wwwmatthes.stm.models.base.Model;
+import de.tum.in.wwwmatthes.stm.exceptions.InvalidConfigException;
+import de.tum.in.wwwmatthes.stm.models.config.Config;
+import de.tum.in.wwwmatthes.stm.models.config.ConfigFactory;
+import de.tum.in.wwwmatthes.stm.models.Model;
+import de.tum.in.wwwmatthes.stm.models.ModelFactory;
 
 public class RankExample {
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws IOException, InvalidConfigException {
 		
-		// Load documents
-		File corpusSourceFile 	= new ClassPathResource("examples/labeled").getFile();
-		File documentsSourceFile = new ClassPathResource("examples/unlabeled").getFile();
+		// Load Configuration File
+		File configFile = new ClassPathResource("examples/config/example.config").getFile();
 		
-		// Doc2Vec
-		Model doc2Vec = new ModelDoc2Vec(documentsSourceFile, corpusSourceFile);
-		doc2Vec.fit();
-		System.out.println("Model Doc2Vec fitted.");
+		// Create Configuration
+		Config config = new ConfigFactory()
+				.useConfigFile(configFile)
+				.build();
 		
-		// TFIDF
-		Model tfidf = new ModelTFIDF(documentsSourceFile);
-		tfidf.fit();
-		System.out.println("Model TFIDF fitted.");
+		// Create Model
+		Model model = ModelFactory.createFromConfig(config);
+		
+		// Fit Model
+		model.fit();
+		
+		/*
+		 * Alternative:
+		 * 
+		 * Model model = ModelFactory.createFromConfigFile(configFile);
+		 * 
+		 */
 		
 		// Create dataset with truths
+		DataSet dataSet = createDataset();
+		System.out.println(dataSet);
+		
+		Evaluation evaluation = new Evaluation(dataSet, model);
+		System.out.println("MRR: " + evaluation.evaluateWithMRR());
+	}
+	
+	private static DataSet createDataset() {
+		
 		List<String> item1List = new ArrayList<String>();
 		item1List.add("finance");
 		
@@ -47,23 +65,7 @@ public class RankExample {
 		itemList.add(item1);
 		itemList.add(item2);
 		
-		DataSet dataSet = new DataSet(itemList);
-		System.out.println();
-		System.out.println(dataSet);
-		
-		// Evaluate
-		//System.out.println(doc2Vec.rankedDocumentsWithSimilaritiesForText(item1.getInput()));
-		//System.out.println(doc2Vec.rankedDocumentsWithSimilaritiesForText(item2.getInput()));
-		
-		//System.out.println(tfidf.rankedDocumentsWithSimilaritiesForText(item1.getInput()));
-		//System.out.println(tfidf.rankedDocumentsWithSimilaritiesForText(item2.getInput()));
-		
-		Evaluation evaluationDoc2Vec = new Evaluation(dataSet, doc2Vec);
-		System.out.println("Doc2Vec MRR: " + evaluationDoc2Vec.evaluateWithMRR());
-		
-		Evaluation evaluationTFIDF = new Evaluation(dataSet, tfidf);
-		System.out.println("TFIDF MRR: " + evaluationTFIDF.evaluateWithMRR());
-		
+		return new DataSet(itemList);
 	}
 	
 }
