@@ -24,9 +24,7 @@ public class RankExample {
 		File configFile = new ClassPathResource("examples/config/example.config").getFile();
 		
 		// Create Configuration
-		Config config = new ConfigFactory()
-				.useConfigFile(configFile)
-				.build();
+		Config config = new ConfigFactory(configFile).build();
 		
 		// Create Model
 		Model model = ModelFactory.createFromConfig(config);

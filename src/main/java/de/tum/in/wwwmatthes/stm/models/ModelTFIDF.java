@@ -1,5 +1,6 @@
 package de.tum.in.wwwmatthes.stm.models;
 
+import org.deeplearning4j.bagofwords.vectorizer.BagOfWordsVectorizer;
 import org.deeplearning4j.bagofwords.vectorizer.TfidfVectorizer;
 import org.nd4j.linalg.api.ndarray.INDArray;
 
@@ -12,7 +13,7 @@ class ModelTFIDF extends ModelImpl {
 
 	ModelTFIDF(Config config) {
 		super(config);
-		
+				
 		tfidfVectorizer = new TfidfVectorizer.Builder()
 			.setMinWordFrequency(config.getMinWordFrequency())
 			.setStopWords(config.getStopWords())

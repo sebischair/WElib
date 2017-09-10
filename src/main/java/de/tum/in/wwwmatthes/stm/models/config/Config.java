@@ -16,6 +16,8 @@ public interface Config {
 	public File getDocumentsSourceFile();
 
 	public File getCorpusSourceFile();
+	
+	public File getCorpusFile();
 
 	public int getEpochs();
 	

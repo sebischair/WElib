@@ -28,10 +28,11 @@ abstract class ConfigImpl implements Config {
 	private int	windowSize 	= 0;
 	private int	epochs 		= 0;
 	
-	private File corpusSourceFile = null;
+	private File corpusSourceFile 	= null;
+	private File corpusFile 			= null;
 	
 	// Config File
-	private File 		configFile;
+	private File configFile;
 	
 	/**
 	 * Create a new object of type Config.
@@ -72,6 +73,10 @@ abstract class ConfigImpl implements Config {
 	public File getCorpusSourceFile() {
 		return corpusSourceFile;
 	}
+	
+	public File getCorpusFile() {
+		return corpusFile;
+	}
 
 	public int getEpochs() {
 		return epochs;
@@ -111,6 +116,10 @@ abstract class ConfigImpl implements Config {
 	
 	void setCorpusSourceFile(File corpusSourceFile) {
 		this.corpusSourceFile = corpusSourceFile;
+	}
+	
+	void setCorpusFile(File corpusFile) {
+		this.corpusFile = corpusFile;
 	}
 	
 	void setUseDefaultStopWords(boolean useDefaultStopWords) {

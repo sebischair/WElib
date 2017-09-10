@@ -44,13 +44,7 @@ abstract class ModelImpl implements Model {
 	              .build();
 		
 		// Tokenizer Factory
-		try {
-			this.tokenizerFactory = new UimaTokenizerFactory();
-		} catch (ResourceInitializationException e) {
-			e.printStackTrace();
-			this.tokenizerFactory = new DefaultTokenizerFactory();
-		}
-		
+		this.tokenizerFactory = new UimaTokenizerFactory(UimaTokenizerFactory.defaultAnalysisEngine());
 		this.tokenizerFactory.setTokenPreProcessor(new CommonPreprocessor() {
 			@Override
 			public String preProcess(String token) {

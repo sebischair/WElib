@@ -24,28 +24,23 @@ public class ConfigFactory {
 	private File 		documentsSourceFile		= null;
 		
 	// Word2Vec & Doc2Vec
-	private int	layerSize 	= 0;
-	private int	windowSize 	= 0;
+	private int	layerSize 	= 1;
+	private int	windowSize 	= 2;
 	private int	epochs 		= 0;
 	
-	private File corpusSourceFile = null;
+	private File corpusSourceFile 	= null;
+	private File corpusFile 			= null;
 	
 	// Config File
 	private File 		configFile;
 	
-	public ConfigFactory useConfigFile(File configFile) {
-		this.configFile = configFile;
-		return this;
-	}
-	
-	public ConfigFactory key(String key) {
+	public ConfigFactory(String key, ConfigType type) {
 		this.key = key;
-		return this;
+		this.type = type;
 	}
 	
-	public ConfigFactory type(ConfigType type) {
-		this.type = type;
-		return this;
+	public ConfigFactory(File file) {
+		this.configFile = file;
 	}
 	
 	public ConfigFactory useDefaultStopWords(boolean useDefaultStopWords) {
@@ -65,6 +60,11 @@ public class ConfigFactory {
 	
 	public ConfigFactory corpusSourceFile(File corpusSourceFile) {
 		this.corpusSourceFile = corpusSourceFile;
+		return this;
+	}
+	
+	public ConfigFactory corpusFile(File corpusFile) {
+		this.corpusFile = corpusFile;
 		return this;
 	}
 	
@@ -114,22 +114,26 @@ public class ConfigFactory {
 			return configTFIDF;
 			
 		case WORD2VEC:
-			ConfigTFIDF configWORD2VEC = new ConfigTFIDF(key);
+			ConfigWord2Vec configWORD2VEC = new ConfigWord2Vec(key);
 			configWORD2VEC.setMinWordFrequency(minWordFrequency);
 			configWORD2VEC.setStopWords(stopWords);
 			configWORD2VEC.setDocumentsSourceFile(documentsSourceFile);
 			configWORD2VEC.setUseDefaultStopWords(useDefaultStopWords);
 			configWORD2VEC.setEpochs(epochs);
+			configWORD2VEC.setCorpusSourceFile(corpusSourceFile);
+			configWORD2VEC.setCorpusFile(corpusFile);
 			
 			return configWORD2VEC;
 			
 		case DOC2VEC:
-			ConfigTFIDF configDOC2VEC = new ConfigTFIDF(key);
+			ConfigDoc2Vec configDOC2VEC = new ConfigDoc2Vec(key);
 			configDOC2VEC.setMinWordFrequency(minWordFrequency);
 			configDOC2VEC.setStopWords(stopWords);
 			configDOC2VEC.setDocumentsSourceFile(documentsSourceFile);
 			configDOC2VEC.setUseDefaultStopWords(useDefaultStopWords);
 			configDOC2VEC.setEpochs(epochs);
+			configDOC2VEC.setCorpusSourceFile(corpusSourceFile);
+			configDOC2VEC.setCorpusFile(corpusFile);
 			
 			return configDOC2VEC;
 
@@ -151,6 +155,7 @@ public class ConfigFactory {
 	private static final String JSON_KEY_LAYERSIZE 			= "layerSize";
 	private static final String JSON_KEY_WINDOWSIZE 			= "windowSize";
 	private static final String JSON_KEY_CORPUSSOURCEFILE 	= "corpusSourceFile";
+	private static final String JSON_KEY_CORPUSFILE 			= "corpusFile";
 	
 	private void importJSONFile(File file) {
 		
@@ -205,6 +210,17 @@ public class ConfigFactory {
 			}
 		} else {
 			this.corpusSourceFile = null;
+		}
+		
+		if (object.has(JSON_KEY_CORPUSFILE)) {
+			File corpusFile = new File(object.getString(JSON_KEY_CORPUSFILE));
+			if (corpusFile.exists()) {
+				this.corpusFile = corpusFile;
+			} else {
+				this.corpusFile = null;
+			}
+		} else {
+			this.corpusFile = null;
 		}
 		
 		// Add Default Stop Words		
