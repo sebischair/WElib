@@ -9,23 +9,26 @@ import org.datavec.api.util.ClassPathResource;
 
 import de.tum.in.wwwmatthes.stm.evaluation.DataSet;
 import de.tum.in.wwwmatthes.stm.evaluation.DataSetItem;
+import de.tum.in.wwwmatthes.stm.evaluation.DataSets;
 import de.tum.in.wwwmatthes.stm.evaluation.Evaluation;
 import de.tum.in.wwwmatthes.stm.exceptions.InvalidConfigException;
 import de.tum.in.wwwmatthes.stm.models.config.Config;
 import de.tum.in.wwwmatthes.stm.models.config.ConfigFactory;
+import de.tum.in.wwwmatthes.stm.models.config.ConfigType;
 import de.tum.in.wwwmatthes.stm.models.Model;
 import de.tum.in.wwwmatthes.stm.models.ModelFactory;
 
 public class RankExample {
 
 	public static void main(String[] args) throws IOException, InvalidConfigException {
-		
+	
 		// Load Configuration File
 		File configFile = new ClassPathResource("examples/config/example.config").getFile();
 		
 		// Create Configuration
-		Config config = new ConfigFactory(configFile).build();
-		
+		Config config = ConfigFactory.buildFromFile(configFile);
+		//config.writeToFile(new File("/path/to/file"));
+				
 		// Create Model
 		Model model = ModelFactory.createFromConfig(config);
 		
@@ -40,14 +43,18 @@ public class RankExample {
 		 */
 		
 		// Create dataset with truths
-		DataSet dataSet = createDataset();
-		System.out.println(dataSet);
+		DataSets dataSets = createDatasets();
+		System.out.println(dataSets);
 		
-		Evaluation evaluation = new Evaluation(dataSet, model);
-		System.out.println("MRR: " + evaluation.evaluateWithMRR());
+		System.out.println("Evaluation");
+		System.out.println("MRR: " + dataSets.getMRR());
+		dataSets.evaluateWithModel(model);
+		System.out.println("MRR: " + dataSets.getMRR());
+		
+		//dataSets.writeToFile(new File("/path/to/file"));
 	}
 	
-	private static DataSet createDataset() {
+	private static DataSets createDatasets() {
 		
 		List<String> item1List = new ArrayList<String>();
 		item1List.add("finance");
@@ -63,7 +70,7 @@ public class RankExample {
 		itemList.add(item1);
 		itemList.add(item2);
 		
-		return new DataSet(itemList);
+		return new DataSets(new DataSet("Random", itemList));
 	}
 	
 }

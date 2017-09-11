@@ -2,142 +2,106 @@ package de.tum.in.wwwmatthes.stm.models.config;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import org.apache.commons.io.FileUtils;
 
-import de.tum.in.wwwmatthes.stm.preprocessing.StopWords;
-import de.tum.in.wwwmatthes.stm.util.FileUtil;
+import com.google.gson.Gson;
 
-abstract class ConfigImpl implements Config {
+public class ConfigImpl implements Config {
 	
-	// General
-	protected final String 		key;
-	protected final ConfigType	type;
+	private String			type;
+	private String			identifier;
 	
-	protected List<String> 	stopWords				= new ArrayList<String>();
-	protected boolean		useDefaultStopWords		= true;
-	protected int 			minWordFrequency			= 0;
-	
-	protected File 			documentsSourceFile		= null;
-	
-	// Word2Vec & Doc2Vec
-	private int	layerSize 	= 0;
-	private int	windowSize 	= 0;
-	private int	epochs 		= 0;
-	
-	private File corpusSourceFile 	= null;
-	private File corpusFile 			= null;
-	
-	// Config File
-	private File configFile;
-	
-	/**
-	 * Create a new object of type Config.
-	 * @param key Key associated with this configuration.
-	 * @param type Type of this configuration - TFIDF, Word2Vec etc..
-	 */
-	ConfigImpl(String key, ConfigType type) {
-		super();
+	private List<String> 	stopWords;
+	private boolean			addDefaultStopWords;
+	private int				minWordFrequency;
+	private String			documentsSourcePath;	
 		
-		this.key 	= key; 
-		this.type 	= type;
+	public ConfigImpl(ConfigType type) {
+		super();
+		this.setType(type);
 	}
 	
 	/*
-	 *  ConfigAPI
+	 * Methods
+	 */
+	
+	public void writeToFile(File file) throws IOException {
+		String json = new Gson().toJson(this);
+		FileUtils.writeStringToFile(file, json);
+	}
+	
+	/*
+	 * Getters & Setters
 	 */
 	
 	public ConfigType getType() {
-		return type;
+		return ConfigType.typeFromString(type);
+	}
+
+	public void setType(ConfigType type) {
+		this.type = ConfigType.stringFromType(type);
 	}
 	
+	public String getIdentifier() {
+		return identifier;
+	}
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
+	}
 	public List<String> getStopWords() {
 		return stopWords;
 	}
-
+	public void setStopWords(List<String> stopWords) {
+		this.stopWords = stopWords;
+	}
+	public boolean isAddDefaultStopWords() {
+		return addDefaultStopWords;
+	}
+	public void setAddDefaultStopWords(boolean addDefaultStopWords) {
+		this.addDefaultStopWords = addDefaultStopWords;
+	}
 	public int getMinWordFrequency() {
 		return minWordFrequency;
 	}
-
-	public File getDocumentsSourceFile() {
-		return documentsSourceFile;
-	}
-
-	public boolean isUseDefaultStopWords() {
-		return useDefaultStopWords;
-	}
-
-	public File getCorpusSourceFile() {
-		return corpusSourceFile;
-	}
-	
-	public File getCorpusFile() {
-		return corpusFile;
-	}
-
-	public int getEpochs() {
-		return epochs;
-	}
-
-	public String getKey() {
-		return key;
-	}
-
-	public int getLayerSize() {
-		return layerSize;
-	}
-
-	public int getWindowSize() {
-		return windowSize;
-	}
-
-	/*
-	 * Setters
-	 */
-	
-	void setWindowSize(int windowSize) {
-		this.windowSize = windowSize;
-	}
-	
-	void setMinWordFrequency(int minWordFrequency) {
+	public void setMinWordFrequency(int minWordFrequency) {
 		this.minWordFrequency = minWordFrequency;
 	}
 	
-	void setLayerSize(int layerSize) {
-		this.layerSize = layerSize;
-	}
-	
-	void setEpochs(int epochs) {
-		this.epochs = epochs;
-	}
-	
-	void setCorpusSourceFile(File corpusSourceFile) {
-		this.corpusSourceFile = corpusSourceFile;
-	}
-	
-	void setCorpusFile(File corpusFile) {
-		this.corpusFile = corpusFile;
-	}
-	
-	void setUseDefaultStopWords(boolean useDefaultStopWords) {
-		this.useDefaultStopWords = useDefaultStopWords;
-	}
-	
-	void setDocumentsSourceFile(File documentsSourceFile) {
-		this.documentsSourceFile = documentsSourceFile;
-	}
-	
-	void setStopWords(List<String> stopWords) {
-		this.stopWords = stopWords;
+	public File getDocumentsSourceFile() {
+		if(documentsSourcePath!=null) {
+			return new File(documentsSourcePath);
+		}
+		return null;
 	}
 
-	@Override
-	public String toString() {
-		return "Config [key=" + key + ", type=" + type + ", stopWords=" + stopWords + ", minWordFrequency="
-				+ minWordFrequency + "]";
+	public void setDocumentsSourceFile(File documentsSourceFile) {
+		if(documentsSourceFile!=null) {
+			this.documentsSourcePath = documentsSourceFile.getPath();
+		} else {
+			this.documentsSourcePath = null;
+		}
+	}
+	
+	public int getEpochs() {
+		return -1;
 	}
 
+	public int getLayerSize() {
+		return -1;
+	}
+
+	public int getWindowSize() {
+		return -1;
+	}
+
+	public File getCorpusFile() {
+		return null;
+	}
+
+	public File getCorpusSourceFile() {
+		return null;
+	}
+	
 }

@@ -5,8 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.google.gson.Gson;
 
 import de.tum.in.wwwmatthes.stm.exceptions.InvalidConfigException;
 import de.tum.in.wwwmatthes.stm.preprocessing.StopWords;
@@ -14,11 +13,11 @@ import de.tum.in.wwwmatthes.stm.util.FileUtil;
 
 public class ConfigFactory {
 	
-	private String 		key;
+	private String 		identifier;
 	private ConfigType	type;
 	
 	private List<String>	stopWords				= new ArrayList<String>();
-	private boolean		useDefaultStopWords		= true;			
+	private boolean		addDefaultStopWords		= true;			
 	private int 			minWordFrequency			= 0;
 	
 	private File 		documentsSourceFile		= null;
@@ -31,20 +30,42 @@ public class ConfigFactory {
 	private File corpusSourceFile 	= null;
 	private File corpusFile 			= null;
 	
-	// Config File
-	private File 		configFile;
 	
-	public ConfigFactory(String key, ConfigType type) {
-		this.key = key;
+	public static Config buildFromFile(File file) throws IOException, InvalidConfigException {
+		String json 		= FileUtil.readFile(file);
+		Config config 	= new Gson().fromJson(json, ConfigImpl.class);
+		
+		switch (config.getType()) {
+		case TFIDF:
+			config = new Gson().fromJson(json, ConfigTFIDF.class);
+			break;
+			
+		case WORD2VEC:
+			config = new Gson().fromJson(json, ConfigWord2Vec.class);
+			break;
+			
+		case DOC2VEC:
+			config = new Gson().fromJson(json, ConfigDoc2Vec.class);
+			break;
+
+		default:
+			throw new InvalidConfigException();
+		}
+		
+		return config;
+	}
+	
+	public ConfigFactory(ConfigType type) {
 		this.type = type;
 	}
 	
-	public ConfigFactory(File file) {
-		this.configFile = file;
+	public ConfigFactory useIdentifier(String identifier) {
+		this.identifier = identifier;
+		return this;
 	}
 	
-	public ConfigFactory useDefaultStopWords(boolean useDefaultStopWords) {
-		this.useDefaultStopWords = useDefaultStopWords;
+	public ConfigFactory addDefaultStopWords(boolean addDefaultStopWords) {
+		this.addDefaultStopWords = addDefaultStopWords;
 		return this;
 	}
 	
@@ -84,41 +105,30 @@ public class ConfigFactory {
 	}
 
 	public Config build() throws InvalidConfigException {
-		
-		// If Config File exists
-		if (configFile != null) {
-			if (configFile.exists()) {
-				importJSONFile(configFile);
-			} else {
-				// Print: 
-			}
-		}
-		
-		// Check Type & Key
-		
+				
 		if (type == null) {
-			throw new InvalidConfigException();
-		} else if (key == null) {
 			throw new InvalidConfigException();
 		}
 		
 		switch (type) {
 		
 		case TFIDF:
-			ConfigTFIDF configTFIDF = new ConfigTFIDF(key);
+			ConfigTFIDF configTFIDF = new ConfigTFIDF();
+			configTFIDF.setIdentifier(identifier);
 			configTFIDF.setMinWordFrequency(minWordFrequency);
 			configTFIDF.setStopWords(stopWords);
 			configTFIDF.setDocumentsSourceFile(documentsSourceFile);
-			configTFIDF.setUseDefaultStopWords(useDefaultStopWords);
+			configTFIDF.setAddDefaultStopWords(addDefaultStopWords);
 			
 			return configTFIDF;
 			
 		case WORD2VEC:
-			ConfigWord2Vec configWORD2VEC = new ConfigWord2Vec(key);
+			ConfigWord2Vec configWORD2VEC = new ConfigWord2Vec();
+			configWORD2VEC.setIdentifier(identifier);
 			configWORD2VEC.setMinWordFrequency(minWordFrequency);
 			configWORD2VEC.setStopWords(stopWords);
 			configWORD2VEC.setDocumentsSourceFile(documentsSourceFile);
-			configWORD2VEC.setUseDefaultStopWords(useDefaultStopWords);
+			configWORD2VEC.setAddDefaultStopWords(addDefaultStopWords);
 			configWORD2VEC.setEpochs(epochs);
 			configWORD2VEC.setCorpusSourceFile(corpusSourceFile);
 			configWORD2VEC.setCorpusFile(corpusFile);
@@ -126,11 +136,12 @@ public class ConfigFactory {
 			return configWORD2VEC;
 			
 		case DOC2VEC:
-			ConfigDoc2Vec configDOC2VEC = new ConfigDoc2Vec(key);
+			ConfigDoc2Vec configDOC2VEC = new ConfigDoc2Vec();
+			configDOC2VEC.setIdentifier(identifier);
 			configDOC2VEC.setMinWordFrequency(minWordFrequency);
 			configDOC2VEC.setStopWords(stopWords);
 			configDOC2VEC.setDocumentsSourceFile(documentsSourceFile);
-			configDOC2VEC.setUseDefaultStopWords(useDefaultStopWords);
+			configDOC2VEC.setAddDefaultStopWords(addDefaultStopWords);
 			configDOC2VEC.setEpochs(epochs);
 			configDOC2VEC.setCorpusSourceFile(corpusSourceFile);
 			configDOC2VEC.setCorpusFile(corpusFile);
@@ -141,126 +152,5 @@ public class ConfigFactory {
 			throw new InvalidConfigException();
 		}
 	}
-	
-	/*
-	 * JSON-Import
-	 */
-	
-	private static final String JSON_KEY_TYPE 				= "type";
-	private static final String JSON_KEY_STOPWORDS 			= "stopWords";
-	private static final String JSON_KEY_ADDDEFAULTSTOPWORDS 	= "addDefaultStopWords";
-	private static final String JSON_KEY_MINWORDFREQUENCY 	= "minWordFrequency";
-	private static final String JSON_KEY_DOCUMENTSSOURCEFILE 	= "documentsSourceFile";
-	private static final String JSON_KEY_EPOCHS 				= "epochs";
-	private static final String JSON_KEY_LAYERSIZE 			= "layerSize";
-	private static final String JSON_KEY_WINDOWSIZE 			= "windowSize";
-	private static final String JSON_KEY_CORPUSSOURCEFILE 	= "corpusSourceFile";
-	private static final String JSON_KEY_CORPUSFILE 			= "corpusFile";
-	
-	private void importJSONFile(File file) {
-		
-		// Load File
-		String string = null;
-		try {
-			string = FileUtil.readFile(file);
-		} catch (IOException e) {
-			// Ignore & return
-			return;
-		}
-		
-		// Load File Into JSONObject
-		JSONObject object = new JSONObject(string).getJSONObject("config");
-		
-		//// Write Values
-		
-		this.key		= FileUtil.getFileNameWithoutExtension(file);
-		this.type	= ConfigType.typeFromString(object.getString(JSON_KEY_TYPE));
-		
-		// Stop Words	
-		if (object.has(JSON_KEY_STOPWORDS)) {
-			this.stopWords.addAll(jsonArrayToStringList(object.getJSONArray(JSON_KEY_STOPWORDS)));
-		}
-		
-		// Min Word Frequency
-		if (object.has(JSON_KEY_MINWORDFREQUENCY)) {
-			this.minWordFrequency = object.getInt(JSON_KEY_MINWORDFREQUENCY);
-		} else {
-			this.minWordFrequency = 0;
-		}
-		
-		// Documents Source File	
-		if (object.has(JSON_KEY_DOCUMENTSSOURCEFILE)) {
-			File documentsSourceFile = new File(object.getString(JSON_KEY_DOCUMENTSSOURCEFILE));
-			if (documentsSourceFile.exists()) {
-				this.documentsSourceFile = documentsSourceFile;
-			} else {
-				this.documentsSourceFile = null;
-			}
-		} else {
-			this.documentsSourceFile = null;
-		}
-		
-		// Documents Source File	
-		if (object.has(JSON_KEY_CORPUSSOURCEFILE)) {
-			File documentsSourceFile = new File(object.getString(JSON_KEY_CORPUSSOURCEFILE));
-			if (documentsSourceFile.exists()) {
-				this.corpusSourceFile = documentsSourceFile;
-			} else {
-				this.corpusSourceFile = null;
-			}
-		} else {
-			this.corpusSourceFile = null;
-		}
-		
-		if (object.has(JSON_KEY_CORPUSFILE)) {
-			File corpusFile = new File(object.getString(JSON_KEY_CORPUSFILE));
-			if (corpusFile.exists()) {
-				this.corpusFile = corpusFile;
-			} else {
-				this.corpusFile = null;
-			}
-		} else {
-			this.corpusFile = null;
-		}
-		
-		// Add Default Stop Words		
-		if (object.getBoolean(JSON_KEY_ADDDEFAULTSTOPWORDS)) {
-			this.stopWords.addAll(StopWords.getStopWords());
-		}
-		
-		// Epochs
-		if (object.has(JSON_KEY_EPOCHS)) {
-			this.epochs = object.getInt(JSON_KEY_EPOCHS);
-		} else {
-			this.epochs = 0;
-		}
-		
-		// Window Size
-		if (object.has(JSON_KEY_WINDOWSIZE)) {
-			this.windowSize = object.getInt(JSON_KEY_WINDOWSIZE);
-		} else {
-			this.windowSize = 0;
-		}
-		
-		// Layer Size
-		if (object.has(JSON_KEY_LAYERSIZE)) {
-			this.layerSize = object.getInt(JSON_KEY_LAYERSIZE);
-		} else {
-			this.layerSize = 0;
-		}
-	}
-	
-	/*
-	 * Private Helper Methods
-	 */
-	
-	private List<String> jsonArrayToStringList(JSONArray array) {
-		List<String> list = new ArrayList<String>();     
-		for (int i = 0; i < array.length(); i++){ 
-		    list.add(array.get(i).toString());
-		} 
-		return list;
-	}
-	
 	
 }

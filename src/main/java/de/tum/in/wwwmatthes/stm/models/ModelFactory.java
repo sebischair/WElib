@@ -10,7 +10,7 @@ import de.tum.in.wwwmatthes.stm.models.config.ConfigFactory;
 public class ModelFactory {
 
 	public static Model createFromConfigFile(File file) throws IOException, InvalidConfigException {
-		Config config = new ConfigFactory(file).build();
+		Config config = ConfigFactory.buildFromFile(file);
 		return createFromConfig(config);
 	}
 	

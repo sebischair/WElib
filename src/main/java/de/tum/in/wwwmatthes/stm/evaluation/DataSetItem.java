@@ -2,20 +2,34 @@ package de.tum.in.wwwmatthes.stm.evaluation;
 
 import java.util.List;
 
+import de.tum.in.wwwmatthes.stm.models.Model;
+
 public class DataSetItem {
 	
-	private String key;
+	private String identifier;
 	private String input;
 	private List<String> output;
 	
-	public DataSetItem(String key, String input, List<String> output) {
-		this.key 	= key;
-		this.input	= input;
-		this.output	= output;
+	private Double MRR;
+	
+	public DataSetItem(String identifier, String input, List<String> output) {
+		this.identifier 	= identifier;
+		this.input		= input;
+		this.output		= output;
+		this.MRR 		= null;
 	}
+	
+	public void evaluateWithModel(Model model) {
+		List<String> rankedDocuments = model.rankedDocumentsForText(getInput());
+		this.MRR = Evaluation.mrr(getOutput(), rankedDocuments);
+	}
+	
+	/*
+	 * Getters & Setters
+	 */
 
-	public String getKey() {
-		return key;
+	public String getIdentifier() {
+		return identifier;
 	}
 
 	public String getInput() {
@@ -25,14 +39,18 @@ public class DataSetItem {
 	public List<String> getOutput() {
 		return output;
 	}
+	
+	public Double getMRR() {
+		return MRR;
+	}
 
 	@Override
 	public String toString() {
 		int max = Math.min(input.length(), 20);
 		if (input.length() > max) {
-			return "DataSetItem [key=" + key + ", input=" + input.substring(0, max) + "... , output=" + output + "]";
+			return "DataSetItem [identifier=" + identifier + ", input=" + input.substring(0, max) + "... , output=" + output + "]";
 		} else {
-			return "DataSetItem [key=" + key + ", input=" + input + ", output=" + output + "]";
+			return "DataSetItem [identifier=" + identifier + ", input=" + input + ", output=" + output + "]";
 		}
 	}
 
