@@ -8,8 +8,7 @@ class ConfigWord2Vec extends ConfigImpl {
 	private int				layerSize;	
 	private int				windowSize;	
 	
-	private String				corpusPath;	
-	private String				corpusSourcePath;
+	private String			corpusPath;	
 	
 	ConfigWord2Vec() {
 		super(ConfigType.WORD2VEC);
@@ -61,23 +60,5 @@ class ConfigWord2Vec extends ConfigImpl {
 			this.corpusPath = null;
 		}
 	}
-
-	@Override
-	public File getCorpusSourceFile() {
-		if(corpusSourcePath!=null) {
-			return new File(corpusSourcePath);
-		}
-		return null;
-	}
-
-	public void setCorpusSourceFile(File corpusSourceFile) {
-		if(corpusSourcePath!=null) {
-			this.corpusSourcePath = corpusSourceFile.getPath();
-		} else {
-			this.corpusSourcePath = null;
-		}
-	}
-
-	
-	
+		
 }

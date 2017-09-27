@@ -1,9 +1,9 @@
 package de.tum.in.wwwmatthes.stm.evaluation;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import de.tum.in.wwwmatthes.stm.models.Model;
 
 public class DataSet {
@@ -25,12 +25,25 @@ public class DataSet {
 	}
 	
 	public void evaluateWithModel(Model model) {
-		double mrr = 0;
+		
+		// Evaluate
 		for(DataSetItem item : getItems()) {
 			item.evaluateWithModel(model);
-			mrr += item.getMRR();
 		}
-		this.MRR = mrr / getItems().size();
+		
+		// Calculate MRR from evaluated Data Set Items
+		double mrr = 0;
+		List<DataSetItem> evaluatedItems = getEvaluatedItems();
+		
+		if (evaluatedItems.size() > 0) {
+			for(DataSetItem item : evaluatedItems) {
+				item.evaluateWithModel(model);
+				mrr += item.getMRR();
+			}
+			this.MRR = mrr / evaluatedItems.size();
+		} else {
+			this.MRR = null;
+		}
 	}
 	
 	/**
@@ -41,6 +54,16 @@ public class DataSet {
 	 */
 	public DataSetItem dataSetItemForKey(String label) {
 		return map.get(label);
+	}
+	
+	public List<DataSetItem> getEvaluatedItems() {
+		List<DataSetItem> evaluatedItems = new ArrayList<DataSetItem>();
+		for(DataSetItem item : getItems()) {
+			if (item.getMRR() != null && item.getMRR() != null) {
+				evaluatedItems.add(item);
+			}
+		}
+		return evaluatedItems;
 	}
 	
 	/*
@@ -61,11 +84,7 @@ public class DataSet {
 
 	@Override
 	public String toString() {
-		String output = "DataSet:\n";
-		for(DataSetItem item : items) {
-			output += item + "\n";
-		}
-		return output;
+		return "DataSet [identifier=" + identifier + ", MRR=" + MRR + "]";
 	}
-
+	
 }

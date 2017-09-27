@@ -2,21 +2,27 @@ package de.tum.in.wwwmatthes.stm.models.config;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
 import com.google.gson.Gson;
 
+import de.tum.in.wwwmatthes.stm.preprocessing.StopWords;
+
 public class ConfigImpl implements Config {
 	
 	private String			type;
 	private String			identifier;
 	
-	private List<String> 	stopWords;
-	private boolean			addDefaultStopWords;
-	private int				minWordFrequency;
+	private List<String> 	stopWords				;
+	private boolean			addDefaultStopWords		;
+	private int				minWordFrequency			;
 	private String			documentsSourcePath;	
+	
+	private boolean			useStemming				;
+	private List<String>		allowedPosTags			;
 		
 	public ConfigImpl(ConfigType type) {
 		super();
@@ -56,11 +62,19 @@ public class ConfigImpl implements Config {
 	public void setStopWords(List<String> stopWords) {
 		this.stopWords = stopWords;
 	}
-	public boolean isAddDefaultStopWords() {
+	public Boolean isAddDefaultStopWords() {
 		return addDefaultStopWords;
 	}
 	public void setAddDefaultStopWords(boolean addDefaultStopWords) {
 		this.addDefaultStopWords = addDefaultStopWords;
+	}
+	@Override
+	public List<String> getTotalStopWords() {
+		List<String> totalStopWords = new ArrayList<String>(stopWords);
+		if (addDefaultStopWords) {
+			totalStopWords.addAll(StopWords.getStopWords());
+		}
+		return totalStopWords;
 	}
 	public int getMinWordFrequency() {
 		return minWordFrequency;
@@ -84,6 +98,58 @@ public class ConfigImpl implements Config {
 		}
 	}
 	
+	public File getCorpusFile() {
+		return null;
+	}
+	
+	@Override
+	public List<String> getAllowedPosTags() {
+		return allowedPosTags;
+	}
+
+	public void setUseStemming(boolean useStemming) {
+		this.useStemming = useStemming;
+	}
+
+	public void setAllowedPosTags(List<String> allowedPosTags) {
+		this.allowedPosTags = allowedPosTags;
+	}
+
+	@Override
+	public boolean isUseStemming() {
+		return useStemming;
+	}
+	
+	@Override
+	public int getBatchSize() {
+		return -1;
+	}
+	
+	@Override
+	public int getIterations() {
+		return -1;
+	}
+	
+	@Override
+	public double getLearningRate() {
+		return -1;
+	}
+	
+	@Override
+	public double getMinLearningRate() {
+		return -1;
+	}
+	
+	@Override
+	public double getSampling() {
+		return -1;
+	}
+
+	@Override
+	public double getNegativeSample() {
+		return -1;
+	}
+	
 	public int getEpochs() {
 		return -1;
 	}
@@ -95,13 +161,12 @@ public class ConfigImpl implements Config {
 	public int getWindowSize() {
 		return -1;
 	}
-
-	public File getCorpusFile() {
-		return null;
-	}
-
-	public File getCorpusSourceFile() {
-		return null;
+	
+	@Override
+	public String toString() {
+		return "ConfigImpl [type=" + type + ", identifier=" + identifier + ", addDefaultStopWords="
+				+ addDefaultStopWords + ", minWordFrequency=" + minWordFrequency + ", documentsSourcePath="
+				+ documentsSourcePath + "]";
 	}
 	
 }

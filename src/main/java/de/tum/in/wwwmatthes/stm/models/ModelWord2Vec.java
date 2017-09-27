@@ -1,6 +1,7 @@
 package de.tum.in.wwwmatthes.stm.models;
 
 import java.io.FileNotFoundException;
+import java.util.List;
 
 import org.deeplearning4j.models.paragraphvectors.ParagraphVectors;
 import org.deeplearning4j.models.word2vec.Word2Vec;
@@ -8,6 +9,7 @@ import org.deeplearning4j.text.documentiterator.FileLabelAwareIterator;
 import org.deeplearning4j.text.documentiterator.LabelAwareIterator;
 import org.deeplearning4j.text.sentenceiterator.BasicLineIterator;
 import org.deeplearning4j.text.sentenceiterator.SentenceIterator;
+import org.deeplearning4j.text.tokenization.tokenizer.Tokenizer;
 import org.nd4j.linalg.api.ndarray.INDArray;
 
 import de.tum.in.wwwmatthes.stm.models.config.Config;
@@ -17,38 +19,36 @@ class ModelWord2Vec extends ModelImpl {
 	// Variables
 	private Word2Vec 			vectors;
 	private SentenceIterator 	corpusSentenceIterator;
-	private LabelAwareIterator 	corpusLabelAwareIterator;
 	
 	ModelWord2Vec(Config config) {
 		super(config);
 		
-		ParagraphVectors.Builder builder = new ParagraphVectors.Builder();
+		Word2Vec.Builder builder = new Word2Vec.Builder();
 		
-		if(config.getCorpusSourceFile() != null && config.getCorpusSourceFile().exists()) {
-			corpusLabelAwareIterator = new FileLabelAwareIterator.Builder()
-		              .addSourceFolder(config.getCorpusSourceFile())
-		              .build();
-			builder.iterate(corpusLabelAwareIterator);
-			
-		} else if(config.getCorpusFile() != null && config.getCorpusFile().exists()) {
-			try {
-				corpusSentenceIterator = new BasicLineIterator(config.getCorpusFile());
-				builder.iterate(corpusSentenceIterator);
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
+		try {
+			corpusSentenceIterator = new BasicLineIterator(config.getCorpusFile());
+			builder.iterate(corpusSentenceIterator);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		}
 		
-		corpusLabelAwareIterator = new FileLabelAwareIterator.Builder()
-				.addSourceFolder(config.getCorpusSourceFile())
-				.build();
-		
 		vectors = builder
-				.stopWords(config.getStopWords())
-        			.batchSize(1000)
+				
+				.minWordFrequency(config.getMinWordFrequency())
+				.stopWords(config.getTotalStopWords())
         			.epochs(config.getEpochs())
-				.trainWordVectors(true)
+        			.iterations(config.getIterations())
+        			.batchSize(config.getBatchSize())
+        			.layerSize(config.getLayerSize())
+        			.windowSize(config.getWindowSize())
+        			.learningRate(config.getLearningRate())
+        			.minLearningRate(config.getMinLearningRate())
+        			.sampling(config.getSampling())
+        			.negativeSample(config.getNegativeSample())
+        			
+        			.allowParallelTokenization(false)
 	        		.tokenizerFactory(tokenizerFactory)
+
 	        		.build();
 	}
 
@@ -63,6 +63,12 @@ class ModelWord2Vec extends ModelImpl {
 
 	@Override
 	public INDArray vectorFromText(String text) {
+        Tokenizer tokenizer = tokenizerFactory.create(text);
+        List<String> tokens = tokenizer.getTokens();
+        
+        //vectors.
+        
+        //INDArray result = new INDArray();
 		return vectors.getWordVectorMatrixNormalized(""); // TODO
 	}
 

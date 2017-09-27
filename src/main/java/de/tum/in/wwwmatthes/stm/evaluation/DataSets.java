@@ -2,6 +2,7 @@ package de.tum.in.wwwmatthes.stm.evaluation;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.Map;
 import org.apache.commons.io.FileUtils;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import de.tum.in.wwwmatthes.stm.models.Model;
 
@@ -19,6 +21,10 @@ public class DataSets {
 	private transient Map<String, DataSet> 	map;
 	
 	private Double MRR;
+	
+	public DataSets() {
+		
+	}
 	
 	public DataSets(List<DataSet> items) {
 		this.items 		= items;
@@ -34,17 +40,31 @@ public class DataSets {
 	}
 	
 	public void evaluateWithModel(Model model) {
-		double mrr = 0;
+		
+		// Evaluate
 		for(DataSet item : getItems()) {
 			item.evaluateWithModel(model);
-			mrr += item.getMRR();
 		}
+		
+		// Calculate MRR from evaluated Data Set Items
+		double mrr = 0;
+		List<DataSet> evaluatedItems = getEvaluatedItems();
+		
+		if (evaluatedItems.size() > 0) {
+			for(DataSet item : evaluatedItems) {
+				item.evaluateWithModel(model);
+				mrr += item.getMRR();
+			}
+			this.MRR = mrr / evaluatedItems.size();
+		} else {
+			this.MRR = null;
+		}
+		
 		this.MRR = mrr / getItems().size();
 	}
 	
 	public void writeToFile(File file) throws IOException {
-		String json = new Gson().toJson(this);
-		FileUtils.writeStringToFile(file, json);
+		FileUtils.writeStringToFile(file, toJson());
 	}
 	
 	/**
@@ -55,6 +75,16 @@ public class DataSets {
 	 */
 	public DataSet dataSetItemForIdentifier(String identifier) {
 		return map.get(identifier);
+	}
+	
+	public List<DataSet> getEvaluatedItems() {
+		List<DataSet> evaluatedItems = new ArrayList<DataSet>();
+		for(DataSet item : getItems()) {
+			if (item.getMRR() != null && item.getMRR() != null) {
+				evaluatedItems.add(item);
+			}
+		}
+		return evaluatedItems;
 	}
 	
 	/*
@@ -76,6 +106,13 @@ public class DataSets {
 			output += item + "\n";
 		}
 		return output;
+	}
+	
+	// Public Methods - JSON
+	
+	private String toJson() {
+		Gson gson = new GsonBuilder().serializeSpecialFloatingPointValues().create();
+		return gson.toJson(this);
 	}
 	
 }

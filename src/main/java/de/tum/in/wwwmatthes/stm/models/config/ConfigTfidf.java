@@ -1,10 +1,8 @@
 package de.tum.in.wwwmatthes.stm.models.config;
 
-import java.io.File;
-
-class ConfigTFIDF extends ConfigImpl {
+class ConfigTfidf extends ConfigImpl {
 		
-	ConfigTFIDF() {
+	ConfigTfidf() {
 		super(ConfigType.TFIDF);
 	}
 

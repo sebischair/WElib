@@ -2,8 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.tum.in.wwwmatthes</groupId>
-	<artifactId>STM</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>stm-lib</artifactId>
+	<version>0.0.1</version>
 	<name>Semantic Text Matching</name>
 	<description>Library for ranking documents using text similarity measures.</description>
 	<dependencies>
@@ -40,5 +40,10 @@
 			<version>2.8.1</version>
 		</dependency>
 	</dependencies>
+	
+	<properties>
+   		<maven.compiler.source>1.6</maven.compiler.source>
+   		<maven.compiler.target>1.6</maven.compiler.target>
+	</properties>
 
 </project>

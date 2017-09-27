@@ -19,7 +19,7 @@ public class ModelFactory {
 		switch (config.getType()) {
 		
 		case TFIDF:
-			return new ModelTFIDF(config);
+			return new ModelTfidf(config);
 			
 		case WORD2VEC:
 			return new ModelWord2Vec(config);

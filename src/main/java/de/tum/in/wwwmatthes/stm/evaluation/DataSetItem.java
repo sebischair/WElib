@@ -10,7 +10,7 @@ public class DataSetItem {
 	private String input;
 	private List<String> output;
 	
-	private Double MRR;
+	private Double MRR = -1.0;
 	
 	public DataSetItem(String identifier, String input, List<String> output) {
 		this.identifier 	= identifier;
@@ -20,8 +20,12 @@ public class DataSetItem {
 	}
 	
 	public void evaluateWithModel(Model model) {
-		List<String> rankedDocuments = model.rankedDocumentsForText(getInput());
-		this.MRR = Evaluation.mrr(getOutput(), rankedDocuments);
+		try {
+			List<String> rankedDocuments = model.rankedDocumentsForText(getInput());
+			this.MRR = Evaluation.mrr(getOutput(), rankedDocuments);
+		} catch (org.nd4j.linalg.exception.ND4JIllegalStateException e) {
+			this.MRR = null;
+		}	
 	}
 	
 	/*

@@ -1,8 +1,24 @@
 package de.tum.in.wwwmatthes.stm.models.config;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public enum ConfigType {
 	TFIDF, WORD2VEC, DOC2VEC;
-
+	
+	public static List<ConfigType> list() {
+		return Arrays.asList(TFIDF, WORD2VEC, DOC2VEC);
+	}
+	
+	public static List<String> stringList() {
+		List<String> stringList = new ArrayList<String>();
+		for(ConfigType type : list()) {
+			stringList.add(type.toString());
+		}
+		return stringList;
+	}
+	
 	static ConfigType typeFromString(String string) {
 		if (string != null) {
 			if (string.equalsIgnoreCase("tfidf")) {
@@ -17,12 +33,17 @@ public enum ConfigType {
 	}
 
 	static String stringFromType(ConfigType type) {
-		if (type == ConfigType.TFIDF) {
+		return type.toString();
+	}
+	
+	@Override
+	public String toString() {
+		if (this == ConfigType.TFIDF) {
 			return "tfidf";
-		} else if (type == ConfigType.WORD2VEC) {
+		} else if (this == ConfigType.WORD2VEC) {
 			return "word2vec";
-		} else if (type == ConfigType.DOC2VEC) {
-			return "doc2Vec";
+		} else if (this == ConfigType.DOC2VEC) {
+			return "doc2vec";
 		}
 		return null;
 	}

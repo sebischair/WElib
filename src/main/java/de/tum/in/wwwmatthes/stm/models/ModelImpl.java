@@ -1,7 +1,5 @@
 package de.tum.in.wwwmatthes.stm.models;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -10,12 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.uima.resource.ResourceInitializationException;
 import org.deeplearning4j.text.documentiterator.FileLabelAwareIterator;
 import org.deeplearning4j.text.documentiterator.LabelAwareIterator;
 import org.deeplearning4j.text.documentiterator.LabelledDocument;
-import org.deeplearning4j.text.tokenization.tokenizer.preprocessor.CommonPreprocessor;
-import org.deeplearning4j.text.tokenization.tokenizerfactory.DefaultTokenizerFactory;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.TokenizerFactory;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.UimaTokenizerFactory;
 import org.nd4j.linalg.api.ndarray.INDArray;
@@ -23,6 +18,7 @@ import org.nd4j.linalg.ops.transforms.Transforms;
 import org.nd4j.linalg.primitives.Pair;
 
 import de.tum.in.wwwmatthes.stm.models.config.Config;
+import de.tum.in.wwwmatthes.stm.tokenizers.STMTokenizerFactory;
 
 abstract class ModelImpl implements Model {
 	
@@ -33,24 +29,20 @@ abstract class ModelImpl implements Model {
 	protected LabelAwareIterator 	documentsLabelAwareIterator;
 	protected TokenizerFactory 		tokenizerFactory;
 	
-	// Private Variables
-	
 	ModelImpl(Config config) {
 		super();
 		
 		// Documents Label Aware Iterator
-		this.documentsLabelAwareIterator = new FileLabelAwareIterator.Builder()
+		documentsLabelAwareIterator = new FileLabelAwareIterator.Builder()
 	              .addSourceFolder(config.getDocumentsSourceFile())
 	              .build();
 		
 		// Tokenizer Factory
-		this.tokenizerFactory = new UimaTokenizerFactory(UimaTokenizerFactory.defaultAnalysisEngine());
-		this.tokenizerFactory.setTokenPreProcessor(new CommonPreprocessor() {
-			@Override
-			public String preProcess(String token) {
-				return token;
-			}
-		});
+		STMTokenizerFactory tokenizerFactory = new STMTokenizerFactory();
+		tokenizerFactory.setUseStemming(config.isUseStemming());
+		tokenizerFactory.setAllowedPosTags(config.getAllowedPosTags());
+		
+		this.tokenizerFactory = tokenizerFactory;
 	}
 
 	/**
