@@ -46,6 +46,12 @@ public class DataSet {
 		}
 	}
 	
+	public void resetEvaluation() {
+		for(DataSetItem item : getItems()) {
+			item.resetEvaluation();
+		}
+	}
+	
 	/**
 	 * Return dataset for a specific label.
 	 * 

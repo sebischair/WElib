@@ -16,7 +16,8 @@ import com.google.gson.GsonBuilder;
 import de.tum.in.wwwmatthes.stm.models.Model;
 
 public class DataSets {
-
+	
+	private String 							identifier;
 	private List<DataSet> 					items;
 	private transient Map<String, DataSet> 	map;
 	
@@ -63,8 +64,19 @@ public class DataSets {
 		this.MRR = mrr / getItems().size();
 	}
 	
+	public void resetEvaluation() {
+		for(DataSet item : getItems()) {
+			item.resetEvaluation();
+		}
+	}
+	
 	public void writeToFile(File file) throws IOException {
 		FileUtils.writeStringToFile(file, toJson());
+	}
+	
+	public DataSets readFromFile(File file) throws IOException {
+		String content = FileUtils.readFileToString(file);
+		return fromJson(content);
 	}
 	
 	/**
@@ -95,6 +107,14 @@ public class DataSets {
 		return items;
 	}
 	
+	public String getIdentifier() {
+		return identifier;
+	}
+
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
+	}
+
 	public Double getMRR() {
 		return MRR;
 	}
@@ -113,6 +133,11 @@ public class DataSets {
 	private String toJson() {
 		Gson gson = new GsonBuilder().serializeSpecialFloatingPointValues().create();
 		return gson.toJson(this);
+	}
+	
+	private DataSets fromJson(String json) {
+		Gson gson = new GsonBuilder().serializeSpecialFloatingPointValues().create();
+		return gson.fromJson(json, DataSets.class);
 	}
 	
 }

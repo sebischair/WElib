@@ -30,8 +30,6 @@ class ModelDoc2Vec extends ModelImpl {
 			e.printStackTrace();
 		}
 		
-		System.out.println(config);
-		
 		vectors = builder
 				.minWordFrequency(config.getMinWordFrequency())
 				.stopWords(config.getTotalStopWords())

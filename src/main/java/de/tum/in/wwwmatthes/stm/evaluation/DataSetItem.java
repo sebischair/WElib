@@ -28,6 +28,10 @@ public class DataSetItem {
 		}	
 	}
 	
+	public void resetEvaluation() {
+		this.MRR = null;
+	}
+	
 	/*
 	 * Getters & Setters
 	 */

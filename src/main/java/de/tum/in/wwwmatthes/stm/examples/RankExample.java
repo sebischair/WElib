@@ -34,7 +34,7 @@ public class RankExample {
 				.useStemming(true)
 				.allowedPosTags(Arrays.asList("NN", "NNS"))
 				.documentsSourceFile(new ClassPathResource("examples/labeled").getFile())
-				//.corpusFile(new File("/Users/christopherl/citadel/data/corpus/CORP_CONTROLS"))
+				// .corpusFile(new File("/Users/christopherl/citadel/data/corpus/CORP_CONTROLS"))
 				.addDefaultStopWords(true)
 				.stopWords(Arrays.asList("Hallo"))
 				.epochs(1)
