@@ -2,6 +2,7 @@ package de.tum.in.wwwmatthes.stm.evaluation;
 
 import java.util.List;
 
+import de.tum.in.wwwmatthes.stm.exceptions.VocabularyMatchException;
 import de.tum.in.wwwmatthes.stm.models.Model;
 
 public class DataSetItem {
@@ -10,21 +11,27 @@ public class DataSetItem {
 	private String input;
 	private List<String> output;
 	
-	private Double MRR = -1.0;
+	// Output
+	private Double MRR = null;
+	private List<DataSetItemSimilarity> similarities;
 	
 	public DataSetItem(String identifier, String input, List<String> output) {
-		this.identifier 	= identifier;
-		this.input		= input;
-		this.output		= output;
-		this.MRR 		= null;
+		this.identifier 		= identifier;
+		this.input			= input;
+		this.output			= output;
+		this.MRR 			= null;
+		this.similarities 	= null;
 	}
 	
 	public void evaluateWithModel(Model model) {
 		try {
 			List<String> rankedDocuments = model.rankedDocumentsForText(getInput());
-			this.MRR = Evaluation.mrr(getOutput(), rankedDocuments);
-		} catch (org.nd4j.linalg.exception.ND4JIllegalStateException e) {
-			this.MRR = null;
+			
+			this.MRR 			= Evaluation.mrr(getOutput(), rankedDocuments);
+			this.similarities 	= DataSetItemSimilarity.createListFromPairMap(model.rankedDocumentsWithSimilaritiesForText(getInput()));
+		} catch (VocabularyMatchException e) {
+			this.MRR 			= null;
+			this.similarities 	= null;
 		}	
 	}
 	
@@ -50,6 +57,10 @@ public class DataSetItem {
 	
 	public Double getMRR() {
 		return MRR;
+	}
+
+	public List<DataSetItemSimilarity> getSimilarities() {
+		return similarities;
 	}
 
 	@Override

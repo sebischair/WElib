@@ -9,7 +9,9 @@ import org.deeplearning4j.text.sentenceiterator.BasicLineIterator;
 import org.deeplearning4j.text.sentenceiterator.SentenceIterator;
 import org.deeplearning4j.text.sentenceiterator.UimaSentenceIterator;
 import org.nd4j.linalg.api.ndarray.INDArray;
+import org.nd4j.linalg.exception.ND4JIllegalStateException;
 
+import de.tum.in.wwwmatthes.stm.exceptions.VocabularyMatchException;
 import de.tum.in.wwwmatthes.stm.models.config.Config;
 
 class ModelDoc2Vec extends ModelImpl {
@@ -59,8 +61,12 @@ class ModelDoc2Vec extends ModelImpl {
 	}
 
 	@Override
-	public INDArray vectorFromText(String text) {
-		return vectors.inferVector(text);
+	public INDArray vectorFromText(String text) throws VocabularyMatchException {
+		try {
+			return vectors.inferVector(text);
+		} catch(ND4JIllegalStateException exception) {
+			throw new VocabularyMatchException();
+		}
 	}
 
 }

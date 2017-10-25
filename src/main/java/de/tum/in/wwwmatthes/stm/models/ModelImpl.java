@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.commons.lang3.tuple.Triple;
 import org.deeplearning4j.text.documentiterator.FileLabelAwareIterator;
 import org.deeplearning4j.text.documentiterator.LabelAwareIterator;
 import org.deeplearning4j.text.documentiterator.LabelledDocument;
@@ -17,6 +18,7 @@ import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.ops.transforms.Transforms;
 import org.nd4j.linalg.primitives.Pair;
 
+import de.tum.in.wwwmatthes.stm.exceptions.VocabularyMatchException;
 import de.tum.in.wwwmatthes.stm.models.config.Config;
 import de.tum.in.wwwmatthes.stm.tokenizers.STMTokenizerFactory;
 
@@ -56,7 +58,7 @@ abstract class ModelImpl implements Model {
 	 * @param  text Text to convert.         
 	 * @return vector Vector converted from text.
 	 */
-	public abstract INDArray vectorFromText(String text);
+	public abstract INDArray vectorFromText(String text) throws VocabularyMatchException;
 		
 	/**
 	 * Calculates the similarity between two vectors.
@@ -76,7 +78,7 @@ abstract class ModelImpl implements Model {
 	 * @param  text Text to compare.         
 	 * @return similarity Similarity between text and label.
 	 */
-	public double similarity(String text, String label) {
+	public double similarity(String text, String label) throws VocabularyMatchException {
 		INDArray vector1 = vectorFromText(text);
 		INDArray vector2 = documentsLookupTable.get(label);
 		return similarity(vector1, vector2);
@@ -88,13 +90,16 @@ abstract class ModelImpl implements Model {
 	 * @param  text Text to compare.         
 	 * @return similarities List of labels and their similarities.
 	 */
-	public List<Pair<String, Double>> rankedDocumentsWithSimilaritiesForText(String text) {
+	public List<Pair<String, Double>> rankedDocumentsWithSimilaritiesForText(String text) throws VocabularyMatchException {
 		INDArray vector 							= vectorFromText(text);
 		List<Pair<String, Double>> similarDocs 	= new ArrayList<Pair<String, Double>>();
 		
 		// Add
 		for(Entry<String, INDArray> entry : documentsLookupTable.entrySet()) {	
-			double similarity = similarity(entry.getValue(), vector);
+			Double similarity = similarity(entry.getValue(), vector);
+			if(similarity.isNaN()) {
+				similarity = -0.1;
+			}
 			similarDocs.add(new Pair<String, Double>(entry.getKey(), similarity));
 		}
 		
@@ -114,7 +119,7 @@ abstract class ModelImpl implements Model {
 	 * @param  text Text to compare.         
 	 * @return similarities List of labels and their similarities.
 	 */
-	public List<String> rankedDocumentsForText(String text) {
+	public List<String> rankedDocumentsForText(String text) throws VocabularyMatchException {
 
 		List<Pair<String, Double>> similarDocs = rankedDocumentsWithSimilaritiesForText(text);
 		
@@ -148,16 +153,26 @@ abstract class ModelImpl implements Model {
 		while(documentsLabelAwareIterator.hasNext()) {
 			LabelledDocument 	labelledDocument 		= documentsLabelAwareIterator.nextDocument();
 			String 				labelledDocumentId 		= labelledDocument.getLabels().get(0);
-			INDArray 			labelledDocumentVector 	= vectorFromText(labelledDocument.getContent());
-			
-			if (labelledDocumentId != null && labelledDocumentVector != null) {
-				lookupTable.put(labelledDocumentId, labelledDocumentVector);
-				documentsContentLookupTable.put(labelledDocumentId, labelledDocument.getContent());
+
+			try {
+				INDArray labelledDocumentVector = vectorFromText(labelledDocument.getContent());
+				if (labelledDocumentId != null && labelledDocumentVector != null) {
+					lookupTable.put(labelledDocumentId, labelledDocumentVector);
+					documentsContentLookupTable.put(labelledDocumentId, labelledDocument.getContent());
+				}
+				
+			} catch (VocabularyMatchException e) {
+				System.err.println("Label " + labelledDocument.getContent() + " has no matches in model vocabulary. It will be ignored.");
 			}
 		}
 		
 		// Set
 		documentsLookupTable = lookupTable;
+	}
+	
+	@Override
+	public Map<String, String> getDocumentContents() {
+		return documentsContentLookupTable;
 	}
 	
 }

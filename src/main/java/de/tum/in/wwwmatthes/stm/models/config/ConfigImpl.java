@@ -41,7 +41,7 @@ public class ConfigImpl implements Config {
 	/*
 	 * Getters & Setters
 	 */
-	
+	 
 	public ConfigType getType() {
 		return ConfigType.typeFromString(type);
 	}

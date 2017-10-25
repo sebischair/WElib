@@ -1,8 +1,11 @@
 package de.tum.in.wwwmatthes.stm.models;
 
 import java.util.List;
+import java.util.Map;
 
 import org.nd4j.linalg.primitives.Pair;
+
+import de.tum.in.wwwmatthes.stm.exceptions.VocabularyMatchException;
 
 public interface Model {
 	
@@ -18,7 +21,7 @@ public interface Model {
 	 * @param  text Text to compare.         
 	 * @return similarity Similarity between text and label.
 	 */
-	public double similarity(String text, String label);
+	public double similarity(String text, String label) throws VocabularyMatchException;
 	
 	/**
 	 * Returns the documents ranked by the similarities between a given text and all labels.
@@ -26,7 +29,7 @@ public interface Model {
 	 * @param  text Text to compare.         
 	 * @return similarities List of ranked documents.
 	 */
-	public List<String> rankedDocumentsForText(String text);
+	public List<String> rankedDocumentsForText(String text) throws VocabularyMatchException;
 	
 	/**
 	 * Returns the documents ranked by the similarities between a given text and all labels.
@@ -34,7 +37,7 @@ public interface Model {
 	 * @param  text Text to compare.         
 	 * @return documents List of ranked documents with their their similarities.
 	 */
-	public List<Pair<String, Double>> rankedDocumentsWithSimilaritiesForText(String text);
+	public List<Pair<String, Double>> rankedDocumentsWithSimilaritiesForText(String text) throws VocabularyMatchException;
 	
 	/**
 	 * Returns the content for the given document label.
@@ -43,5 +46,12 @@ public interface Model {
 	 * @return content Content of the document 
 	 */
 	public String getContentForDocument(String label);
+	
+	/**
+	 * Returns a dictionary with the label as key and content as value.
+	 * 
+	 * @return dictionary Dictionary of labels and its contents
+	 */
+	public Map<String, String> getDocumentContents();
 	
 }

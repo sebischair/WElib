@@ -34,18 +34,18 @@ public class RankExample {
 				.useStemming(true)
 				.allowedPosTags(Arrays.asList("NN", "NNS"))
 				.documentsSourceFile(new ClassPathResource("examples/labeled").getFile())
-				// .corpusFile(new File("/Users/christopherl/citadel/data/corpus/CORP_CONTROLS"))
+				.corpusFile(new File("/Users/christopherl/citadel/data/corpus/CORP_CONTROLS"))
 				.addDefaultStopWords(true)
 				.stopWords(Arrays.asList("Hallo"))
-				.epochs(1)
-				.iterations(1)
-				.batchSize(1)
-				.layerSize(1)
-				.windowSize(1)
-				.minLearningRate(0.4)
-				.learningRate(0.3)
-				.sampling(0.5)
-				.negativeSample(0.5)
+				.epochs(3)
+				.iterations(3)
+				.batchSize(5)
+				//.layerSize(1)
+				//.windowSize(1)
+				//.minLearningRate(0.4)
+				//.learningRate(0.3)
+				//.sampling(0.5)
+				//.negativeSample(0.5)
 				.build();
 		
 		// Create Model
@@ -69,6 +69,14 @@ public class RankExample {
 		System.out.println("MRR: " + dataSets.getMRR());
 		dataSets.evaluateWithModel(model);
 		System.out.println("MRR: " + dataSets.getMRR());
+		
+		System.out.println(dataSets.getContents());
+		
+		for(DataSet dataSet : dataSets.getItems()) {
+			for(DataSetItem dataSetItem : dataSet.getItems()) {
+				System.out.println(dataSetItem.getSimilarities());
+			}
+		}
 
 		// dataSets.writeToFile(new File("/path/to/file"));
 	}

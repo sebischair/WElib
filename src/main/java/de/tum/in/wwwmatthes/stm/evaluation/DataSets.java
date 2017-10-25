@@ -19,6 +19,8 @@ public class DataSets {
 	
 	private String 							identifier;
 	private List<DataSet> 					items;
+	private Map<String, String>            	contents;
+	
 	private transient Map<String, DataSet> 	map;
 	
 	private Double MRR;
@@ -30,6 +32,7 @@ public class DataSets {
 	public DataSets(List<DataSet> items) {
 		this.items 		= items;
 		this.map 		= new HashMap<String, DataSet>(); 
+		this.contents 	= new HashMap<String, String>(); 
 		
 		for(DataSet item : items) {
 			this.map.put(item.getIdentifier(), item);
@@ -46,6 +49,9 @@ public class DataSets {
 		for(DataSet item : getItems()) {
 			item.evaluateWithModel(model);
 		}
+		
+		// Save Document Contents
+		this.contents = model.getDocumentContents();
 		
 		// Calculate MRR from evaluated Data Set Items
 		double mrr = 0;
@@ -74,9 +80,9 @@ public class DataSets {
 		FileUtils.writeStringToFile(file, toJson());
 	}
 	
-	public DataSets readFromFile(File file) throws IOException {
+	public static DataSets readFromFile(File file) throws IOException {
 		String content = FileUtils.readFileToString(file);
-		return fromJson(content);
+		return DataSets.fromJson(content);
 	}
 	
 	/**
@@ -89,7 +95,7 @@ public class DataSets {
 		return map.get(identifier);
 	}
 	
-	public List<DataSet> getEvaluatedItems() {
+	private List<DataSet> getEvaluatedItems() {
 		List<DataSet> evaluatedItems = new ArrayList<DataSet>();
 		for(DataSet item : getItems()) {
 			if (item.getMRR() != null && item.getMRR() != null) {
@@ -119,6 +125,10 @@ public class DataSets {
 		return MRR;
 	}
 
+	public Map<String, String> getContents() {
+		return contents;
+	}
+
 	@Override
 	public String toString() {
 		String output = "DataSets:\n";
@@ -135,7 +145,7 @@ public class DataSets {
 		return gson.toJson(this);
 	}
 	
-	private DataSets fromJson(String json) {
+	private static DataSets fromJson(String json) {
 		Gson gson = new GsonBuilder().serializeSpecialFloatingPointValues().create();
 		return gson.fromJson(json, DataSets.class);
 	}

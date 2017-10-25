@@ -40,6 +40,7 @@ public class DataSet {
 				item.evaluateWithModel(model);
 				mrr += item.getMRR();
 			}
+			System.out.println(mrr + " " + evaluatedItems.size());
 			this.MRR = mrr / evaluatedItems.size();
 		} else {
 			this.MRR = null;
@@ -62,7 +63,7 @@ public class DataSet {
 		return map.get(label);
 	}
 	
-	public List<DataSetItem> getEvaluatedItems() {
+	private List<DataSetItem> getEvaluatedItems() {
 		List<DataSetItem> evaluatedItems = new ArrayList<DataSetItem>();
 		for(DataSetItem item : getItems()) {
 			if (item.getMRR() != null && item.getMRR() != null) {

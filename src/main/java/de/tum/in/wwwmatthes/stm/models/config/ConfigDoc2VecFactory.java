@@ -117,6 +117,10 @@ public class ConfigDoc2VecFactory extends ConfigFactory {
 	@Override
 	public Config build() throws InvalidConfigException {
 		
+		if (corpusFile == null) {
+			throw new InvalidConfigException();
+		}
+		
 		ConfigDoc2Vec configDOC2VEC = new ConfigDoc2Vec();
 		configDOC2VEC.setIdentifier(identifier);
 		configDOC2VEC.setMinWordFrequency(minWordFrequency); 

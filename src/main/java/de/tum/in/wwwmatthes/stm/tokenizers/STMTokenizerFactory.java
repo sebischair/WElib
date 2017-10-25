@@ -125,7 +125,9 @@ public class STMTokenizerFactory implements TokenizerFactory {
 			        
 				return tokenizerFactory;
 				
-			} catch (ResourceInitializationException e) {
+			} catch (Exception e) { // ResourceInitialization
+				System.out.println("Errorrr!!!!!");
+				e.printStackTrace();
 				throw new RuntimeException();
 			}
 		}
