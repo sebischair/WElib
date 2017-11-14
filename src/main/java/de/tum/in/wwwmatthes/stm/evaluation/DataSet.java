@@ -40,7 +40,6 @@ public class DataSet {
 				item.evaluateWithModel(model);
 				mrr += item.getMRR();
 			}
-			System.out.println(mrr + " " + evaluatedItems.size());
 			this.MRR = mrr / evaluatedItems.size();
 		} else {
 			this.MRR = null;

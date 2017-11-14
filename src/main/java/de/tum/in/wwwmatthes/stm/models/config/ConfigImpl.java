@@ -161,12 +161,15 @@ public class ConfigImpl implements Config {
 	public int getWindowSize() {
 		return -1;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "ConfigImpl [type=" + type + ", identifier=" + identifier + ", addDefaultStopWords="
-				+ addDefaultStopWords + ", minWordFrequency=" + minWordFrequency + ", documentsSourcePath="
-				+ documentsSourcePath + "]";
+		return "ConfigImpl [type=" + type + ", identifier=" + identifier + ", stopWords=" + stopWords
+				+ ", addDefaultStopWords=" + addDefaultStopWords + ", minWordFrequency=" + minWordFrequency
+				+ ", documentsSourcePath=" + documentsSourcePath + ", useStemming=" + useStemming + ", allowedPosTags="
+				+ allowedPosTags + "]";
 	}
+	
+	
 	
 }

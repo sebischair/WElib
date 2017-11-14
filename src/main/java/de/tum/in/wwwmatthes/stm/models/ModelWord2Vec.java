@@ -46,6 +46,7 @@ class ModelWord2Vec extends ModelImpl {
         			.sampling(config.getSampling())
         			.negativeSample(config.getNegativeSample())
         			
+        			.seed(42)
         			.allowParallelTokenization(false)
 	        		.tokenizerFactory(tokenizerFactory)
 

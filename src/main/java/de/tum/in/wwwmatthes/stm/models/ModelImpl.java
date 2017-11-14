@@ -18,11 +18,15 @@ import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.ops.transforms.Transforms;
 import org.nd4j.linalg.primitives.Pair;
 
+import com.sun.istack.internal.logging.Logger;
+
 import de.tum.in.wwwmatthes.stm.exceptions.VocabularyMatchException;
 import de.tum.in.wwwmatthes.stm.models.config.Config;
 import de.tum.in.wwwmatthes.stm.tokenizers.STMTokenizerFactory;
 
 abstract class ModelImpl implements Model {
+	
+	private Logger logger = Logger.getLogger(ModelImpl.class);
 	
 	private Map<String, String> documentsContentLookupTable = new HashMap<String, String>(); // Only for debugging
 	private Map<String, INDArray> documentsLookupTable = new HashMap<String, INDArray>();
@@ -33,6 +37,8 @@ abstract class ModelImpl implements Model {
 	
 	ModelImpl(Config config) {
 		super();
+		
+		logger.info("Creating Model with Config " + config);
 		
 		// Documents Label Aware Iterator
 		documentsLabelAwareIterator = new FileLabelAwareIterator.Builder()
@@ -163,6 +169,8 @@ abstract class ModelImpl implements Model {
 				
 			} catch (VocabularyMatchException e) {
 				System.err.println("Label " + labelledDocument.getContent() + " has no matches in model vocabulary. It will be ignored.");
+			} catch (Exception e) {
+				System.err.println("Label " + labelledDocument.getContent() + " has an error.");
 			}
 		}
 		

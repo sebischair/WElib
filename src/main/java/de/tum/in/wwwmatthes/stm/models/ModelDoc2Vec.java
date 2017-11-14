@@ -46,6 +46,7 @@ class ModelDoc2Vec extends ModelImpl {
         			.negativeSample(config.getMinLearningRate())
         			//.trainElementsRepresentation(true)
 				//.trainWordVectors(true)
+        			.seed(42)
         			.allowParallelTokenization(false)
 	        		.tokenizerFactory(tokenizerFactory)
 	        		.build();

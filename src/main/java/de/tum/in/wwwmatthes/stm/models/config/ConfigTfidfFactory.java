@@ -10,9 +10,7 @@ public class ConfigTfidfFactory extends ConfigFactory {
 		
 	@Override
 	public Config build() throws InvalidConfigException {
-		
-		System.out.println("Build Config: " + allowedPosTags + " " + useStemming);
-		
+				
 		ConfigTfidf config = new ConfigTfidf();
 		config.setIdentifier(identifier);
 		config.setMinWordFrequency(minWordFrequency); 
