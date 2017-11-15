@@ -13,12 +13,13 @@ public interface Config {
 	public ConfigType getType();
 	
 	public List<String> getStopWords();
-	
-	public Boolean isAddDefaultStopWords();
-	
+		
 	public List<String> getTotalStopWords();
 	
-	public boolean isUseStemming();
+	public boolean isAddDefaultStopWords();
+	
+	public boolean isProcessingEnabled();
+	public boolean isStemmingEnabled();
 	
 	public List<String> getAllowedPosTags();
 

@@ -15,7 +15,8 @@ public class ConfigFactory {
 	protected String 		identifier;
 	protected ConfigType		type;
 	
-	protected boolean		useStemming			= false;
+	protected boolean		stemmingEnabled		= false;
+	protected boolean		preprocessingEnabled	= false;
 	protected List<String>	allowedPosTags		;
 	
 	protected List<String>	stopWords			= new ArrayList<String>();
@@ -38,8 +39,13 @@ public class ConfigFactory {
 		return this;
 	}
 	
-	public ConfigFactory useStemming(boolean useStemming) {
-		this.useStemming = useStemming;
+	public ConfigFactory enableStemming(boolean enableStemming) {
+		this.stemmingEnabled = enableStemming;
+		return this;
+	}
+	
+	public ConfigFactory enablePreprocessing(boolean enablePreprocessing) {
+		this.preprocessingEnabled = enablePreprocessing;
 		return this;
 	}
 	

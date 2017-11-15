@@ -8,26 +8,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.lang3.tuple.Triple;
 import org.deeplearning4j.text.documentiterator.FileLabelAwareIterator;
 import org.deeplearning4j.text.documentiterator.LabelAwareIterator;
 import org.deeplearning4j.text.documentiterator.LabelledDocument;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.TokenizerFactory;
-import org.deeplearning4j.text.tokenization.tokenizerfactory.UimaTokenizerFactory;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.ops.transforms.Transforms;
 import org.nd4j.linalg.primitives.Pair;
-
-import com.sun.istack.internal.logging.Logger;
 
 import de.tum.in.wwwmatthes.stm.exceptions.VocabularyMatchException;
 import de.tum.in.wwwmatthes.stm.models.config.Config;
 import de.tum.in.wwwmatthes.stm.tokenizers.STMTokenizerFactory;
 
 abstract class ModelImpl implements Model {
-	
-	private Logger logger = Logger.getLogger(ModelImpl.class);
-	
+		
 	private Map<String, String> documentsContentLookupTable = new HashMap<String, String>(); // Only for debugging
 	private Map<String, INDArray> documentsLookupTable = new HashMap<String, INDArray>();
 	
@@ -37,9 +31,7 @@ abstract class ModelImpl implements Model {
 	
 	ModelImpl(Config config) {
 		super();
-		
-		logger.info("Creating Model with Config " + config);
-		
+				
 		// Documents Label Aware Iterator
 		documentsLabelAwareIterator = new FileLabelAwareIterator.Builder()
 	              .addSourceFolder(config.getDocumentsSourceFile())
@@ -47,7 +39,8 @@ abstract class ModelImpl implements Model {
 		
 		// Tokenizer Factory
 		STMTokenizerFactory tokenizerFactory = new STMTokenizerFactory();
-		tokenizerFactory.setUseStemming(config.isUseStemming());
+		tokenizerFactory.setPreprocessingEnabled(config.isProcessingEnabled());
+		tokenizerFactory.setStemmingEnabled(config.isStemmingEnabled());
 		tokenizerFactory.setAllowedPosTags(config.getAllowedPosTags());
 		
 		this.tokenizerFactory = tokenizerFactory;

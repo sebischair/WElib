@@ -38,8 +38,13 @@ public class ConfigWord2VecFactory extends ConfigFactory {
 	}
 	
 	@Override
-	public ConfigWord2VecFactory useStemming(boolean useStemming) {
-		return (ConfigWord2VecFactory) super.useStemming(useStemming);
+	public ConfigWord2VecFactory enableStemming(boolean enableStemming) {
+		return (ConfigWord2VecFactory) super.enableStemming(enableStemming);
+	}
+	
+	@Override
+	public ConfigWord2VecFactory enablePreprocessing(boolean enableStemming) {
+		return (ConfigWord2VecFactory) super.enableStemming(enableStemming);
 	}
 	
 	@Override
@@ -124,7 +129,8 @@ public class ConfigWord2VecFactory extends ConfigFactory {
 		ConfigWord2Vec configWORD2VEC = new ConfigWord2Vec();
 		configWORD2VEC.setIdentifier(identifier);
 		configWORD2VEC.setMinWordFrequency(minWordFrequency); 
-		configWORD2VEC.setUseStemming(useStemming);	
+		configWORD2VEC.setStemmingEnabled(stemmingEnabled);
+		configWORD2VEC.setPreprocessingEnabled(preprocessingEnabled);
 		configWORD2VEC.setAllowedPosTags(allowedPosTags);
 		configWORD2VEC.setStopWords(stopWords);
 		configWORD2VEC.setDocumentsSourceFile(documentsSourceFile);

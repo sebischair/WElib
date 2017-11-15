@@ -23,7 +23,8 @@ import de.tum.in.wwwmatthes.stm.preprocessing.PreProcessor;
 public class STMTokenizerFactory implements TokenizerFactory {
 	
 	// Properties
-	private boolean 				useStemming; 
+	private boolean 				preprocessingEnabled; 
+	private boolean 				stemmingEnabled; 
 	private Collection<String> 	allowedPosTags;
 	
 	// Attributes
@@ -33,7 +34,6 @@ public class STMTokenizerFactory implements TokenizerFactory {
     private TokenizerFactory tokenizerFactory;
 		
 	public STMTokenizerFactory() {
-		setTokenPreProcessor(new PreProcessor());
 	}
 
 	@Override
@@ -67,16 +67,30 @@ public class STMTokenizerFactory implements TokenizerFactory {
 
     // Getters & Setters
     
-	public boolean isUseStemming() {
-		return useStemming;
-	}
-
-	public void setUseStemming(boolean useStemming) {
-		this.useStemming = useStemming;
-	}
-
 	public Collection<String> getAllowedPosTags() {
 		return allowedPosTags;
+	}
+
+	public boolean isPreprocessingEnabled() {
+		return preprocessingEnabled;
+	}
+
+	public void setPreprocessingEnabled(boolean preprocessingEnabled) {
+		if(this.preprocessingEnabled) {
+			setTokenPreProcessor(new PreProcessor());
+		} else {
+			setTokenPreProcessor(null);
+		}
+		
+		this.preprocessingEnabled = preprocessingEnabled;
+	}
+
+	public boolean isStemmingEnabled() {
+		return stemmingEnabled;
+	}
+
+	public void setStemmingEnabled(boolean stemmingEnabled) {
+		this.stemmingEnabled = stemmingEnabled;
 	}
 
 	public void setAllowedPosTags(Collection<String> allowedPosTags) {
@@ -99,7 +113,7 @@ public class STMTokenizerFactory implements TokenizerFactory {
 				AnalysisEngineDescription posTaggerDescr	= PoStagger.getDescription("en");
 				AnalysisEngineDescription stemmerDescr 	= StemmerAnnotator.getDescription("English");
 				
-				if (useStemming && allowedPosTags != null) {
+				if (stemmingEnabled && allowedPosTags != null) {
 					AnalysisEngineDescription descr	= AnalysisEngineFactory.createEngineDescription(sentenceDescr, annotatorDescr, posTaggerDescr, stemmerDescr);
 					AnalysisEngine analysisEngine 	= AnalysisEngineFactory.createEngine(descr);
 					
@@ -111,7 +125,7 @@ public class STMTokenizerFactory implements TokenizerFactory {
 					
 					tokenizerFactory = new PosUimaTokenizerFactory(analysisEngine, allowedPosTags);
 				
-				} else if (useStemming) {
+				} else if (stemmingEnabled) {
 					
 					AnalysisEngineDescription descr	= AnalysisEngineFactory.createEngineDescription(sentenceDescr, annotatorDescr, stemmerDescr);
 					AnalysisEngine analysisEngine 	= AnalysisEngineFactory.createEngine(descr);

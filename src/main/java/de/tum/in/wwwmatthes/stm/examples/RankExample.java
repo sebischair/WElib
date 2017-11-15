@@ -34,6 +34,7 @@ public class RankExample {
 	public static void main(String[] args) throws IOException, InvalidConfigException {
 		
 		//runNativeWord2Vec();
+		//System.exit(0);
 
 		// Load Configuration File
 		//File configFile = new ClassPathResource("examples/config/example.config").getFile();
@@ -48,9 +49,10 @@ public class RankExample {
 				//.useStemming(true)
 				//.allowedPosTags(Arrays.asList("NN", "NNS"))
 				
-				.documentsSourceFile(new ClassPathResource("examples/labeled").getFile())
+				//.documentsSourceFile(new ClassPathResource("examples/labeled").getFile())
+				.documentsSourceFile(new File("/Users/christopherl/citadel/data/labels/DOC"))
 				//.corpusFile(new ClassPathResource("examples/corpus/corpus.txt").getFile())
-				.corpusFile(new ClassPathResource("examples/corpus/corpus_edu.txt").getFile())
+				.corpusFile(new ClassPathResource("examples/corpus/corpus_ctrls_reg.txt").getFile())
 				//.corpusFile(new ClassPathResource("examples/corpus/raw_sentences.txt").getFile())
 				.addDefaultStopWords(true)
 				
@@ -79,25 +81,36 @@ public class RankExample {
 		 * Model model = ModelFactory.createFromConfigFile(configFile);
 		 * 
 		 */
-		System.exit(0);
+		// System.exit(0);
 		// Create dataset with truths
-		DataSets dataSets = createDatasets();
-		System.out.println(dataSets);
+		// DataSets dataSets = createDatasets();
+		// System.out.println(dataSets);
 
-		// Evaluation
+		// Evaluate
+		evaluateDatasetsForCTRLS_REG(model);
+
+		// dataSets.writeToFile(new File("/path/to/file"));
+	}
+	
+	private static void evaluateDatasetsForCTRLS_REG(Model model) {
+
+		DataSetItem item1 = new DataSetItem("i1", "Configuration for each change shall be managed through version control solution.",
+				Arrays.asList("55d4ab6d9d3fbfcdb0f4f79d|16"));
+		
+		List<DataSetItem> itemList = Arrays.asList(item1);  
+		
+		DataSets dataSets = new DataSets(new DataSet("Random", itemList));
 		dataSets.evaluateWithModel(model);
+		
 		System.out.println("Evaluation");
 		System.out.println("MRR: " + dataSets.getMRR());
-		
-		System.out.println(dataSets.getContents());
+		//System.out.println(dataSets.getContents());
 		
 		for(DataSet dataSet : dataSets.getItems()) {
 			for(DataSetItem dataSetItem : dataSet.getItems()) {
-				System.out.println(dataSetItem.getSimilarities());
+				//System.out.println(dataSetItem.getSimilarities());
 			}
 		}
-
-		// dataSets.writeToFile(new File("/path/to/file"));
 	}
 
 	private static DataSets createDatasets() {

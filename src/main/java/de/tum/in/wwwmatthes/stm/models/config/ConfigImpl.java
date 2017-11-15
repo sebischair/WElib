@@ -21,7 +21,8 @@ public class ConfigImpl implements Config {
 	private int				minWordFrequency			;
 	private String			documentsSourcePath;	
 	
-	private boolean			useStemming				;
+	private boolean			preprocessingEnabled		;
+	private boolean			stemmingEnabled			;
 	private List<String>		allowedPosTags			;
 		
 	public ConfigImpl(ConfigType type) {
@@ -62,7 +63,7 @@ public class ConfigImpl implements Config {
 	public void setStopWords(List<String> stopWords) {
 		this.stopWords = stopWords;
 	}
-	public Boolean isAddDefaultStopWords() {
+	public boolean isAddDefaultStopWords() {
 		return addDefaultStopWords;
 	}
 	public void setAddDefaultStopWords(boolean addDefaultStopWords) {
@@ -102,22 +103,25 @@ public class ConfigImpl implements Config {
 		return null;
 	}
 	
+	public void setStemmingEnabled(boolean stemmingEnabled) {
+		this.stemmingEnabled = stemmingEnabled;
+	}
+
+	public boolean isPreprocessingEnabled() {
+		return preprocessingEnabled;
+	}
+
+	public void setPreprocessingEnabled(boolean preprocessingEnabled) {
+		this.preprocessingEnabled = preprocessingEnabled;
+	}
+
 	@Override
 	public List<String> getAllowedPosTags() {
 		return allowedPosTags;
 	}
 
-	public void setUseStemming(boolean useStemming) {
-		this.useStemming = useStemming;
-	}
-
 	public void setAllowedPosTags(List<String> allowedPosTags) {
 		this.allowedPosTags = allowedPosTags;
-	}
-
-	@Override
-	public boolean isUseStemming() {
-		return useStemming;
 	}
 	
 	@Override
@@ -166,8 +170,20 @@ public class ConfigImpl implements Config {
 	public String toString() {
 		return "ConfigImpl [type=" + type + ", identifier=" + identifier + ", stopWords=" + stopWords
 				+ ", addDefaultStopWords=" + addDefaultStopWords + ", minWordFrequency=" + minWordFrequency
-				+ ", documentsSourcePath=" + documentsSourcePath + ", useStemming=" + useStemming + ", allowedPosTags="
+				+ ", documentsSourcePath=" + documentsSourcePath + ", useStemming=" + stemmingEnabled + ", allowedPosTags="
 				+ allowedPosTags + "]";
+	}
+
+	@Override
+	public boolean isProcessingEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isStemmingEnabled() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	

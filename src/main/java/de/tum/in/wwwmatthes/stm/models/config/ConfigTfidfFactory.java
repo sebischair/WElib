@@ -14,7 +14,8 @@ public class ConfigTfidfFactory extends ConfigFactory {
 		ConfigTfidf config = new ConfigTfidf();
 		config.setIdentifier(identifier);
 		config.setMinWordFrequency(minWordFrequency); 
-		config.setUseStemming(useStemming);	
+		config.setPreprocessingEnabled(preprocessingEnabled);
+		config.setStemmingEnabled(stemmingEnabled);
 		config.setAllowedPosTags(allowedPosTags);
 		config.setStopWords(stopWords);
 		config.setDocumentsSourceFile(documentsSourceFile);
