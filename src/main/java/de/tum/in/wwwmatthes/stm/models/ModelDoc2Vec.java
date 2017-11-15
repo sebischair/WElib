@@ -1,8 +1,10 @@
 package de.tum.in.wwwmatthes.stm.models;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 
 import org.deeplearning4j.models.paragraphvectors.ParagraphVectors;
+import org.deeplearning4j.plot.BarnesHutTsne;
 import org.deeplearning4j.text.documentiterator.FileLabelAwareIterator;
 import org.deeplearning4j.text.documentiterator.LabelAwareIterator;
 import org.deeplearning4j.text.sentenceiterator.BasicLineIterator;
@@ -45,11 +47,26 @@ class ModelDoc2Vec extends ModelImpl {
         			.sampling(config.getSampling())
         			.negativeSample(config.getMinLearningRate())
         			//.trainElementsRepresentation(true)
-				//.trainWordVectors(true)
+				.trainWordVectors(true)
         			.seed(42)
         			.allowParallelTokenization(false)
 	        		.tokenizerFactory(tokenizerFactory)
 	        		.build();
+		
+		/*
+		BarnesHutTsne tsne = new BarnesHutTsne.Builder()
+	            .setMaxIter(1000)
+	            .stopLyingIteration(250)
+	            .learningRate(500)
+	            .useAdaGrad(false)
+	            .theta(0.5)
+	            .setMomentum(0.5)
+	            .normalize(true)
+	            .build();
+		INDArray weights = vectors.getFirst().getSyn0();
+		tsne.plot(matrix, nDims, labels, path);
+		*/
+		//vectors.lookupTable().plotVocab(3, new File("/Users/christopherl/Desktop/test.plot"));
 	}
 
 	@Override

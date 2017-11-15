@@ -13,9 +13,12 @@ import org.deeplearning4j.text.annotator.StemmerAnnotator;
 import org.deeplearning4j.text.annotator.TokenizerAnnotator;
 import org.deeplearning4j.text.tokenization.tokenizer.TokenPreProcess;
 import org.deeplearning4j.text.tokenization.tokenizer.Tokenizer;
+import org.deeplearning4j.text.tokenization.tokenizer.preprocessor.CommonPreprocessor;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.PosUimaTokenizerFactory;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.TokenizerFactory;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.UimaTokenizerFactory;
+
+import de.tum.in.wwwmatthes.stm.preprocessing.PreProcessor;
 
 public class STMTokenizerFactory implements TokenizerFactory {
 	
@@ -30,7 +33,7 @@ public class STMTokenizerFactory implements TokenizerFactory {
     private TokenizerFactory tokenizerFactory;
 		
 	public STMTokenizerFactory() {
-		//
+		setTokenPreProcessor(new PreProcessor());
 	}
 
 	@Override

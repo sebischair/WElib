@@ -11,10 +11,10 @@ public class ConfigDoc2VecFactory extends ConfigFactory {
 	private int			epochs			= 1;	
 	private int			layerSize		= 100;	
 	private int			windowSize		= 5;
-	private int			batchSize		= 0;	
+	private int			batchSize		= 128;	
 	
 	private double 		learningRate		= 0.025;
-	private double 		minLearningRate	= 0.1;
+	private double 		minLearningRate	= 0.0001;
 	
 	private double 		sampling			= 0;		
 	private double 		negativeSample 	= 0;

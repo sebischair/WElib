@@ -1,5 +1,6 @@
 package de.tum.in.wwwmatthes.stm.models;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
 
@@ -46,9 +47,9 @@ class ModelWord2Vec extends ModelImpl {
         			.sampling(config.getSampling())
         			.negativeSample(config.getNegativeSample())
         			
-        			.seed(42)
         			.allowParallelTokenization(false)
 	        		.tokenizerFactory(tokenizerFactory)
+	        		.seed(42)
 
 	        		.build();
 	}
@@ -58,6 +59,10 @@ class ModelWord2Vec extends ModelImpl {
 		// Fit Model
 		vectors.fit();
 		
+		//vectors.getLookupTable().plotVocab(100, new File("/Users/christopherl/Desktop/test.plot"));
+		System.out.println(vectors.getConfiguration());
+		System.out.println(vectors.wordsNearest("data", 20));
+	
 		// Create Documents Lookup Table
 		updateDocumentsLookupTable();
 	}
@@ -67,10 +72,17 @@ class ModelWord2Vec extends ModelImpl {
         Tokenizer tokenizer = tokenizerFactory.create(text);
         List<String> tokens = tokenizer.getTokens();
         
-        //vectors.
+        INDArray vector = null; 
+        for(String token : tokens) {
+        		INDArray tokenVector = vectors.getWordVectorMatrix(token);
+        		if(vector == null && tokenVector != null) {
+        			vector = tokenVector;
+        		} else if (tokenVector != null) {
+        			vector.add(tokenVector);
+        		}
+        }
         
-        //INDArray result = new INDArray();
-		return vectors.getWordVectorMatrixNormalized(""); // TODO
+		return vector;
 	}
 
 }
