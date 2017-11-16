@@ -17,12 +17,12 @@ public class ConfigImpl implements Config {
 	private String			identifier;
 	
 	private List<String> 	stopWords				;
-	private boolean			addDefaultStopWords		;
-	private int				minWordFrequency			;
+	private Boolean			addDefaultStopWords		;
+	private Integer			minWordFrequency			;
 	private String			documentsSourcePath;	
 	
-	private boolean			preprocessingEnabled		;
-	private boolean			stemmingEnabled			;
+	private Boolean			preprocessingEnabled		;
+	private Boolean			stemmingEnabled			;
 	private List<String>		allowedPosTags			;
 		
 	public ConfigImpl(ConfigType type) {
@@ -63,10 +63,10 @@ public class ConfigImpl implements Config {
 	public void setStopWords(List<String> stopWords) {
 		this.stopWords = stopWords;
 	}
-	public boolean isAddDefaultStopWords() {
+	public Boolean isAddDefaultStopWords() {
 		return addDefaultStopWords;
 	}
-	public void setAddDefaultStopWords(boolean addDefaultStopWords) {
+	public void setAddDefaultStopWords(Boolean addDefaultStopWords) {
 		this.addDefaultStopWords = addDefaultStopWords;
 	}
 	@Override
@@ -77,10 +77,10 @@ public class ConfigImpl implements Config {
 		}
 		return totalStopWords;
 	}
-	public int getMinWordFrequency() {
+	public Integer getMinWordFrequency() {
 		return minWordFrequency;
 	}
-	public void setMinWordFrequency(int minWordFrequency) {
+	public void setMinWordFrequency(Integer minWordFrequency) {
 		this.minWordFrequency = minWordFrequency;
 	}
 	
@@ -103,15 +103,11 @@ public class ConfigImpl implements Config {
 		return null;
 	}
 	
-	public void setStemmingEnabled(boolean stemmingEnabled) {
+	public void setStemmingEnabled(Boolean stemmingEnabled) {
 		this.stemmingEnabled = stemmingEnabled;
 	}
 
-	public boolean isPreprocessingEnabled() {
-		return preprocessingEnabled;
-	}
-
-	public void setPreprocessingEnabled(boolean preprocessingEnabled) {
+	public void setPreprocessingEnabled(Boolean preprocessingEnabled) {
 		this.preprocessingEnabled = preprocessingEnabled;
 	}
 
@@ -125,44 +121,44 @@ public class ConfigImpl implements Config {
 	}
 	
 	@Override
-	public int getBatchSize() {
+	public Integer getBatchSize() {
 		return -1;
 	}
 	
 	@Override
-	public int getIterations() {
+	public Integer getIterations() {
 		return -1;
 	}
 	
 	@Override
-	public double getLearningRate() {
-		return -1;
+	public Double getLearningRate() {
+		return -1.0;
 	}
 	
 	@Override
-	public double getMinLearningRate() {
-		return -1;
+	public Double getMinLearningRate() {
+		return -1.0;
 	}
 	
 	@Override
-	public double getSampling() {
-		return -1;
+	public Double getSampling() {
+		return -1.0;
 	}
 
 	@Override
-	public double getNegativeSample() {
-		return -1;
+	public Double getNegativeSample() {
+		return -1.0;
 	}
 	
-	public int getEpochs() {
+	public Integer getEpochs() {
 		return -1;
 	}
 
-	public int getLayerSize() {
+	public Integer getLayerSize() {
 		return -1;
 	}
 
-	public int getWindowSize() {
+	public Integer getWindowSize() {
 		return -1;
 	}
 
@@ -175,17 +171,13 @@ public class ConfigImpl implements Config {
 	}
 
 	@Override
-	public boolean isProcessingEnabled() {
-		// TODO Auto-generated method stub
-		return false;
+	public Boolean isPreprocessingEnabled() {
+		return preprocessingEnabled;
 	}
 
 	@Override
-	public boolean isStemmingEnabled() {
-		// TODO Auto-generated method stub
-		return false;
+	public Boolean isStemmingEnabled() {
+		return stemmingEnabled;
 	}
-	
-	
 	
 }

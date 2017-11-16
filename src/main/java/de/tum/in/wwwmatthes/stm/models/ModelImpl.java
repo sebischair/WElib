@@ -39,7 +39,7 @@ abstract class ModelImpl implements Model {
 		
 		// Tokenizer Factory
 		STMTokenizerFactory tokenizerFactory = new STMTokenizerFactory();
-		tokenizerFactory.setPreprocessingEnabled(config.isProcessingEnabled());
+		tokenizerFactory.setPreprocessingEnabled(config.isPreprocessingEnabled());
 		tokenizerFactory.setStemmingEnabled(config.isStemmingEnabled());
 		tokenizerFactory.setAllowedPosTags(config.getAllowedPosTags());
 		

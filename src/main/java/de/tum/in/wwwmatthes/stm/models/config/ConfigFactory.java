@@ -15,13 +15,13 @@ public class ConfigFactory {
 	protected String 		identifier;
 	protected ConfigType		type;
 	
-	protected boolean		stemmingEnabled		= false;
-	protected boolean		preprocessingEnabled	= false;
+	protected Boolean		stemmingEnabled		= false;
+	protected Boolean		preprocessingEnabled	= false;
 	protected List<String>	allowedPosTags		;
 	
 	protected List<String>	stopWords			= new ArrayList<String>();
-	protected boolean		addDefaultStopWords	= false;			
-	protected int 			minWordFrequency		= 0;
+	protected Boolean		addDefaultStopWords	= false;			
+	protected Integer 		minWordFrequency		= 0;
 	
 	protected File 			documentsSourceFile;
 	
@@ -39,12 +39,12 @@ public class ConfigFactory {
 		return this;
 	}
 	
-	public ConfigFactory enableStemming(boolean enableStemming) {
+	public ConfigFactory enableStemming(Boolean enableStemming) {
 		this.stemmingEnabled = enableStemming;
 		return this;
 	}
 	
-	public ConfigFactory enablePreprocessing(boolean enablePreprocessing) {
+	public ConfigFactory enablePreprocessing(Boolean enablePreprocessing) {
 		this.preprocessingEnabled = enablePreprocessing;
 		return this;
 	}
@@ -54,12 +54,12 @@ public class ConfigFactory {
 		return this;
 	}
 	
-	public ConfigFactory addDefaultStopWords(boolean addDefaultStopWords) {
+	public ConfigFactory addDefaultStopWords(Boolean addDefaultStopWords) {
 		this.addDefaultStopWords = addDefaultStopWords;
 		return this;
 	}
 	
-	public ConfigFactory minWordFrequency(int minWordFrequency) {
+	public ConfigFactory minWordFrequency(Integer minWordFrequency) {
 		this.minWordFrequency = minWordFrequency;
 		return this;
 	}

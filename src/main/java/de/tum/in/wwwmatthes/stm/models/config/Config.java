@@ -16,36 +16,36 @@ public interface Config {
 		
 	public List<String> getTotalStopWords();
 	
-	public boolean isAddDefaultStopWords();
+	public Boolean isAddDefaultStopWords();
 	
-	public boolean isProcessingEnabled();
-	public boolean isStemmingEnabled();
+	public Boolean isPreprocessingEnabled();
+	public Boolean isStemmingEnabled();
 	
 	public List<String> getAllowedPosTags();
 
-	public int getMinWordFrequency();
+	public Integer getMinWordFrequency();
 	
 	public File getDocumentsSourceFile();
 	
 	public File getCorpusFile();
 
-	public int getIterations();
+	public Integer getIterations();
 	
-	public int getBatchSize();
+	public Integer getBatchSize();
 	
-	public int getEpochs();
+	public Integer getEpochs();
 	
-	public int getWindowSize();
+	public Integer getWindowSize();
 	
-	public int getLayerSize();
+	public Integer getLayerSize();
 	
-	public double getLearningRate();
+	public Double getLearningRate();
 	
-	public double getMinLearningRate();
+	public Double getMinLearningRate();
 	
-	public double getSampling();
+	public Double getSampling();
 	
-	public double getNegativeSample();
+	public Double getNegativeSample();
 	
 	// Methods
 	

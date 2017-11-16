@@ -3,6 +3,8 @@ package de.tum.in.wwwmatthes.stm.models;
 import java.util.List;
 import java.util.Map;
 
+import org.deeplearning4j.models.embeddings.WeightLookupTable;
+import org.deeplearning4j.models.word2vec.VocabWord;
 import org.nd4j.linalg.primitives.Pair;
 
 import de.tum.in.wwwmatthes.stm.exceptions.VocabularyMatchException;

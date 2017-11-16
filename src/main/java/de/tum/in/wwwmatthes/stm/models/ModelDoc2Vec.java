@@ -52,21 +52,6 @@ class ModelDoc2Vec extends ModelImpl {
         			.allowParallelTokenization(false)
 	        		.tokenizerFactory(tokenizerFactory)
 	        		.build();
-		
-		/*
-		BarnesHutTsne tsne = new BarnesHutTsne.Builder()
-	            .setMaxIter(1000)
-	            .stopLyingIteration(250)
-	            .learningRate(500)
-	            .useAdaGrad(false)
-	            .theta(0.5)
-	            .setMomentum(0.5)
-	            .normalize(true)
-	            .build();
-		INDArray weights = vectors.getFirst().getSyn0();
-		tsne.plot(matrix, nDims, labels, path);
-		*/
-		//vectors.lookupTable().plotVocab(3, new File("/Users/christopherl/Desktop/test.plot"));
 	}
 
 	@Override

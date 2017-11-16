@@ -4,17 +4,17 @@ import java.io.File;
 
 class ConfigWord2Vec extends ConfigImpl {
 	
-	private int			iterations;
-	private int			epochs;	
-	private int			layerSize;	
-	private int			windowSize;
-	private int			batchSize;	
+	private Integer		iterations;
+	private Integer		epochs;	
+	private Integer		layerSize;	
+	private Integer		windowSize;
+	private Integer		batchSize;	
 	
-	private double 		learningRate;
-	private double 		minLearningRate;
+	private Double 		learningRate;
+	private Double 		minLearningRate;
 	
-	private double 		sampling;		
-	private double 		negativeSample;
+	private Double 		sampling;		
+	private Double 		negativeSample;
 	
 	private String		corpusPath;	
 	
@@ -27,83 +27,83 @@ class ConfigWord2Vec extends ConfigImpl {
 	 */
 
 	@Override
-	public int getEpochs() {
+	public Integer getEpochs() {
 		return epochs;
 	}
 
-	public void setEpochs(int epochs) {
+	public void setEpochs(Integer epochs) {
 		this.epochs = epochs;
 	}
 
 	@Override
-	public int getLayerSize() {
+	public Integer getLayerSize() {
 		return layerSize;
 	}
 
-	public void setLayerSize(int layerSize) {
+	public void setLayerSize(Integer layerSize) {
 		this.layerSize = layerSize;
 	}
 
 	@Override
-	public int getWindowSize() {
+	public Integer getWindowSize() {
 		return windowSize;
 	}
 
-	public void setWindowSize(int windowSize) {
+	public void setWindowSize(Integer windowSize) {
 		this.windowSize = windowSize;
 	}
 
 	@Override
-	public int getBatchSize() {
+	public Integer getBatchSize() {
 		return batchSize;
 	}
 
-	public void setBatchSize(int batchSize) {
+	public void setBatchSize(Integer batchSize) {
 		this.batchSize = batchSize;
 	}
 	
 	@Override
-	public double getLearningRate() {
+	public Double getLearningRate() {
 		return learningRate;
 	}
 
-	public void setLearningRate(double learningRate) {
+	public void setLearningRate(Double learningRate) {
 		this.learningRate = learningRate;
 	}
 
 	@Override
-	public double getMinLearningRate() {
+	public Double getMinLearningRate() {
 		return minLearningRate;
 	}
 
-	public void setMinLearningRate(double minLearningRate) {
+	public void setMinLearningRate(Double minLearningRate) {
 		this.minLearningRate = minLearningRate;
 	}
 
 	@Override
-	public double getSampling() {
+	public Double getSampling() {
 		return sampling;
 	}
 
-	public void setSampling(double sampling) {
+	public void setSampling(Double sampling) {
 		this.sampling = sampling;
 	}
 
 	@Override
-	public double getNegativeSample() {
+	public Double getNegativeSample() {
 		return negativeSample;
 	}
 
-	public void setNegativeSample(double negativeSample) {
+	public void setNegativeSample(Double negativeSample) {
 		this.negativeSample = negativeSample;
 	}
 	
 	@Override
-	public int getIterations() {
+	public Integer getIterations() {
 		return iterations;
 	}
 
-	public void setIterations(int iterations) {
+	public void setIterations(Integer iterations) {
 		this.iterations = iterations;
 	}
 
@@ -125,10 +125,17 @@ class ConfigWord2Vec extends ConfigImpl {
 
 	@Override
 	public String toString() {
-		return "ConfigDoc2Vec [iterations=" + iterations + ", epochs=" + epochs + ", layerSize=" + layerSize
+		return "ConfigWord2Vec [iterations=" + iterations + ", epochs=" + epochs + ", layerSize=" + layerSize
 				+ ", windowSize=" + windowSize + ", batchSize=" + batchSize + ", learningRate=" + learningRate
 				+ ", minLearningRate=" + minLearningRate + ", sampling=" + sampling + ", negativeSample="
-				+ negativeSample + ", corpusPath=" + corpusPath + "]";
+				+ negativeSample + ", corpusPath=" + corpusPath + ", getType()=" + getType() + ", getIdentifier()="
+				+ getIdentifier() + ", getStopWords()=" + getStopWords() + ", isAddDefaultStopWords()="
+				+ isAddDefaultStopWords() + ", getTotalStopWords()=" + getTotalStopWords() + ", getMinWordFrequency()="
+				+ getMinWordFrequency() + ", getDocumentsSourceFile()=" + getDocumentsSourceFile()
+				+ ", isPreprocessingEnabled()=" + isPreprocessingEnabled() + ", getAllowedPosTags()="
+				+ getAllowedPosTags() + ", toString()=" + super.toString() + ", isProcessingEnabled()="
+				+ isPreprocessingEnabled() + ", isStemmingEnabled()=" + isStemmingEnabled() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 		
 }

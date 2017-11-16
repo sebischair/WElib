@@ -7,17 +7,17 @@ import de.tum.in.wwwmatthes.stm.exceptions.InvalidConfigException;
 
 public class ConfigWord2VecFactory extends ConfigFactory {
 	
-	private int			iterations		= 1;
-	private int			epochs			= 1;	
-	private int			layerSize		= 100;	
-	private int			windowSize		= 5;
-	private int			batchSize		= 128;	
+	private Integer		iterations		= 1;
+	private Integer		epochs			= 1;	
+	private Integer		layerSize		= 100;	
+	private Integer		windowSize		= 5;
+	private Integer		batchSize		= 128;	
 	
-	private double 		learningRate		= 0.025;
-	private double 		minLearningRate	= 0.0001;
+	private Double 		learningRate		= 0.025;
+	private Double 		minLearningRate	= 0.0001;
 	
-	private double 		sampling			= 0;		
-	private double 		negativeSample 	= 0;
+	private Double 		sampling			= 0.0;		
+	private Double 		negativeSample 	= 0.0;
 	
 	private File			corpusFile;	
 	
@@ -38,22 +38,22 @@ public class ConfigWord2VecFactory extends ConfigFactory {
 	}
 	
 	@Override
-	public ConfigWord2VecFactory enableStemming(boolean enableStemming) {
+	public ConfigWord2VecFactory enableStemming(Boolean enableStemming) {
 		return (ConfigWord2VecFactory) super.enableStemming(enableStemming);
 	}
 	
 	@Override
-	public ConfigWord2VecFactory enablePreprocessing(boolean enableStemming) {
-		return (ConfigWord2VecFactory) super.enableStemming(enableStemming);
+	public ConfigWord2VecFactory enablePreprocessing(Boolean enableStemming) {
+		return (ConfigWord2VecFactory) super.enablePreprocessing(enableStemming);
 	}
 	
 	@Override
-	public ConfigWord2VecFactory addDefaultStopWords(boolean addDefaultStopWords) {
+	public ConfigWord2VecFactory addDefaultStopWords(Boolean addDefaultStopWords) {
 		return (ConfigWord2VecFactory) super.addDefaultStopWords(addDefaultStopWords);
 	}
 	
 	@Override
-	public ConfigWord2VecFactory minWordFrequency(int minWordFrequency) {
+	public ConfigWord2VecFactory minWordFrequency(Integer minWordFrequency) {
 		return (ConfigWord2VecFactory) super.minWordFrequency(minWordFrequency);
 	}
 	
@@ -74,47 +74,47 @@ public class ConfigWord2VecFactory extends ConfigFactory {
 		return this;
 	}
 	
-	public ConfigWord2VecFactory windowSize(int windowSize) {
+	public ConfigWord2VecFactory windowSize(Integer windowSize) {
 		this.windowSize = windowSize;
 		return this;
 	}
 	
-	public ConfigWord2VecFactory layerSize(int layerSize) {
+	public ConfigWord2VecFactory layerSize(Integer layerSize) {
 		this.layerSize = layerSize;
 		return this;
 	}
 	
-	public ConfigWord2VecFactory batchSize(int batchSize) {
+	public ConfigWord2VecFactory batchSize(Integer batchSize) {
 		this.batchSize = batchSize;
 		return this;
 	}
 	
-	public ConfigWord2VecFactory epochs(int epochs) {
+	public ConfigWord2VecFactory epochs(Integer epochs) {
 		this.epochs = epochs;
 		return this;
 	}
 	
-	public ConfigWord2VecFactory iterations(int iterations) {
+	public ConfigWord2VecFactory iterations(Integer iterations) {
 		this.iterations = iterations;
 		return this;
 	}
 	
-	public ConfigWord2VecFactory minLearningRate(double minLearningRate) {
+	public ConfigWord2VecFactory minLearningRate(Double minLearningRate) {
 		this.minLearningRate = minLearningRate;
 		return this;
 	}
 	
-	public ConfigWord2VecFactory learningRate(double learningRate) {
+	public ConfigWord2VecFactory learningRate(Double learningRate) {
 		this.learningRate = learningRate;
 		return this;
 	}
 	
-	public ConfigWord2VecFactory sampling(double sampling) {
+	public ConfigWord2VecFactory sampling(Double sampling) {
 		this.sampling = sampling;
 		return this;
 	}
 	
-	public ConfigWord2VecFactory negativeSample(double negativeSample) {
+	public ConfigWord2VecFactory negativeSample(Double negativeSample) {
 		this.negativeSample = negativeSample;
 		return this;
 	}
