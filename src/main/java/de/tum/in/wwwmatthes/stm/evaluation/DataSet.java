@@ -33,8 +33,8 @@ public class DataSet {
 		
 		// Calculate MRR from evaluated Data Set Items
 		double mrr = 0;
-		List<DataSetItem> evaluatedItems = getEvaluatedItems();
 		
+		List<DataSetItem> evaluatedItems = getEvaluatedItems();
 		if (evaluatedItems.size() > 0) {
 			for(DataSetItem item : evaluatedItems) {
 				item.evaluateWithModel(model);

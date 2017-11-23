@@ -24,12 +24,11 @@ public class DataSetItem {
 	}
 	
 	public void evaluateWithModel(Model model) {
-		try {
-			List<String> rankedDocuments = model.rankedDocumentsForText(getInput());
-			
-			this.MRR 			= Evaluation.mrr(getOutput(), rankedDocuments);
+		List<String> rankedDocuments = model.rankedDocumentsForText(getInput());
+		if (rankedDocuments != null) {
+			this.MRR				= Evaluation.mrr(getOutput(), rankedDocuments);
 			this.similarities 	= DataSetItemSimilarity.createListFromPairMap(model.rankedDocumentsWithSimilaritiesForText(getInput()));
-		} catch (VocabularyMatchException e) {
+		} else {
 			this.MRR 			= null;
 			this.similarities 	= null;
 		}	

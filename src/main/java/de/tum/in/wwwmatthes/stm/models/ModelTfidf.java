@@ -23,7 +23,11 @@ class ModelTfidf extends ModelImpl {
 	
 	@Override
 	public void fit() {
+		// Fit Model
 		tfidfVectorizer.fit();
+		
+		// Set Vocab
+		vocab = tfidfVectorizer.getVocabCache();
 				
 		// Update documents look up table
 		updateDocumentsLookupTable();

@@ -9,9 +9,9 @@ public class PreProcessor extends CommonPreprocessor {
 	private static final Pattern punctPattern = Pattern.compile("[$%]+");
 	
 	@Override
-	public String preProcess(String token) {
+	public String preProcess(String token) {		
 		String superString = super.preProcess(token);
-		return superString; //PreProcessor.clean(superString);
+		return PreProcessor.clean(superString);
 	}
 
     private static String clean(String base) {

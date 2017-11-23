@@ -1,37 +1,39 @@
 package de.tum.in.wwwmatthes.stm.models;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 
+import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.deeplearning4j.models.paragraphvectors.ParagraphVectors;
-import org.deeplearning4j.plot.BarnesHutTsne;
-import org.deeplearning4j.text.documentiterator.FileLabelAwareIterator;
-import org.deeplearning4j.text.documentiterator.LabelAwareIterator;
 import org.deeplearning4j.text.sentenceiterator.BasicLineIterator;
+import org.deeplearning4j.text.sentenceiterator.FileSentenceIterator;
 import org.deeplearning4j.text.sentenceiterator.SentenceIterator;
 import org.deeplearning4j.text.sentenceiterator.UimaSentenceIterator;
+import org.deeplearning4j.text.uima.UimaResource;
 import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.exception.ND4JIllegalStateException;
 
-import de.tum.in.wwwmatthes.stm.exceptions.VocabularyMatchException;
 import de.tum.in.wwwmatthes.stm.models.config.Config;
 
 class ModelDoc2Vec extends ModelImpl {
 	
 	// Variables
 	private ParagraphVectors 	vectors;
-	private SentenceIterator 	corpusSentenceIterator;
 	
 	ModelDoc2Vec(Config config) {
 		super(config);
 		
 		ParagraphVectors.Builder builder = new ParagraphVectors.Builder();
-
-		try {				
-			corpusSentenceIterator = new BasicLineIterator(config.getCorpusFile());
+		
+		if (config.getCorpusFile() != null) {
+			try {				
+				SentenceIterator corpusSentenceIterator = new BasicLineIterator(config.getCorpusFile());
+				builder.iterate(corpusSentenceIterator);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			
+		} else if (config.getCorpusSourceFile() != null) {
+			FileSentenceIterator corpusSentenceIterator = new FileSentenceIterator(config.getCorpusSourceFile());
 			builder.iterate(corpusSentenceIterator);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		}
 		
 		vectors = builder
@@ -46,7 +48,6 @@ class ModelDoc2Vec extends ModelImpl {
         			.minLearningRate(config.getMinLearningRate())
         			.sampling(config.getSampling())
         			.negativeSample(config.getMinLearningRate())
-        			//.trainElementsRepresentation(true)
 				.trainWordVectors(true)
         			.seed(42)
         			.allowParallelTokenization(false)
@@ -57,19 +58,19 @@ class ModelDoc2Vec extends ModelImpl {
 	@Override
 	public void fit() {
 		// Fit Model
-		vectors.fit();
+		vectors.fit();		
+		System.out.println(vectors.wordsNearest("data", 20));
 		
+		// Set Vocab
+		vocab = vectors.getVocab();
+
 		// Create Documents Lookup Table
 		updateDocumentsLookupTable();
 	}
 
 	@Override
-	public INDArray vectorFromText(String text) throws VocabularyMatchException {
-		try {
-			return vectors.inferVector(text);
-		} catch(ND4JIllegalStateException exception) {
-			throw new VocabularyMatchException();
-		}
+	public INDArray vectorFromText(String text) {
+		return vectors.inferVector(text);	
 	}
 
 }

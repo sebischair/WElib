@@ -45,18 +45,18 @@ public class DataSets {
 	
 	public void evaluateWithModel(Model model) {
 		
+		// Save Document Contents
+		this.contents = model.getDocumentContents();
+		
 		// Evaluate
 		for(DataSet item : getItems()) {
 			item.evaluateWithModel(model);
 		}
 		
-		// Save Document Contents
-		this.contents = model.getDocumentContents();
-		
 		// Calculate MRR from evaluated Data Set Items
 		double mrr = 0;
-		List<DataSet> evaluatedItems = getEvaluatedItems();
 		
+		List<DataSet> evaluatedItems = getEvaluatedItems();
 		if (evaluatedItems.size() > 0) {
 			for(DataSet item : evaluatedItems) {
 				item.evaluateWithModel(model);
@@ -66,8 +66,6 @@ public class DataSets {
 		} else {
 			this.MRR = null;
 		}
-		
-		this.MRR = mrr / getItems().size();
 	}
 	
 	public void resetEvaluation() {

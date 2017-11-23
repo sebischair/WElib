@@ -28,6 +28,7 @@ public interface Config {
 	public File getDocumentsSourceFile();
 	
 	public File getCorpusFile();
+	public File getCorpusSourceFile();
 
 	public Integer getIterations();
 	

@@ -1,0 +1,1221 @@
+Big data is a broad term for data sets so large or complex that traditional data processing applications are inadequate.
+Challenges include analysis, capture, data curation, search, sharing, storage, transfer, visualization, querying and information privacy.
+The term often refers simply to the use of predictive analytics or certain other advanced methods to extract value from data, and seldom to a particular size of data set.
+Accuracy in big data may lead to more confident decision making, and better decisions can result in greater operational efficiency, cost reduction and reduced risk.
+Analysis of data sets can find new correlations to "spot business trends, prevent diseases, combat crime and so on."
+Scientists, business executives, practitioners of medicine, advertising and governments alike regularly meet difficulties with large data sets in areas including Internet search, finance and business informatics.
+Scientists encounter limitations in e-Science work, including meteorology, genomics, connectomics, complex physics simulations, biology and environmental research.
+Data sets are growing rapidly in part because they are increasingly gathered by cheap and numerous information-sensing mobile devices, aerial (remote sensing), software logs, cameras, microphones, radio-frequency identification (RFID) readers and wireless sensor networks.
+The world's technological per-capita capacity to store information has roughly doubled every 40 months since the 1980s; as of 2012, every day 2.5 exabytes (2.5×1018) of data are created.
+One question for large enterprises is determining who should own big data initiatives that affect the entire organization.
+Relational database management systems and desktop statistics and visualization packages often have difficulty handling big data.
+The work instead requires "massively parallel software running on tens, hundreds, or even thousands of servers".
+What is considered "big data" varies depending on the capabilities of the users and their tools, and expanding capabilities make big data a moving target.
+"For some organizations, facing hundreds of gigabytes of data for the first time may trigger a need to reconsider data management options.
+For others, it may take tens or hundreds of terabytes before data size becomes a significant consideration."
+Big data usually includes data sets with sizes beyond the ability of commonly used software tools to capture, curate, manage, and process data within a tolerable elapsed time.
+Big data "size" is a constantly moving target, as of 2012 ranging from a few dozen terabytes to many petabytes of data.
+Big data requires a set of techniques and technologies with new forms of integration to reveal insights from datasets that are diverse, complex, and of a massive scale.
+In a 2001 research report and related lectures, META Group (now Gartner) analyst Doug Laney defined data growth challenges and opportunities as being three-dimensional, i.e. increasing volume (amount of data), velocity (speed of data in and out), and variety (range of data types and sources).
+Gartner, and now much of the industry, continue to use this "3Vs" model for describing big data.
+In 2012, Gartner updated its definition as follows: "Big data is high volume, high velocity, and/or high variety information assets that require new forms of processing to enable enhanced decision making, insight discovery and process optimization."
+Gartner's definition of the 3Vs is still widely used, and in agreement with a consensual definition that states that "Big Data represents the Information assets characterized by such a High Volume, Velocity and Variety to require specific Technology and Analytical Methods for its transformation into Value".
+Additionally, a new V "Veracity" is added by some organizations to describe it, revisionism challenged by some industry authorities.
+The 3Vs have been expanded to other complementary characteristics of big data:
+Volume: big data doesn't sample; it just observes and tracks what happens
+Velocity: big data is often available in real-time
+Variety: big data draws from text, images, audio, video; plus it completes missing pieces through data fusion
+Machine Learning: big data often doesn't ask why and simply detects patterns
+Digital footprint: big data is often a cost-free byproduct of digital interaction
+Big data requires exceptional technologies to efficiently process large quantities of data within tolerable elapsed times.
+A 2011 McKinsey report suggests suitable technologies include A/B testing, crowdsourcing, data fusion and integration, genetic algorithms, machine learning, natural language processing, signal processing, simulation, time series analysis and visualisation.
+Multidimensional big data can also be represented as tensors, which can be more efficiently handled by tensor-based computation, such as multilinear subspace learning.
+Additional technologies being applied to big data include massively parallel-processing (MPP) databases, search-based applications, data mining, distributed file systems, distributed databases, cloud-based infrastructure (applications, storage and computing resources) and the Internet.
+Some but not all MPP relational databases have the ability to store and manage petabytes of data. Implicit is the ability to load, monitor, back up, and optimize the use of the large data tables in the RDBMS.
+DARPA's Topological Data Analysis program seeks the fundamental structure of massive data sets and in 2008 the technology went public with the launch of a company called Ayasdi.
+The practitioners of big data analytics processes are generally hostile to slower shared storage, preferring direct-attached storage (DAS) in its various forms from solid state drive (Ssd) to high capacity SATA disk buried inside parallel processing nodes.
+The perception of shared storage architectures—Storage area network (SAN) and Network-attached storage (NAS) —is that they are relatively slow, complex, and expensive.
+These qualities are not consistent with big data analytics systems that thrive on system performance, commodity infrastructure, and low cost.
+Real or near-real time information delivery is one of the defining characteristics of big data analytics.
+Latency is therefore avoided whenever and wherever possible.
+Data in memory is good—data on spinning disk at the other end of a FC SAN connection is not.
+The cost of a SAN at the scale needed for analytics applications is very much higher than other storage techniques.
+There are advantages as well as disadvantages to shared storage in big data analytics, but big data analytics practitioners as of 2011 did not favour it.[50]
+Big data has increased the demand of information management specialists in that Software AG, Oracle Corporation, IBM, Microsoft, SAP, EMC, HP and Dell have spent more than $15 billion on software firms specializing in data management and analytics.
+In 2010, this industry was worth more than $100 billion and was growing at almost 10 percent a year: about twice as fast as the software business as a whole.
+Developed economies increasingly use data-intensive technologies.
+There are 4.6 billion mobile-phone subscriptions worldwide, and between 1 billion and 2 billion people accessing the internet.
+Between 1990 and 2005, more than 1 billion people worldwide entered the middle class, which means more people become more literate, which in turn leads to information growth.
+The world's effective capacity to exchange information through telecommunication networks was 281 petabytes in 1986, 471 petabytes in 1993, 2.2 exabytes in 2000, 65 exabytes in 2007 and predictions put the amount of internet traffic at 667 exabytes annually by 2014.
+According to one estimate, one third of the globally stored information is in the form of alphanumeric text and still image data,
+which is the format most useful for most big data applications.
+This also shows the potential of yet unused data (i.e. in the form of video and audio content).
+While many vendors offer off-the-shelf solutions for Big Data, experts recommend the development of in-house solutions custom-tailored to solve the company's problem at hand if the company has sufficient technical capabilities.
+Machine learning tasks are typically classified into three broad categories, depending on the nature of the learning "signal" or "feedback" available to a learning system.
+Supervised learning: The computer is presented with example inputs and their desired outputs, given by a "teacher", and the goal is to learn a general rule that maps inputs to outputs.
+Unsupervised learning: No labels are given to the learning algorithm, leaving it on its own to find structure in its input.
+Unsupervised learning can be a goal in itself (discovering hidden patterns in data) or a means towards an end (feature learning).
+Reinforcement learning: A computer program interacts with a dynamic environment in which it must perform a certain goal (such as driving a vehicle), without a teacher explicitly telling it whether it has come close to its goal.
+Another example is learning to play a game by playing against an opponent.
+Between supervised and unsupervised learning is semi-supervised learning, where the teacher gives an incomplete training signal: a training set with some (often many) of the target outputs missing.
+Transduction is a special case of this principle where the entire set of problem instances is known at learning time, except that part of the targets are missing.
+A support vector machine is a classifier that divides its input space into two regions, separated by a linear boundary.
+Here, it has learned to distinguish black and white circles.
+Among other categories of machine learning problems, learning to learn learns its own inductive bias based on previous experience.
+Developmental learning, elaborated for robot learning, generates its own sequences (also called curriculum) of learning situations to cumulatively acquire repertoires of novel skills through autonomous self-exploration and social interaction with human teachers, and using guidance mechanisms such as active learning, maturation, motor synergies, and imitation.
+Another categorization of machine learning tasks arises when one considers the desired output of a machine-learned system:
+In classification, inputs are divided into two or more classes, and the learner must produce a model that assigns unseen inputs to one (or multi-label classification) or more of these classes.
+This is typically tackled in a supervised way.
+Spam filtering is an example of classification, where the inputs are email (or other) messages and the classes are "spam" and "not spam".
+In regression, also a supervised problem, the outputs are continuous rather than discrete.
+In clustering, a set of inputs is to be divided into groups.
+Unlike in classification, the groups are not known beforehand, making this typically an unsupervised task.
+Density estimation finds the distribution of inputs in some space.
+Dimensionality reduction simplifies inputs by mapping them into a lower-dimensional space.
+Topic modeling is a related problem, where a program is given a list of human language documents and is tasked to find out which documents cover similar topics.
+A core objective of a learner is to generalize from its experience.
+Generalization in this context is the ability of a learning machine to perform accurately on new, unseen examples/tasks after having experienced a learning data set.
+The training examples come from some generally unknown probability distribution (considered representative of the space of occurrences) and the learner has to build a general model about this space that enables it to produce sufficiently accurate predictions in new cases.
+The computational analysis of machine learning algorithms and their performance is a branch of theoretical computer science known as computational learning theory.
+Because training sets are finite and the future is uncertain, learning theory usually does not yield guarantees of the performance of algorithms.
+Instead, probabilistic bounds on the performance are quite common. The bias–variance decomposition is one way to quantify generalization error.
+In addition to performance bounds, computational learning theorists study the time complexity and feasibility of learning.
+In computational learning theory, a computation is considered feasible if it can be done in polynomial time.
+There are two kinds of time complexity results.
+Positive results show that a certain class of functions can be learned in polynomial time.
+Negative results show that certain classes cannot be learned in polynomial time.
+There are many similarities between machine learning theory and statistical inference, although they use different terms.
+An artificial neural network (ANN) learning algorithm, usually called "neural network" (NN), is a learning algorithm that is inspired by the structure and functional aspects of biological neural networks.
+Computations are structured in terms of an interconnected group of artificial neurons, processing information using a connectionist approach to computation.
+Modern neural networks are non-linear statistical data modeling tools.
+They are usually used to model complex relationships between inputs and outputs, to find patterns in data, or to capture the statistical structure in an unknown joint probability distribution between observed variables.
+Several learning algorithms, mostly unsupervised learning algorithms, aim at discovering better representations of the inputs provided during training.
+Classical examples include principal components analysis and cluster analysis.
+Representation learning algorithms often attempt to preserve the information in their input but transform it in a way that makes it useful, often as a pre-processing step before performing classification or predictions, allowing to reconstruct the inputs coming from the unknown data generating distribution, while not being necessarily faithful for configurations that are implausible under that distribution.
+Manifold learning algorithms attempt to do so under the constraint that the learned representation is low-dimensional.
+Sparse coding algorithms attempt to do so under the constraint that the learned representation is sparse (has many zeros).
+Multilinear subspace learning algorithms aim to learn low-dimensional representations directly from tensor representations for multidimensional data, without reshaping them into (high-dimensional) vectors.
+Deep learning algorithms discover multiple levels of representation, or a hierarchy of features, with higher-level, more abstract features defined in terms of (or generating) lower-level features.
+It has been argued that an intelligent machine is one that learns a representation that disentangles the underlying factors of variation that explain the observed data.
+Despite popular belief, a reliance on a single food which composes the majority of a diet is indicative of poor eating habits.
+An individual on such a diet may be prone to deficiency and most certainly will not be fulfilling the Recommended Nutrient Intake.
+While plants, vegetables, and fruits are known to help reduce the incidence of chronic disease, the benefits on health posed by plant-based foods, as well as the percentage on which a diet needs to be plant-based in order to have health benefits, is unknown.
+Nevertheless, plant-based food diets in society and between nutritionist circles are linked to health and longevity, as well as contributing to lowering cholesterol, weight loss, and, in some cases, stress reduction.
+Although a number of preconceptions of a healthy diet center around plant-based foods, the majority of assumptions about foods which are usually thought of as "bad" foods are usually correct, apart from the assumption that there are "bad" foods; many people associate dishes such as Full English cooked Breakfast and Bacon Sandwiches as foods which, if eaten regularly, can contribute to cholesterol, fat, and heart problems.
+A healthy diet is usually defined as a diet in which nutrient intake is maintained, and cholesterol, salt, sugar, and fat are reduced.
+The idea of a healthy diet is something used by a government to ensure that people are well "protected" against common illnesses and conditions which stem from poor diet.
+This could include headaches, lessened sexual drive, heart disease, alcohol poisoning, or obesity.
+A healthy diet is a way of eating that that reduces risk for complications such as heart disease and stroke.
+Healthy eating includes eating a wide variety of foods including: vegetables, whole grains, fruits, non-fat dairy products, beans, lean meats, poultry, fish
+The definition of a healthy diet is sometimes also thought of as a diet which will combat or prevent illness.
+Although the majority of people would support this definition, few know why, other than because "bad" foods are not consumed.
+People with healthy diets are less likely to succumb to common minor illnesses, such as lesser forms of Influenza, mainly because consumption of a healthy diet would provide ample nutrients and energy for the body, so as to help stave off such illnesses.
+Similarly, the healthy diet can also be used this way to aid the body during illness.
+The myth of "feed a cold, starve a fever" is a common misconception among the public, particularly in the United Kingdom.
+This is a myth in every sense of the word because providing the body with nutrients during illness is actually beneficial - nutrient and energy stores would be replenished, allowing for more energy to be used by the body to combat illness.
+Cholesterol is a steroid, a lipid, and an alcohol, found in the cell membranes of all body tissues, and transported in the blood plasma of all animals.
+Most cholesterol is not dietary in origin, it is synthesized internally.
+Cholesterol is present in higher concentrations in tissues which either produce more or have more densely-packed membranes, for example, the liver, spinal cord, brain and atheroma.
+Cholesterol plays a central role in many biochemical processes, but is best known for the association of cardiovascular disease with various lipoprotein cholesterol transport patterns in the blood.
+The name originates from the Greek chole- (bile) and stereos (solid), as researchers first identified cholesterol (C27H45OH) in solid form in gallstones.
+The selective toxicity of vitamin C for cancer cells has been demonstrated repeatedly in cell culture studies.
+The Proceedings of the National Academy of Sciences recently published a paper demonstrating vitamin C killing cancer cells.
+As of 2005, some physicians have called for a more careful reassessment of vitamin C, especially intravenous vitamin C, in cancer treatment.
+With two colleagues, Pauling founded the Institute of Orthomolecular Medicine in Menlo Park, California, in 1973, which was soon renamed the Linus Pauling Institute of Science and Medicine.
+Pauling directed research on vitamin C, but also continued his theoretical work in chemistry and physics until his death in 1994.
+In his last years, he became especially interested in the possible role of vitamin C in preventing atherosclerosis and published three case reports on the use of lysine and vitamin C to relieve angina pectoris.
+In 1996, the Linus Pauling Institute moved from Palo Alto, California, to Corvallis, Oregon, to become part of Oregon State University, where it continues to conduct research on micronutrients, phytochemicals (chemicals from plants), and other constituents of the diet in preventing and treating disease.
+Stress management refers to the wide spectrum of techniques and psychotherapies aimed at controlling a person's levels of stress, especially chronic stress, usually for the purpose of improving everyday functioning.
+In this context, the term 'stress' refers only to a stress with significant negative consequences, or distress in the terminology advocated by Hans Selye, rather than what he calls eustress, a stress whose consequences are helpful or otherwise positive.
+Stress produces numerous physical and mental symptoms which vary according to each individual's situational factors.
+These can include physical health decline as well as depression.
+The process of stress management is named as one of the keys to a happy and successful life in modern society.
+Although life provides numerous demands that can prove difficult to handle, stress management provides a number of ways to manage anxiety and maintain overall well-being.
+Despite stress often being thought of as a subjective experience, levels of stress are readily measurable, using various physiological tests, similar to those used in polygraphs.
+Many practical stress management techniques are available, some for use by health professionals and others, for self-help, which may help an individual reduce their levels of stress, provide positive feelings of control over one's life and promote general well-being.
+Evaluating the effectiveness of various stress management techniques can be difficult, as limited research currently exists.
+Consequently, the amount and quality of evidence for the various techniques varies widely.
+Some are accepted as effective treatments for use in psychotherapy, whilst others with less evidence favoring them are considered alternative therapies.
+Many professional organisations exist to promote and provide training in conventional or alternative therapies.
+There are several models of stress management, each with distinctive explanations of mechanisms for controlling stress.
+Much more research is necessary to provide a better understanding of which mechanisms actually operate and are effective in practice.
+Unintentional weight loss may result from loss of body fats, loss of body fluids, muscle atrophy, or even a combination of these.
+It is generally regarded as a medical problem when at least 10% of a person's body weight has been lost in six months or 5% in the last month.
+Another criterion used for assessing weight that is too low is the body mass index (BMI).
+However, even lesser amounts of weight loss can be a cause for serious concern in a frail elderly person.
+Unintentional weight loss can occur because of an inadequately nutritious diet relative to a person's energy needs (generally called malnutrition).
+Disease processes, changes in metabolism, hormonal changes, medications or other treatments, disease- or treatment-related dietary changes, or reduced appetite associated with a disease or treatment can also cause unintentional weight loss.
+Poor nutrient utilization can lead to weight loss, and can be caused by fistulae in the gastrointestinal tract, diarrhea, drug-nutrient interaction, enzyme depletion and muscle atrophy.
+Continuing weight loss may deteriorate into wasting, a vaguely defined condition called cachexia.
+Cachexia differs from starvation in part because it involves a systemic inflammatory response.
+It is associated with poorer outcomes.
+In the advanced stages of progressive disease, metabolism can change so that they lose weight even when they are getting what is normally regarded as adequate nutrition and the body cannot compensate.
+This leads to a condition called anorexia cachexia syndrome (ACS) and additional nutrition or supplementation is unlikely to help.
+Symptoms of weight loss from ACS include severe weight loss from muscle rather than body fat, loss of appetite and feeling full after eating small amounts, nausea, anemia, weakness and fatigue.
+Serious weight loss may reduce quality of life, impair treatment effectiveness or recovery, worsen disease processes and be a risk factor for high mortality rates.
+Medical treatment can directly or indirectly cause weight loss, impairing treatment effectiveness and recovery that can lead to further weight loss in a vicious cycle.
+Many patients will be in pain and have a loss of appetite after surgery.
+Part of the body's response to surgery is to direct energy to wound healing, which increases the body's overall energy requirements.
+Surgery affects nutritional status indirectly, particularly during the recovery period, as it can interfere with wound healing and other aspects of recovery.
+Surgery directly affects nutritional status if a procedure permanently alters the digestive system.
+Enteral nutrition (tube feeding) is often needed.
+However a policy of 'nil by mouth' for all gastrointestinal surgery has not been shown to benefit, with some suggestion it might hinder recovery.
+Early post-operative nutrition is a part of Enhanced Recovery After Surgery protocols.
+These protocols also include carbohydrate loading in the 24 hours before surgery, but earlier nutritional interventions have not been shown to have a significant impact.
+Some medications can cause weight loss, while others can cause weight gain.
+Social conditions such as poverty, social isolation and inability to get or prepare preferred foods can cause unintentional weight loss, and this may be particularly common in older people.
+Nutrient intake can also be affected by culture, family and belief systems.
+Ill-fitting dentures and other dental or oral health problems can also affect adequacy of nutrition.
+Loss of hope, status or social contact and spiritual distress can cause depression, which may be associated with reduced nutrition, as can fatigue.
+Intentional weight loss is the loss of total body mass as a result of efforts to improve fitness and health, or to change appearance through slimming.
+Weight loss in individuals who are overweight or obese can reduce health risks, increase fitness, and may delay the onset of diabetes.
+It could reduce pain and increase movement in people with osteoarthritis of the knee.
+Weight loss can lead to a reduction in hypertension (high blood pressure), however whether this reduces hypertension-related harm is unclear.
+Weight loss occurs when the body is expending more energy in work and metabolism than it is absorbing from food or other nutrients.
+It will then use stored reserves from fat or muscle, gradually leading to weight loss.
+For athletes seeking to improve performance or to meet required weight classification for participation in a sport, it is not uncommon to seek additional weight loss even if they are already at their ideal body weight.
+Others may be driven to lose weight to achieve an appearance they consider more attractive.
+Being underweight is associated with health risks such as difficulty fighting off infection, osteoporosis, decreased muscle strength, trouble regulating body temperature and even increased risk of death.
+Low-calorie diets are also referred to as balanced percentage diets.
+Due to their minimal detrimental effects, these types of diets are most commonly recommended by nutritionists.
+In addition to restricting calorie intake, a balanced diet also regulates macronutrient consumption.
+From the total number of allotted daily calories, it is recommended that 55% should come from carbohydrates, 15% from protein, and 30% from fats with no more than 10% of total fat coming from saturated forms.
+For instance, a recommended 1,200 calorie diet would supply about 660 calories from carbohydrates, 180 from protein, and 360 from fat.
+Some studies suggest that increased consumption of protein can help ease hunger pangs associated with reduced caloric intake by increasing the feeling of satiety.
+Calorie restriction in this way has many long-term benefits. After reaching the desired body weight, the calories consumed per day may be increased gradually, without exceeding 2,000 net (i.e. derived by subtracting calories burned by physical activity from calories consumed).
+Combined with increased physical activity, low-calorie diets are thought to be most effective long-term, unlike crash diets, which can achieve short-term results, at best.
+Physical activity could greatly enhance the efficiency of a diet.
+The healthiest weight loss regimen, therefore, is one that consists of a balanced diet and moderate physical activity.
+The least intrusive weight loss methods, and those most often recommended, are adjustments to eating patterns and increased physical activity, generally in the form of exercise.
+The World Health Organization recommended that people combine a reduction of processed foods high in saturated fats, sugar and salt and caloric content of the diet with an increase in physical activity.
+An increase in fiber intake is also recommended for regulating bowel movements.
+Other methods of weight loss include use of drugs and supplements that decrease appetite, block fat absorption, or reduce stomach volume.
+Bariatric surgery may be indicated in cases of severe obesity.
+Two common bariatric surgical procedures are gastric bypass and gastric banding.
+Both can be effective at limiting the intake of food energy by reducing the size of the stomach, but as with any surgical procedure both come with their own risks that should be considered in consultation with a physician.
+Dietary supplements, though widely used, are not considered a healthy option for weight loss.
+Many are available, but very few are effective in the long term.
+Virtual gastric band uses hypnosis to make the brain think the stomach is smaller than it really is and hence lower the amount of food ingested.
+This brings as a consequence weight reduction.
+This method is complemented with psychological treatment for anxiety management and with hypnopedia.
+Research has been conducted into the use of hypnosis as a weight management alternative.
+In 1996 a study found that cognitive-behavioral therapy (CBT) was more effective for weight reduction if reinforced with hypnosis.
+Acceptance and Commitment Therapy ACT, a mindfulness approach to weight loss, has also in the last few years been demonstrating its usefulness.
+Symptoms of parasites may not always be obvious.
+However, such symptoms may mimic anemia or a hormone deficiency.
+Some of the symptoms caused by several worm infestation can include itching affecting the anus or the vaginal area, abdominal pain, weight loss, increased appetite, bowel obstructions, diarrhea, and vomiting eventually leading to dehydration, sleeping problems, worms present in the vomit or stools, anemia, aching muscles or joints, general malaise, allergies, fatigue, nervousness.
+Symptoms may also be confused with pneumonia or food poisoning.
+The effects caused by parasitic diseases range from mild discomfort to death.
+The nematode parasites Necator americanus and Ancylostoma duodenale cause human hookworm infection, which leads to anaemia and protein malnutrition.
+This infection affects approximately 740 million people in the developing countries, including children and adults, of the tropics specifically in poor rural areas located in sub-Saharan Africa, Latin America, South-East Asia and China.
+Chronic hookworm in children leads to impaired physical and intellectual development, school performance and attendance are reduced.
+Pregnant women affected by a hookworm infection can also develop aneamia, which results in negative outcomes both for the mother and the infant.
+Some of them are: low birth weight, impaired milk production, as well as increased risk of death for the mother and the baby.
+Issuer services help companies from around the world to join the London equity market in order to gain access to capital.
+The LSE allows companies to raise money, increase their profile and obtain a market valuation through a variety of routes, thus following the firms throughout the whole IPO process.
+The London Stock Exchange runs several markets for listing, giving an opportunity for different sized companies to list.
+International companies can list a number of products in London including shares, depositary receipts and debt, offering different and cost-effective ways to raise capital.
+In 2004 the Exchange opened a Hong Kong office and has attracted more than 200 companies from the Asia-Pacific region.
+For the biggest companies exists the Premium Listed Main Market.
+This operates a Super Equivalence method where conditions of both the UK Listing Authority as well as London Stock Exchange’s own criteria have to be met.
+The largest IPO on the Exchange was completed in May 2011 by Glencore International plc.
+The company raised $10 billion at admission, making it one of the largest IPOs ever.
+In December 2005, the London Stock Exchange rejected a £1.6 billion takeover offer from Macquarie Bank.
+The London Stock Exchange described the offer as "derisory", a sentiment echoed by shareholders in the Exchange.
+Shortly after Macquarie withdrew its offer, the LSE received an unsolicited approach from NASDAQ valuing the company at £2.4 billion.
+This too it rejected.
+NASDAQ later pulled its bid, and less than two weeks later on 11 April 2006, struck a deal with LSE's largest shareholder, Ameriprise Financial's Threadneedle Asset Management unit, to acquire all of that firm's stake, consisting of 35.4 million shares, at £11.75 per share.
+NASDAQ also purchased 2.69 million additional shares, resulting in a total stake of 15%. While the seller of those shares was undisclosed, it occurred simultaneously with a sale by Scottish Widows of 2.69 million shares.
+The move was seen as an effort to force LSE to the negotiating table, as well as to limit the Exchange's strategic flexibility.
+Subsequent purchases increased NASDAQ's stake to 25.1%, holding off competing bids for several months.
+United Kingdom financial rules required that NASDAQ wait for a period of time before renewing its effort.
+On 20 November 2006, within a month or two of the expiration of this period, NASDAQ increased its stake to 28.75% and launched a hostile offer at the minimum permitted bid of £12.43 per share, which was the highest NASDAQ had paid on the open market for its existing shares.
+The LSE immediately rejected this bid, stating that it "substantially undervalues" the company.
+NASDAQ revised its offer (characterized as an "unsolicited" bid, rather than a "hostile takeover attempt") on 12 December 2006, indicating that it would be able to complete the deal with 50% (plus one share) of LSE's stock, rather than the 90% it had been seeking.
+The U.S. exchange did not, however, raise its bid.
+Many hedge funds had accumulated large positions within the LSE, and many managers of those funds, as well as Furse, indicated that the bid was still not satisfactory.
+NASDAQ's bid was made more difficult because it had described its offer as "final", which, under British bidding rules, restricted their ability to raise its offer except under certain circumstances.
+In the end, NASDAQ's offer was roundly rejected by LSE shareholders.
+Having received acceptances of only 0.41% of rest of the register by the deadline on 10 February 2007, Nasdaq's offer duly lapsed.
+Responding to the news, Chris Gibson-Smith, the LSE's chairman, said: "The Exchange’s strategy has produced outstanding results for shareholders by facilitating a structural shift in volume growth in an increasingly international market at the centre of the world’s equity flows.
+The Exchange intends to build on its exceptionally valuable brand by progressing various competitive, collaborative and strategic opportunities, thereby reinforcing its uniquely powerful position in a fast evolving global sector."
+On 20 August 2007, NASDAQ announced that it was abandoning its plan to take over the LSE and subsequently look for options to divest its 31% (61.3 million shares) shareholding in the company in light of its failed takeover attempt.
+In September 2007, NASDAQ agreed to sell the majority of its shares to Borse Dubai, leaving the United Arab Emirates-based exchange with 28% of the LSE.
+In February 2011, in the wake of an announced merger of NYSE Euronext with Deutsche Borse, speculation developed that ICE and Nasdaq could mount a counter-bid of their own for NYSE Euronext.
+ICE was thought to be looking to acquire the American exchange's derivatives business, Nasdaq its cash equities business.
+As of the time of the speculation, "NYSE Euronext’s market value was $9.75 billion.
+Nasdaq was valued at $5.78 billion, while ICE was valued at $9.45 billion.
+"Late in the month, Nasdaq was reported to be considering asking either ICE or the Chicago Merc (CME) to join in what would be probably be an $11–12 billion counterbid for NYSE.
+On April 1, ICE and Nasdaq made an $11.3 billion offer which was rejected April 10 by NYSE.
+Another week later, ICE and Nasdaq sweetened their offer, including a $.17 increase per share to $42.67 and a $350 million breakup fee if the deal were to encounter regulatory trouble.
+The two said the offer was a $2 billion (21%) premium over the Deutsche offer and that they had fully committed financing of $3.8 billion from lenders to finance the deal.
+The Justice Department, also in April, "initiated an antitrust review of the proposal, which would have brought nearly all U.S. stock listings under a merged Nasdaq-NYSE."
+In May, saying it "became clear that we would not be successful in securing regulatory approval," the Nasdaq and ICE withdrew their bid.
+The European Commission then blocked the Deutsche merger on 1 February 2012, citing the fact that the merged company would have a near monopoly.
+In December 2012, ICE announced it would buy NYSE Euronext for $8.2 billion, pending regulatory approval.
+Jeffrey Sprecher will retain his position as Chairman and CEO.
+The boards of directors of both ICE and NYSE Euronext approved the acquisition.
+In a response to US financial crisis in 2008, Sprecher formed ICE US Trust based in New York, now called ICE Clear Credit LLC, to serve as a limited-purpose bank, a clearing house for credit default swaps.
+Sprecher worked closely with the Federal Reserve to serve as its over-the-counter (OTC) derivatives clearing house.
+"US regulators were keen on the kind of clearing house for opaque over-the-counter (OTC) derivatives as a risk management device.
+In the absence of a central counterparty - which would guarantee pay-outs should a trading party be unable to do so - there was a high risk of massive market disruption(Weitzman 2008)"
+The principal backers for ICE US Trust were the same financial institutions most affected by the crisis, the top ten of the world's largest banks (Goldman Sachs, Bank of America, Citi, Credit Suisse, Deutsche Bank, JPMorgan, Merrill Lynch, Morgan Stanley and UBS). Sprecher's clearing house cleared their global credit default swaps (CDS) in exchange for sharing profits with these banks.(Weitzman 2008)(Terhune 2010).
+By 30 September 2008 the Financial Post warned that the "$54000bn credit derivatives market faced its biggest test in October 2008 as billions of dollars worth of contracts on now-defaulted derivatives would be auctioned by the International Swaps and Derivatives Association.
+In his article in the Financial Post, (Weitzman 2008) described ICE as a "US-based electronic futures exchange" which raised the stakes on October 30, 2008 in its effort to expand in the $54000 bn credit derivatives market.
+For years, the NYMEX traders had done a large business trading futures of Maine's potato crop.
+According to Leah McGrath Goodman's 2011 book The Asylum, manipulation in this market was commonplace, performed by various parties including potato inspectors and NYMEX traders.
+The worst incident was the 1970s potato bust, when Idaho potato magnate J. R. Simplot allegedly went short in huge numbers, leaving a large amount of contracts unsettled at the expiration date, resulting in a large number of defaulted delivery contracts.
+A public outcry followed, and the newly created Commodity Futures Trading Commission held hearings.
+NYMEX was barred from trading not only potatoes futures, but from entering new areas it hadn't traded in before.
+NYMEX's reputation was severely damaged, because, as future chairman Michel Marks told Goodman in his book, "The essence of an exchange is the sanctity of its contract."
+When the potato ban came into effect, NYMEX's platinum, palladium and heating oil markets were not significantly affected.
+However, NYMEX's reputation suffered in Washington, D.C., especially with the regulations in the Commodity Futures Trading Commission (CFTC), the President of the Exchange, Richard Leone brought in John Elting Treat, White House energy adviser to Presidents Carter and Reagan to help restore the credibility of NYMEX and to help the Exchange explore the possibility of entering the petroleum market recognizing the great potential for moving well beyond the limited size of the New York Heating Oil market.
+When Leone left NYMEX in 1981 as a result of a strong disagreement with the NYMEX Board, John Elting Treat was asked to replace him as President.
+The launching of the WTI crude oil contract was championed by Treat, who, with difficulty, convinced the Board and the two Marks family members, veteran and highly respected floor trader Francis Marks and his son, Michael, who had just come Chairman of the Board, to take a chance on trading crude oil. Arnold Safir was one of the members of an advisory committee formed by Treat to help design the new contract.
+Treat, with Board Chairman Marks and the support of the rest of the NYMEX Board, eventually chose West Texas Intermediate (WTI) as the traded product and Cushing, Oklahoma, as the delivery point.
+Robin Woodhead, who later became the first Chairman of the International Petroleum Exchange (IPE) in London started an active dialogue with Treat about whether they could start a Brent Crude oil contracts.
+Treat was very supportive and gave Woodhead strong support and a lot of advice. Shortly thereafter, after substantial conversations, The IPE was formally launched and started trading Brent.
+NYMEX held a virtual monopoly on "open market" oil futures trading (as opposed to the dark market or "over the counter" market).
+However, in the early 2000s the electronically based exchanges started taking away the business of the open outcry markets like NYMEX.
+Enron's online energy trading system was part of this trend.
+Jeff Sprecher's Intercontinental Exchange, or ICE, was another example.
+ICE eventually began trading oil contracts that were extremely similar to NYMEX's, taking away market share almost immediately.
+The open outcry NYMEX pit traders had always been against electronic trading because it threatened their income and their lifestyle.
+The executives at NYMEX felt that electronic trading was the only way to keep the exchange competitive.
+NYMEX teamed up with the Chicago Mercantile Exchange to use Globex in 2006.
+The trading pits emptied out as many traders quit. Banks, hedge funds, and huge oil companies stopped making telephone calls to the pits and started trading directly for themselves over screens.
+In this period the NYMEX also worked on founding the Dubai Mercantile Exchange in the United Arab Emirates.
+This was chronicled by Ben Mezrich in his New York Times Best Selling book Rigged which has been optioned for film adaptation by Summit Entertainment.
+The final executive management of NYMEX decided to sell it off in pieces, take golden parachute buyouts, and leave.
+In 2006 NYMEX underwent an initial public offering (IPO) and was listed on the New York Stock Exchange.
+The executives and exchange members owning seats on the exchange saw their net worth increase by millions of dollars in a few hours - many of the pit traders, who leased their seats instead of owning, did not.
+Other parts of NYMEX were sold to private equity investors and the Chicago Mercantile Exchange.
+The CME got ownership of the physical facilities and began scrubbing the NYMEX logo and name off of various artifacts and closed the NYMEX museum.
+NYMEX eventually became little more than a brand name used by CME.
+By 2011, NYMEX open outcry trading was relegated for the most part to a small number of people trading options.
+In 2009 it was reported that holders of COMEX gold futures contracts experienced problems taking delivery of their metal.
+Along with chronic delivery delays, some investors received delivery of bars not matching their contract in serial number and weight.
+The delays could not be easily explained by slow warehouse movements, as the daily reports of these movements showed little activity.
+Because of these problems, there were concerns that COMEX did not have the gold inventory to back its existing warehouse receipts.
+After launching the original crude oil futures contract, Treat began an aggressive marketing campaign to first bring in the large US and British oil companies and then moved on to pull in the large Middle East producers.
+It took almost a year to get the first US "majors" to start trading, but several "majors" did not start for almost 5 years.
+The initial resistance from the OPEC producers was almost impossible to break through, although some finally gave in, among the first being Venezuela.
+The rumors on the floor at that time were the Arab producers would trade gold futures as a proxy for oil prices (since the Arabs were major purchasers of gold and would buy more when their pockets were filled by rising oil prices, and conversely sell when oil revenues fell and reduced their ability to buy gold).
+After the potato ban, NYMEX's existence was in doubt.
+Most of the trading volume had been in potatoes.
+Without a good commodity, the traders had trouble making money.
+Eventually, the new chairman, Michel Marks – the son of commodities icon Francis Q. Marks– along with economist Arnold Safer, figured out that NYMEX could revamp an old heating oil futures contract.
+When the government deregulated heating oil, the contract had a chance of becoming a good object of trade on the floor.
+A new futures contract was carefully drawn up and trading began on a tiny scale in 1978.
+Some of the first users of NYMEX heating oil deliveries were small scale suppliers of people in the Northern United States.
+NYMEX's business threatened some entrenched interests like big oil and government groups like OPEC that had traditionally controlled oil prices.
+NYMEX provided an "open market" and thus transparent pricing for heating oil, and, eventually, crude oil, gasoline, and natural gas.
+NYMEX's oil futures contracts were standardized for the delivery of West Texas Intermediate light, sweet crude oil to Cushing
+The energy trading business took off, and NYMEX boomed.
+The open outcry floor became a cacophony of shouting traders and pit cards.
+The pits became a place where many people without much education or ability to fit into Wall Street could have a chance at being rich.
+Many traders and executives became millionaires.
+They threw lavish parties and went on exotic vacations.
+Many of these people also became heavily involved in drugs and prostitution, with drugs being traded right on the floor of the exchange.
+Goodman's book tells the stories of many of the personalities that built the exchange in this era.
+COMEX (Commodity Exchange, Inc), one of the exchanges that shared 4 World Trade Center with NYMEX, had traditionally looked down on NYMEX for being smaller and for having the toxic reputation from the potato bust.
+With NYMEX's energy trading boom, it became much larger and wealtheir than COMEX.
+On August 3, 1994, the NYMEX and COMEX finally merged under the NYMEX name.
+By the late 1990s, there were more people working on the NYMEX floor than there was space for them.
+In 1997, the NYMEX moved to a new building on the Southwestern portion of Manhattan, part of a complex called the World Financial Center.
+The NYBOT's original headquarters and trading floor were destroyed in the September 11, 2001 terrorist attacks on the World Trade Center.
+Several NYMEX people were lost in the tragedy, even though the new NYMEX building itself was mostly undamaged.
+Despite the area's devastation, the exchange's management and staff had the exchange back up and running in very short order.
+On February 26, 2003, the New York Board of Trade (NYBOT) signed a lease agreement with the NYMEX to move into its World Financial Center headquarters and trading facility.
+NYMEX maintained a close relationship with many organizations and people at World Trade Center, and After the attacks, the NYMEX built a $12 million trading floor backup facility outside of New York City with 700 traders' booths, 2,000 telephones, and a backup computer system.
+This backup was in case of another terrorist attack or natural disaster in Lower Manhattan.
+The strength of the authentication mechanism shall be proportionate to the risk of the processed data and the functionality of the application.
+Applications shall authenticate other applications it interfaces with.
+User sessions shall time out after ##AG_TIMEOUTFQ## of inactivity.
+Each change to the production version of an application must be supported by a documented business case.
+The ##AG_OWNER## may request larger changes to be delivered through a project or program rather than the ##AG_OWNER##'s team depending on scope and complexity of the change.
+The ##AG_OWNER## shall define a list of people and a documented process to allow for and approve emergency changes.
+The ##AG_OWNER## shall maintain an application product plan to align ##AG_PLAN##.
+Releases are categorised into the following types of releases: ##AG_RELEASE_TYPE##.
+The ##AG_OWNER## shall define release naming and numbering and align releases with any dependent releases scheduled within the organisation.
+Configuration and Code for each change shall be managed through ##GLOBAL_CLIENT_NAME##'s version control solution ##AG_VERCON##.
+Each release must include release notes defining the content of changes to the application, the impact on functionality for application users and potential fall back procedures.
+Traceability of all changes made to a production application must be ensured throughout the lifecycle of each software asset.
+Access to production environments must be segregated from access to test and development environments.
+All data input, processed and output through applications shall be validated for correctness.
+The ##AG_OWNER## can initiate the decommissioning of a software asset in conjunction with the business owner once the asset has reached the end of its lifecycle.
+A Software Decommissioning Plan shall be documented for the removal of the application from production. The plan shall include a final date for shutdown, plan for functionality transition or cut over, data archiving requirements, data deletion requirements, update and retirement of user guides, communications to user base and a plan to terminate all related services and contracts.
+All data maintained within an application that is relevant for taxation purposes, is required for fulfilling contractual obligations to customers, or relates to a natural person shall remain accessible in context within a reasonable timeframe after decommissioning a software asset.
+A Release Manager shall be nominated for each release to a production environment.
+The Release Manager shall develop or amend ##AG_RELEASE_PLAN## for each release.
+Deployment of new functionality as well as running of regular processing jobs shall be planned to minimise disruption of IT services.
+Application governance shall include software functionality from go-live in production to decommissioning and data archiving.
+Business controls shall be implemented as automated controls in applications whenever feasible.
+##AG_INCIDENTMGMT## shall be maintained to track incidents from escalation, closure to reporting impacting agreed Service Levels of applications in production.
+##AG_ISSUEMGMT## shall be maintained to track production issues for each application.
+The ##AG_OWNER## shall be responsible for operating applications according to defined performance indicators.
+The ##AG_OWNER## shall be responsible for managing changes to the current functionality, bundling change requests and managing releases of new functionality or fixes to production.
+Each application shall be assigned a business owner who represents the customers of the service provided by the application.
+Application governance covers ##AG_SCOPE##.
+A service level agreement shall be defined for each application and agreed between the business owner and the ##AG_OWNER## defining at minimum: ##AG_SLA##.
+User support shall be provided to the users for each software function according to service level agreements.
+User support may be provided through internal or external services.
+The ##AG_OWNER## shall define response times for user support according to the criticality of the application functionality to the organisation's key processes.
+IT Architects shall define and communicate an architecture strategy in line with IT strategy and corporate strategy to guide IT development.
+The architecture strategy shall define basic principles around hardware and software development, procurement and decommissioning as well as data management. This shall include technology categories, the structure of their integration and strategic vendor relationships relevant to these assets.
+All hardware and software procurement, development and decommissioning decisions shall be aligned to the IT architecture strategy.
+Gap analyses shall be performed regularly to identify necessity and priority for strategic alignment and development areas and kick off new initiatives to address gaps with implementation and migration plans.
+Innovation programs shall be established to evaluate emerging technology trends, encourage innovation, research new usage of technology, recommend implementation options and manage innovation integration.
+The data owner shall remain responsible for appropriate archiving of owned data.
+All archived commercial information shall be retained for at least ##ADR_PERIOD##.
+All commercial information shall be retained and archived. Commercial information includes ##ADR_COMMDATA##.
+All business relevant data shall be backed up on a regular basis.
+Methods for backup shall include incremental backups, delta backups, full backups and off site backups and shall be applied appropriately to the availability requirement of the data.
+Recovery from backup media shall be tested at least every year.
+All physical and electronic data no longer relevant to ##GLOBAL_CLIENT_NAME##'s business shall be destroyed securely if not required to be retained by law or after the end of the legal retention period.
+Information shall be retained and archived in compliance with all local and relevant international laws and regulation.
+When transitioning to a different media or software platform, the structure and context of archived data shall remain restorable for the remainder of the legal or regulatory retention period.
+All archived information shall be retrievable within a timeframe without impacting dependent business processes.
+All archived physical data shall be stored in a location that is appropriately protected from natural influences such as water and fire.
+All archived physical data shall have sufficient access control implemented and inventorisation to prevent unauthorised access to the data.
+The Audit Committee shall nominate an external auditor to perform an independent review of the company's financial records.
+The Internal Audit and External Audit functions shall operate independently from each other.
+The Board of Directors shall define the Audit Committee consisting of members of Internal Audit, Executive Management and the Board of Directors and inform the ##IA_OWNER## of all relevant decisions.
+All activities of Internal Audit shall be documented in formal audit reports and working papers. Identified issues shall be tracked until Internal Audit considers them sufficiently resolved.
+Various types of audits shall be performed including ##IA_TYPES## to provide assurance to ##GLOBAL_CLIENT_NAME##'s stakeholders.
+Internal Audit shall remain independent and shall be separated in its activities and resources from operational business up to board level.
+Resources transferring from operational business to Internal Audit shall not perform any audit activities in the area of their previous responsibility for at least ##IA_WAIT##.
+Appropriate regulators shall be notified of the nomination or change of the ##IA_OWNER## as well as any overdue issues rated ##GLOBAL_ISSUE4##.
+Prior to each internal audit, a planning phase shall determine scope, timeline, controls to be tested and required data. This shall be documented in an audit planning memorandum.
+The audit subjects shall be notified of the planned audit activities through submission of the audit planning memorandum and a kick-off meeting if applicable.
+All identified failures in testing of in-scope controls during an audit shall be documented as issues and rated as ##GLOBAL_ISSUE4## (to be immediately escalated to management), ##GLOBAL_ISSUE3##, ##GLOBAL_ISSUE2## or ##GLOBAL_ISSUE1##.
+Audit reports including the identified issues shall be presented to the audit subject in draft form for discussion. Should no agreement be reached, the audit subject shall formally document their rejection.
+Internal audit shall be provided with full access to information and IT systems relevant to the respective audit topic.
+External skilled resources shall be used for auditing specialised topics that are not covered by the skillset of the internal team.
+Internal Audit shall provide assurance on the design and effectiveness of controls ensuring ##GLOBAL_CLIENT_NAME## operates within defined objectives, rules and regulations as set out by the company's executives and applicable regulators and legal bodies.
+Internal Audit shall develop an annual audit plan taking ##GLOBAL_CLIENT_NAME##'s risk situation, major business or technology changes as well as current incidents and issues into account and provide assurance on the planned items. Additionally special audits shall be performed as needed.
+The ##IA_OWNER## shall be responsible for providing assurance through internal audit to ##GLOBAL_CLIENT_NAME##.
+Audit shall report to the Management Board on Internal Audit activities including the audit plan and overdue issues at least every ##IA_REPORTFQ##.
+Alternate sites shall provide sufficient capacity to deliver defined critical services in case of a disruptive event at the primary site of business.
+Alternate sites shall be separated by at least 50km with separate power supply and communication technology from the site it is providing redundancy for.
+Transport arrangements to the alternate site shall be incorporated into business continuity plans.
+A Business Continuity Plan shall be defined to protect ##GLOBAL_CLIENT_NAME##'s business objectives, business integrity, operational effectiveness and external obligations.
+Business requirements shall be defined to specify the minimal business objectives, integrity KPIs, operational effectiveness levels and external obligations necessary.
+Business Continuity Plans may be broken down for each organisational entity, geography, site or asset as necessary. All plans shall be governed through an overarching plan and a defined hierarchy.
+All Business Continuity Plans shall take ##BCM_PLAN## into account.
+The ##BCM_OWNER## shall implement and maintain a financial and administrative capability to apply for, manage and disburse funds in case of disruptive or emergency events.
+Business requirements defined to specify the minimal business objectives, integrity KPIs, operational effectiveness levels and external obligations necessary shall be reviewed on a regular basis to ensure appropriateness of coverage.
+Key business activities and outcomes, business processes, supporting assets, technology and critical staff shall be used to shape Business Continuity Plans.
+Business Continuity Plans shall clearly call out dependencies on vendors, supplies, supply chain requirements and regulatory requirements.
+Availability of Business Continuity Plans shall be ensured throughout disruptive events through redundant storage, multiple channels of availability, high degree of distribution, physical availability at places critical to crisis and continuity management, diligent versioning and high level of awareness with critical staff.
+Business processes that constitute a value chain for the organisation shall be analysed for the development of Business Continuity Plans.
+Each business process within each value chain shall be rated according to its criticality for business continuity.
+A minimum recovery time (Maximum Tolerable Period of Disruption) and a maximum of tolerable data loss shall be defined for each business process.
+Business Continuity Plans shall define clear, precise and achievable actions required to return business elements to the desired level of performance.
+Actions to return business operations to normal shall take dependencies, required resources, duration, supporting material and assets, success criteria and a path for escalation into account.
+Required external support shall be clearly identified and tested for feasibility (e.g. emergency response services, law enforcement, etc.).
+Business Continuity Plans shall describe at least triggers for activation, the business continuity team and their contact details, priorities and tolerable disruption, recovery strategies and activities, communications plan, response actions for specific disruptions and return to normal procedures.
+Business Continuity Response Centres shall be defined across strategic locations of the organisation to function as the physical management space for managing ##GLOBAL_CLIENT_NAME##'s response to a disruptive event.
+Business Continuity Response Centres shall provide necessary hard and software, redundant lines of communication, available Business Continuity Management plans, redundant power supply and easy accessibility for staff critical to the recovery effort.
+Analysed threats to the business shall include natural threats (geological, biological, meteorological), human threats (intentional, accidental) and technology threats (intentional, accidental).
+Credible threats to the business shall be identified, qualified and categorised.
+Vulnerabilities of in scope business processes and supporting assets shall be matched to credible threats.
+The impact to each business process of each credible threat shall be analysed.
+Threats shall be defined to result in loss of people, assets, IT or facilities.
+Threats shall be defined to affect ##BCM_VULNERABILITY##.
+Consequences of threats shall include impact on ##BCM_CONSEQUENCE##.
+Based on impact consequence and likelihood of threats, defined actions to ensure business continuity shall include ##BCM_RESPONSE##.
+Current risks shall be included in the threat analysis of business process and supporting assets.
+Business impact analyses shall be conducted on a regular basis to ensure business continuity measures are appropriate.
+All identified residual risk after mitigation or risk acceptance shall be considered in business continuity, disaster recovery and crisis management planning.
+The authorised person invoking a Business Continuity Plan shall nominate a head of communications responsible for all internal and external communication relating to the disruptive events and the response.
+All internal communications shall be timely, precise, audience specific and sufficiently redundant in use of channel to reach all affected staff as soon as possible.
+All external communication shall be carefully composed, factually accurate, audience specific, appropriately reviewed and distributed across appropriate channels.
+The communication plan shall include contact details for key staff, regulators, customers, providers, emergency services and media.
+The communication plan shall clearly define staff that are authorised to speak to media.
+Business Continuity Plans shall be defined based on approved and appropriate continuity strategies enabling the resilience of critical business services.
+Each continuity strategy shall include a recovery profile based on the maximum tolerable period of disruption.
+Continuity strategies shall cover business processes, chain of command, facilities, IT systems, suppliers and information.
+Continuity strategies shall restore operations after a disruptive event within ##BCM_RESTORE##.
+For sites and assets continuity strategies shall include ##BCM_CONSTRAT##.
+Continuity strategies shall be reviewed after every Business Impact Assessment to ensure alignment.
+For IT services, continuity strategies shall involve ##BCM_ITCONT##.
+For people continuity strategies shall involve ##BCM_PEOPLECONT##.
+For critical suppliers continuity strategies shall involve ##BCM_SUPPLIERCONT##.
+For critical data continuity strategies shall involve ##BCM_DATACONT##.
+Insurance shall be used to offset financial risk but shall not be used to replace other continuity measures.
+##GLOBAL_CLIENT_NAME##'s first priority in case of a disruptive event is ##BCM_PRIO1##.
+##GLOBAL_CLIENT_NAME##'s second priority in case of a disruptive event is ##BCM_PRIO2##.
+##GLOBAL_CLIENT_NAME##'s third priority in case of a disruptive event is ##BCM_PRIO3##.
+##GLOBAL_CLIENT_NAME##'s fourth priority in case of a disruptive event is ##BCM_PRIO4##.
+##GLOBAL_CLIENT_NAME##'s fifth priority in case of a disruptive event is ##BCM_PRIO5##.
+Business Continuity Plans shall be managed through ##BCM_TOOL##.
+Human Resources shall ensure that salary payments to employees are made on time in the case of a disruptive event to ##GLOBAL_CLIENT_NAME##'s business.
+Human Resources shall have plans in place to ensure that in the case of disruptive events contact details of family members of affected personnel, a hotline for affected staff and relatives, cash for emergency usage and contact to emergency services is readily available.
+Human Resources shall provide adequate counselling services for employees affected by a disastrous event to ##GLOBAL_CLIENT_NAME##'s business.
+Owners of Business Continuity Plans shall review business continuity measures and documents at least every ##BCM_FQ## as well as after returning to normal after a disruptive event and take corrective action if needed or otherwise improve the plans.
+Management shall review summarised outcomes of the BCM program to ensure the program matches the organisation's needs to fulfill business, legal and regulatory requirements.
+The ##BCM_OWNER## shall be responsible for establishing, implementing, operating, monitoring and reviewing the Business Continuity and Crisis Management plans for ##GLOBAL_CLIENT_NAME## as well as raising sufficient awareness.
+The ##BCM_OWNER## shall nominate a responsible Business Continuity and Crisis Manager from each critical business entity with sufficient knowledge of the core business, processes and specific risks.
+The ##BCM_OWNER## shall be the owner of the Business Continuity Plan.
+The ##BCM_OWNER## shall nominate single points of accountability for Medical, Physical Security & Facilities, HR, Communications & Public relations and IT in addition to business unit representatives.
+##BCM_INVOKE## shall have the authority to activate a Business Continuity Plan across parts of or the entire business.
+The ##BCM_OWNER## shall ensure that the Business Continuity & Crisis Management team composition is sufficiently documented in an organisational chart and always kept current and redundantly available.
+All organisational units shall define Business Continuity Plans in addition to the organisation wide framework to ensure organisational units are sufficiently resilient to disruptive events.
+The ##BCM_OWNER## shall ensure responsible regulators are notified within 24 hours of a disruptive event with material impact to ##GLOBAL_CLIENT_NAME##'s business. The regulator shall also be notified as soon as regular business operations have been restored.
+Managers shall ensure that unique roles and skills relevant to business continuity are shared with additional staff through training measures.
+All managers shall identify roles and skills critical to providing services or restoring services after a disruptive event and ensure that this skillset is provided through multiple people.
+Staff shall be trained to assume roles and skills in the line of succession should the primary resource become unavailable through a disruptive event.
+Contact details to all critical personnel shall be kept current and available within Business Continuity Plans.
+The ##BCM_OWNER## shall define a Business Continuity Management test and training schedule covering all key processes on a risk based approach.
+The ##BCM_OWNER## shall nominate a testing or exercise coordinator for each Business Continuity Management test or training.
+The testing or exercise coordinator shall be responsible for defining testing and training scenarios, running the exercise, nominating observers and support staff as needed, defining players, ensuring sufficient material is available and documenting the outcomes and lessons learned.
+The ##BCM_OWNER## shall select testing and training intensity for each scheduled exercise based on criticality of the tested process, maturity of the plans, current risk exposure and level of awareness and capability of affected staff.
+Each Business Continuity Management exercise shall be based on a realistic scenario of disruption of the tested business process based on natural, human or technological threats.
+The exercises shall fall into one of three categories: desktop exercises, limited exercises and full scale exercises.
+Desktop exercises shall be limited in scope and extent to a specific disruption and will be addressed in a slow-paced analytical approach to verify Business Continuity Management Plans and appropriate responses.
+Limited exercises shall involve a wider range of players and extend to the Business Continuity Response Centre. Decisions by the players will be required in order to respond to a range of developing events in the disruptive event tested. Scope shall be limited to a specific business area or process.
+Full scale exercises shall involve an organisation wide response to a specific threat to the organisation and test resilience in a highly realistic simulation.
+Tests or exercises shall be clearly terminated by the test or exercise coordinator. Lessons learned and areas for improvement shall be documented and provided to the ##BCM_OWNER##.
+The ##BCM_OWNER## shall conduct a training needs analysis to identify the scope of training required for all staff required to support business continuity measures.
+All Business Continuity Plans shall be tested at least every ##BCM_TESTFQ##.
+All members of the ##GLOBAL_CLIENT_NAME## organisation shall have sufficient awareness and skills relevant to their tasks in the organisation to react appropriately to a disruptive event and minimise impact to operational effectiveness.
+Only cloud services approved by the ##CS_OWNER## shall be used to process ##GLOBAL_CLIENT_NAME##'s data.
+All cloud services shall be subject to review within ##GLOBAL_CLIENT_NAME##'s user access review process.
+Cloud services shall be integrated with ##GLOBAL_CLIENT_NAME##'s directory services and identity management to avoid separate credentials for cloud services as much as possible.
+Users may access their personal cloud services from ##GLOBAL_CLIENT_NAME##'s resources for reasonable personal usage.
+##GLOBAL_CLIENT_NAME##'s data shall not be processed under any circumstances through personal cloud service accounts.
+The ##CS_OWNER## shall be responsible for managing all cloud services for ##GLOBAL_CLIENT_NAME##.
+All cloud services shall be sourced through ##PROC_OWNER##.
+The ##CS_OWNER## shall publish a list of approved cloud services available to the organisation.
+The ##CS_OWNER## shall evaluate cloud services for approved usage within ##GLOBAL_CLIENT_NAME## based on ##CS_CRITERIA##.
+Email and messaging communication on behalf of ##GLOBAL_CLIENT_NAME## shall use ##GLOBAL_CLIENT_NAME##'s email service.
+All email and messaging accounts shall be assigned to a human identity. This shall include individual accounts, group accounts and technical accounts.
+All email and messaging accounts linked to ##GLOBAL_CLIENT_NAME##'s top level domain are either individual accounts, group accounts or technical accounts.
+Group Accounts may be set up for a group of people with a common functional need that this group requires to communicate on behalf of.
+Technical email accounts may be setup to allow non-human identities to send automatically generated messages.
+Privacy of messages sent through ##GLOBAL_CLIENT_NAME##'s email or messaging services shall not be guaranteed, as it may be necessary to grant other employees access to the email account to ensure business continuity and fulfil contractual obligations.
+All email and messaging accounts shall be configured to contain the legally required signature components and correspond to the corporate identity rules.
+The ##CT_OWNER## shall be responsible for managing all mobile devices accessing ##GLOBAL_CLIENT_NAME##'s non-public information.
+The ##CT_OWNER## shall define a list of permitted devices, mobile operating platforms, mobile OS versions and storage media that may be used within ##GLOBAL_CLIENT_NAME## as well as acceptable use of these.
+All mobile devices accessing ##GLOBAL_CLIENT_NAME##'s information classified ##IC_INTERNAL##, ##IC_CONFIDENTIAL## or ##IC_SECRET## shall allow the ability for remote wiping of the devices.
+The ##COMP_OWNER## shall assess and report the current status of compliance to ##GLOBAL_CLIENT_NAME##'s executives on a regular basis.
+Compliance Reporting shall include at least ##COMP_REPORT##.
+The ##COMP_OWNER## shall be responsible for managing compliance with ##GLOBAL_CLIENT_NAME##'s legal and regulatory requirements.
+All managers shall be responsible for understanding legal and regulatory requirements relevant to their business and upholding business practices that align to these.
+The ##COMP_OWNER## shall maintain a register of all laws and regulatory requirements that ##GLOBAL_CLIENT_NAME## must comply with.
+The ##COMP_OWNER## shall establish and monitor controls to ensure compliance with legal and regulatory requirements.
+The ##COMP_OWNER## shall provide advice and report directly to ##GLOBAL_CLIENT_NAME##'s management on effective compliance strategies and obtain legal guidance from internal and external sources where needed.
+The Chief Executive Officer shall remain ultimately accountable for ##GLOBAL_CLIENT_NAME##'s compliance.
+The ##COMP_OWNER## shall assess the need for training or awareness campaigns for legal or regulatory matters and manage execution appropriately.
+The ##COMP_OWNER## shall monitor changes to legal or regulatory requirements and inform ##GLOBAL_CLIENT_NAME##'s management of any impact to ##GLOBAL_CLIENT_NAME##'s business.
+Regulators shall be notified of nominations of a ##COMP_OWNER## as appropriate.
+When designing cryptographic measures, random key generation, key distribution, key storage and key backup shall be defined.
+The ##SM_OWNER## shall define a list of approved cryptographic methods and tools to be used to protect ##GLOBAL_CLIENT_NAME##'s information assets.
+Only cryptographic methods and tools approved by the ##SM_OWNER## shall be used.
+The strength of the cryptographic method shall be proportionate to the information classification and the risk of usage through applications and devices.
+The strength of a cryptographic method shall be determined by key length, known weaknesses, symmetrical versus asymmetrical encryption method, use of additional cryptographic measures for key exchange or handshake, split knowledge or dual control and implementation in hardware and / or software.
+All data representing information classified ##IC_SECRET## or ##IC_CONFIDENTIAL## shall be protected by encryption in motion and at rest.
+The ##SM_OWNER## shall review approved cryptographic methods on a regular basis and assess if the selected methods still provide sufficient protection and remain legal.
+All cryptographic keys shall be randomly generated, independently from other cryptographic keys.
+Cryptographic keys shall be securely stored to prevent unauthorised access.
+Cryptographic keys shall be stored redundantly to protect from loss of keys thereby losing access to encrypted information.
+Cryptography shall be applied at the application layer for application data where possible.
+Cryptographic measures shall be implemented to achieve the security objectives of confidentiality, authenticity and integrity of information.
+Cryptographic measures shall include ##CR_METHODS##.
+The asset owner shall be responsible for revoking and changing compromised or expired cryptographic keys.
+All mobile devices that contain information classified as ##IC_INTERNAL##, ##IC_CONFIDENTIAL## or ##IC_SECRET## shall be encrypted.
+High risk transactions using cryptographic measures shall be confirmed to end users and especially customers via a second channel.
+The Data Loss Prevention solution shall prevent information of the following types to be moved outside of the defined perimeter: ##DLP_BLOCK##.
+The Data Loss Prevention solution shall be configured to block the movement of large amounts of critical information and warn users before permitting the movement of less critical protected information.
+A Data Loss Prevention solution shall prevent sensitive data from leaving ##GLOBAL_CLIENT_NAME##'s security perimeter.
+The Data Loss Prevention system shall be based on ##DLP_SYS## solution.
+The Data Loss Prevention solution shall monitor data at ##DLP_SCOPE##.
+The Data Loss Prevention solution shall warn users before moving information of the following types outside of the defined perimeter: ##DLP_WARN##.
+The ##DLP_TEAM## shall respond to security events from the Data Loss Prevention solution by escalating the event according to criticality.
+Regular reporting of the identified Data Loss events, response and resolution shall be created for Information Security stakeholders.
+The ##DLP_OWNER## shall be responsible for signing off and reviewing the rules and configuration of the Data Loss Prevention solution on a regular basis.
+The ##DLP_TEAM## shall be responsible for reviewing the rule exceptions and security events raised by the Data Loss Prevention solution and actioning accordingly.
+The ##DLP_OWNER## shall define categories of criticality for security events monitored by the Data Loss Prevention solution.
+Data subjects may request ##GLOBAL_CLIENT_NAME## to disclose, modify or delete all personally identifiable information stored relating to them.
+Data subjects may request a machine-readable export of the personally identifiable information stored relating to them.
+All access requests shall be forwarded to the ##DP_OWNER## who shall respond if appropriate within 40 days.
+The ##DP_OWNER## will analyse the request based on local data privacy laws. If the access request is lawful and does not relate to ongoing legal proceedings, the ##DP_OWNER## shall coordinate a response to the requesting data subject.
+An access request may be denied if one of the following conditions applies: ##DP_AR_DENIAL##.
+All complaints relating to data privacy shall be forwarded to the ##DP_OWNER##.
+Data usage of legally regulated information across borders shall be subject to prior analysis and risk assessment.
+All cross border data flows of personally identifiable information shall be contractually agreed between the data subjects and the data owners. Other data flows shall be managed as exceptions by the ##DP_OWNER##.
+The ##DP_OWNER## shall review all cross border data flows and evaluate if a similar protection level is given in the recipient country of the personally identifiable information.
+The European Economic Area (EEA) shall be considered a single market to use personally identifiable information for its primary purpose within the organisation.
+The ##DP_OWNER## shall establish a contract including EU model clauses to legitimise data flows between an EEA and non-EEA country.
+The ##DP_OWNER## may establish a Privacy Shield agreement between an organisation in the United States of America and the European Economic Area to enable usage of personal data between these countries.
+A data breach has occurred if unauthorised third parties have gained access to commercially sensitive information or personally identifiable information.
+A data breach is considered serious if ##DP_SERIOUSBREACH## have been involved.
+All suspected or confirmed data breaches shall immediately (within 24 hours) be brought to the attention of the ##DP_OWNER##.
+The ##DP_OWNER## shall evaluate the severity of the data breach and assess the impact to customers, employees, third parties and the company.
+For serious data breaches, the ##DP_OWNER## shall notify affected people, regulators and organisations of the breached information.
+If the affected people and organisations cannot be identified and significant financial or reputational damage for affected parties is likely, print media, social media, radio or television shall be used for notification. Communication shall be coordinated with public relations.
+The ##DP_OWNER## shall document all actions taken in relation to data breaches and their analysis.
+The ##DP_OWNER## shall include legal or other subject matter expertise as needed to analyse and evaluate data breach events.
+All communication to parties affected by a data breach shall be initiated by the ##DP_OWNER##.
+Data breaches may occur through ##DP_BREACHREASON##.
+All media containing information classified as ##IC_INTERNAL##, ##IC_CONFIDENTIAL## or ##IC_SECRET## leaving the physical or legal control of ##GLOBAL_CLIENT_NAME## shall be securely destroyed.
+All discarded paper containing classified information shall be shredded in cross cut method with the resulting shreds no wider than 4mm in diameter or incinerated.
+All discarded optical storage devices shall be shredded with the resulting strips no wider than 4mm or incinerated.
+All magnetic storage devices (e.g. HDD) shall be overwritten at with at least three different patterns and reformatted.
+All discarded flash based storage devices (e.g. SSD, mobile phones, USB drives, flash cards) shall be securely overwritten or reset.
+Until media containing classified information is sufficiently destroyed or wiped, the media shall remain protected to the degree required by the classification of data stored on the media.
+All personally identifiable information shall be accurate and kept up to date.
+Personally identifiable information may only be stored as long as it is required to fulfil the primary purpose of collection or required by laws or regulation or with explicit permission of the data subject.
+Records collected for different purposes shall be stored so that they are distinguishable and can be aligned to the respective primary purpose of collection.
+All information relating to ##DP_PII## shall be considered personally identifiable information.
+Information relating to health, race, ethnicity, religious beliefs, sexual preference, political affiliation or union membership, criminal record, as well as personal usage data of telemedia shall be considered sensitive personally identifiable information.
+##GLOBAL_CLIENT_NAME## shall not collect sensitive personally identifiable information unless the data subject has consented, or it is legally required, or if it is required for fulfilling a key aspect of the primary purpose for collection.
+Personally identifiable information shall only be collected by ##GLOBAL_CLIENT_NAME## from the data subject, sources approved by the data subject or other legal sources. All other collected personally identifiable information shall be securely destroyed or consent obtained from the data subject.
+Consent for data processing of persons below 16 years of age shall be given by the person's legal guardian.
+Government issued identifiers shall not be used in ##GLOBAL_CLIENT_NAME## systems to identify an individual and shall not be disclosed unless legally required to.
+Personally identifiable information may only be used for the primary purpose it was collected for and contractually agreed between the data subject and the data owner and to which the data subject has not objected or if regulated by law.
+Data usage shall cover the collection, processing, modification, transfer, disclosure, storage and deletion of data.
+Storage devices being shipped shall be appropriately protected and shipping providers diligently selected.
+Only the minimum amount of personally identifiable information necessary to fulfill the primary purpose of usage shall be captured.
+##GLOBAL_CLIENT_NAME## shall not disclose personally identifiable information unless the data subject consents, it is legally required, it is reasonably expected to be required to fulfill the primary purpose of collection or the data has sufficiently been anonymised.
+No decisions affecting data subjects shall be made purely based on automated processing of information.
+All extraordinary data disclosures shall be documented.
+##GLOBAL_CLIENT_NAME## shall publish an external data privacy policy defining scope, approach and responsibilities in processing and safeguarding personally identifiable information of people outside of the organisation.
+The external data privacy policy shall be easily accessible and free of charge for all people providing ##GLOBAL_CLIENT_NAME## with personally identifiable information.
+Prior to entering into a contract with ##GLOBAL_CLIENT_NAME##, the external data privacy policy shall be accepted by the other party.
+The external privacy policy shall document ##GLOBAL_CLIENT_NAME##'s fundamental approach to data privacy including the protection and limitation of use of personally identifiable information.
+The external privacy policy shall provide contact details for addressing data privacy related inquiries and issues to ##GLOBAL_CLIENT_NAME##.
+The external privacy policy shall document the types of personally identifiable information that are captured, processed and stored.
+The external privacy policy shall assure external parties that they will be informed of the primary purpose of the collection of personally identifiable information.
+The external privacy policy shall call out all sources used to capture personally identifiable information.
+The external privacy policy shall call out any service providers or other data sharing of personally identifiable information.
+The external privacy policy shall explain the process for opting out of being contacted for marketing purposes.
+All cross border data usage shall be documented in the external privacy policy.
+The external privacy policy shall describe the process for people to request information on stored personally identifiable information about themselves.
+The external privacy policy shall commit to data subjects that ##GLOBAL_CLIENT_NAME## shall take reasonable measures to ensure the currentness of personally identifiable information.
+The external privacy policy shall describe general measures that ##GLOBAL_CLIENT_NAME## shall take to protect personally identifiable information as well as responsibilities of data subjects to protect their access to ##GLOBAL_CLIENT_NAME##'s systems.
+##GLOBAL_CLIENT_NAME## shall take reasonable measures to notify data subjects of any changes to the terms defined on the external privacy policy during the term of the contract with the data subject.
+The external privacy policy shall name the responsible regulator governing data privacy.
+All processing of personally identifiable information through external third parties on behalf of ##GLOBAL_CLIENT_NAME## shall be considered external processing.
+All contracts relating to external processing of personally identifiable information must meet data privacy legal requirements and shall be reviewed by the ##DP_OWNER##.
+The ##DP_OWNER## shall ensure prior to contract closure and during the contract lifetime that the service provider has appropriate and effective controls in place to protect the personally identifiable information provided to the service provider for automated processing and only processes as advised by an authorised data owner.
+The ##DP_OWNER## shall categorise automated processing services by risk into classes of high, medium and low risk.
+High risk data processing is categorised by one or many of the following categories: ##DP_ADPHIGH##.
+Medium risk data processing is categorised by one or many of the following categories: ##DP_ADPMEDIUM##.
+Low risk data processing is categorised by one or many of the following categories: ##DP_ADPLOW##.
+Assessments of vendor controls shall include on-site assessments, virtual assessments, self assessments and vendor certifications.
+All high risk automated data processing vendors shall be assessed at least every ##DP_ADPHIGHFQ##.
+All medium risk automated data processing vendors shall be assessed at least every ##DP_ADPMEDIUMFQ##.
+All low risk automated data processing vendors shall be assessed at least ##DP_ADPLOWFQ##.
+Assurance of the appropriateness of controls for securely processing ##GLOBAL_CLIENT_NAME##'s personally identifiable information shall cover physical protection, employee awareness, organisational maturity and IT security of the service provider.
+Contracts defining external processing of personally identifiable information shall define ##DP_ADPCON##.
+##GLOBAL_CLIENT_NAME## shall not contact anyone who has requested to opt out of being contacted for marketing purposes except if it is required for legal reasons or to fulfil contractual obligations.
+Personally identifiable information shall not be used for data analytics for purposes that do not support or enhance the primary reason for data collection or without express permission.
+Personally identifiable information that has been anonymised or aggregated shall be permitted for analytics and market research purposes.
+The ##DP_OWNER## shall maintain an inventory of all usage of personally identifiable information.
+The inventory shall describe the key process and the type and scope of personally identifiable information affected by each data usage. Additionally the process owner and related IT application shall be documented.
+The inventory shall describe the key process and the type and scope of personally identifiable information affected by each data usage. Additionally the process owner and related IT application shall be documented.
+The inventory of personally identifiable information usage shall be checked for currentness at least twice a year.
+All members of ##GLOBAL_CLIENT_NAME## shall ensure that no items are left on their desks at the end of the day.
+Physical data classified as ##IC_SECRET## or ##IC_CONFIDENTIAL## shall not be left open and unattended within the office space.
+Printers that are accessible to a large number of people shall be equipped with a print-on-demand function preventing print jobs to start before the person initiating the print job is physically present.
+Printouts shall not be left on printers or print rooms and shall be retrieved in a timely manner or securely disposed of.
+The ##DP_OWNER## shall be responsible for defining, implementing and enforcing measures to protect personal or commercially important information in a transparent way.
+A Data Privacy Officer shall be appointed if the organisation is regularly involved in systematic monitoring of data subjects or processing of sensitive personally identifiable information at a large scale.
+The ##DP_OWNER## shall be responsible for monitoring legal changes in data protection and data privacy in the locations of ##GLOBAL_CLIENT_NAME##'s operations.
+The natural persons that personally identifiable information relates to shall be defined as data subjects.
+The ##DP_OWNER## shall be the first point of contact for data privacy regulators.
+The ##DP_OWNER## shall ensure that all employees are aware of Data Protection requirements and sufficiently trained in methods for protecting ##GLOBAL_CLIENT_NAME##'s information assets.
+The ##DP_OWNER## shall report annually to the management board on data protection issues, risks, major changes, incidents and future plans.
+All members of ##GLOBAL_CLIENT_NAME## shall call out observed risks in handling sensitive information to the ##DP_OWNER##.
+All members of ##GLOBAL_CLIENT_NAME## shall be responsible for using personally identifiable information according to ##GLOBAL_CLIENT_NAME##'s rules, legal requirements and aligned with the primary purpose of data collection.
+The manager of the department collecting personally identifiable information shall be the data owner who is responsible for managing accuracy of the data.
+The ##DP_OWNER## shall nominate a person responsible for data protection and data privacy for each country ##GLOBAL_CLIENT_NAME## has local operations in to manage compliance with local data privacy and protection laws.
+The relevant regulators shall be consulted regarding high risk data processing activities.
+Data containing personally identifiable information shall not be used for test purposes.
+All records linking data to a person shall be anonymised before data sets can be used for testing.
+##GLOBAL_CLIENT_NAME## is committed to conducting its business in an ethical way.
+The ##FP_OWNER## shall be responsible for managing fraud risk and fraud prevention.
+All members of ##GLOBAL_CLIENT_NAME## shall refrain from fraudulent use of ##GLOBAL_CLIENT_NAME##'s assets.
+All managers shall ensure they are fully aware of their responsibilities in preventing and detecting fraudulent activities of clients, vendors and employees.
+All members of ##GLOBAL_CLIENT_NAME## shall call out observed or suspected cases of fraudulent behaviour to the ##FP_OWNER##'s office.
+The ##FP_OWNER## shall nominate an independent contact outside of the organisation (whistleblower hotline) to function as a trusted third party for whistleblowers to report unethical or fraudulent behaviour outside of ##GLOBAL_CLIENT_NAME##'s line of reporting.
+Contact information to the whistleblower hotline shall be made known to all employees.
+The whistleblowing hotline can be reached via telephone at ##FP_TEL##.
+The whistleblowing hotline can be reached via email at ##FP_EMAIL##.
+The whistleblowing hotline can be reached via physical mail at ##FP_MAIL##.
+The trusted third party shall take reasonable steps to qualify called out fraudulent or unethical behaviour and bring these to the attention of the executives or law enforcement authorities as appropriate and in a timely manner.
+The whistleblowing hotline may be contacted anonymously.
+All disclosures of internal fraud or unethical behaviour shall be made based on first hand information of the person making the disclosure.
+##GLOBAL_CLIENT_NAME## shall protect the identity of the whistleblower unless required to disclose the identity to comply with legal obligations.
+##GLOBAL_CLIENT_NAME## may investigate any maliciously false claims brought to the whistleblowing hotline and take disciplinary or legal action against the individual.
+Human Resources shall ensure that sufficient background checks have been performed on new members of ##GLOBAL_CLIENT_NAME##. The depth of the background check shall be proportionate to the level of risk and responsibility the person is intended to manage within the organisation.
+Enhanced background checks shall be performed for resources with critical tasks or requiring to deal with sensitive information with involvement of the ##FP_OWNER## to assess any potential vulnerabilities to fraud.
+Human Resources shall be responsible for matching required skills in the business with sufficiently skilled resources or coordinating training needs assessments and training as required.
+The ##HR_OWNER## shall manage a regular and timely performance evaluation and management process.
+The ##HR_OWNER## shall establish structures and capabilities to support change management throughout the organisation from identifying the need for change, to enabling change agents, implementing change and supporting adaptation in the organisation.
+All people joining ##GLOBAL_CLIENT_NAME## or processing any of ##GLOBAL_CLIENT_NAME##'s information shall be required to sign a confidentiality agreement.
+The confidentiality agreement shall cover at least ##HR_CONF##.
+Unsuccessful job applications including personally identifiable information shall be deleted, if there are no legal retention requirements and if the applicant has not given consent to ##GLOBAL_CLIENT_NAME## to retain the information.
+Human Resources shall impose disciplinary action on anyone who violates or circumvents any of the control statements or rule setting documentation intentionally or unintentionally. Actions shall be proportionate to the violation and range from informing the individual of wrongdoing to termination of contract and criminal prosecution.
+The ##HR_OWNER## shall be responsible for managing employee lifecycle, compensation and all other people related matters.
+The ##AM_OWNER## shall be responsible for managing ownership and accountability of ##GLOBAL_CLIENT_NAME##'s IT assets.
+The ##AM_OWNER## shall define a business and IT owner for each IT asset managed by ##GLOBAL_CLIENT_NAME##.
+IT Asset Management shall cover all software, hardware and IT services owned or operated by ##GLOBAL_CLIENT_NAME##.
+The ##AM_OWNER## shall define assets or asset categories that are not included in IT asset management based on low value or risk such as peripheral IT equipment.
+The ##AM_OWNER## shall maintain a current register listing all uniquely identifiable IT assets under management including IT services and track associated costs.
+The register shall include location of the IT asset. Changes to the IT asset shall require approval.
+Access to IT assets shall be requested through ##IAM_PROVSYS##.
+The ##IAM_REVIEWER## shall review and approve access requests prior to provisioning access.
+User accounts that have not been used for more than ##IAM_TIMEOUT## shall be deactivated.
+User accounts that have been deactivated for more than ##IAM_TIMEOUTDEL## shall be deleted.
+Deactivation or deletion requests for high risk user accounts shall be actioned within ##IAM_ACTIONHIGH##.
+Deactivation or deletion requests for non high risk user accounts shall be actioned within ##IAM_ACTIONOTHER##.
+Access to IT assets containing information classified as ##IC_CONFIDENTIAL## or ##IC_SECRET## shall be granted only after the user has been identified and authenticated.
+All users shall access applications through accounts specific to the individual user.
+Credentials provided to a user for accessing IT assets shall not be disclosed or shared.
+Two factor authentication shall be implemented for access to systems with high requirements for confidentiality, data protection or risk to ##GLOBAL_CLIENT_NAME##.
+The ##SM_OWNER## shall define and approve a list of authentication mechanisms for usage in two factor authentication solution.
+Digital certificates shall be removed or replaced before they expire.
+The use of a digital certificate shall be approved by the ##SM_OWNER##.
+Users shall only have access required for executing their assigned tasks in line with the least privileged principle.
+An identity shall only have one account per system associated to it.
+Identities created for non-permanent members of ##GLOBAL_CLIENT_NAME## shall be created with a defined end date as contractually specified.
+Members of ##GLOBAL_CLIENT_NAME## shall include ##IAM_MEMBERS##.
+Users shall be sufficiently authenticated before any credential changes (passwords, login IDs) are modified.
+Each person with access to ##GLOBAL_CLIENT_NAME##'s IT assets shall have a permanently unique identity.
+The identity shall be created in ##IAM_IMSYS##.
+##IAM_SETUP## shall be responsible for initiating the identity creation.
+When an employee leaves the organisation, the employee's manager shall initiate access to ##IAM_HRACCESS## to be revoked and returned to the appropriate manager.
+Any system with authentication functions shall log at least ##IAM_LOG##.
+Connections to internal network resources from an external network shall require two factor authentication. Vendor access shall additionally be limited to business hours by default.
+All privileged access accounts shall be approved by the IT asset's IT owner.
+Elevated access to IT assets for administration, maintenance or configuration shall be defined as privileged accounts.
+Entitlements to business applications and IT assets required to execute tasks specific to a profile within the organisation shall be defined as a business role.
+Each person within ##GLOBAL_CLIENT_NAME## shall be assigned at least one role specific to assigned tasks within the organisation.
+Each business role shall be assigned an owner responsible for maintenance.
+The business role owner shall review the role composition on a regular basis.
+The ##IAM_OWNER## shall be responsible for Identity and Access Management.
+All system account creation and changes shall be approved by the IT asset's IT owner.
+Combinations of permissions to IT assets that allow an individual to circumvent rules or controls and inflict financial or reputational damage shall not be assigned to the same user.
+Segregation of Duties rules shall be defined to identify toxic combinations of access.
+Violations of defined Segregation of Duties rules shall be identified and remediated every ##IAM_SODFQ##.
+Segregation of Duties rules shall be implemented and managed in ##IAM_SODSYS##.
+Violations of Segregation of Duties rules shall be mitigated through removing one or both conflicting permissions, implementing compensating controls or accepting risk.
+Users shall authenticate against all ##GLOBAL_CLIENT_NAME## applications and services using their enterprise credentials.
+Authentication using an additional set of credentials shall be allowed only by exception granted by the ##IAM_OWNER##.
+Users manually entering credentials to authenticate against services or applications shall be avoided.
+The ##IAM_OWNER## shall approve identity federation with third party services and applications.
+The ##IAM_OWNER## shall ensure at least ##IAM_FED## are in place before enabling identity federation with any external organisations.
+All user access shall be reviewed on a regular basis.
+User accounts shall be reviewed by ##IAM_USERREVIEWER##.
+User access reviews shall be performed using ##IAM_UARSYSTEM##.
+User access reviews shall include access to business applications and underlying IT assets such as operating systems, databases and network infrastructure.
+Applications with known access management risks, high criticality for the business and high financial or reputation impact upon misuse shall be reviewed at least every ##IAM_UARFQHIGH##.
+Applications with minor access management risks, medium criticality for the business and limited financial or reputation impact upon misuse shall be reviewed at least every ##IAM_UARFQMEDIUM##.
+Applications with no known access management risks, low criticality for the business and low financial or reputation impact upon misuse shall be reviewed at least every ##IAM_UARFQLOW##.
+Database, operating system and network access assets shall be reviewed by ##IAM_ITUAR##.
+User access reviews for ##GLOBAL_CLIENT_NAME##'s vendors shall be performed by a person with knowledge of the vendor's resources roles and responsibilities.
+Access that is not confirmed by the reviewer shall be revoked.
+A user's move within the organisation or significant change within a user's responsibilities or position shall trigger a review of the user's assigned roles and entitlements.
+The user access review upon changing business positions shall be executed by ##IAM_MOVERUAR##.
+The termination of a user's association with ##GLOBAL_CLIENT_NAME## shall result in immediate deprovisioning of all access linked to the user's identity.
+Vendor staff shall use accounts specific to ##GLOBAL_CLIENT_NAME##'s service to deliver services through the vendor's IT systems.
+Information that is essential to ##GLOBAL_CLIENT_NAME##'s business and would cause potentially existential damage if it were disclosed shall be classified as ##IC_SECRET##.
+Information that relates to ##GLOBAL_CLIENT_NAME##'s financial details, clients / customers, employees, administration of IT systems or intellectual property and would cause significant financial or reputational damage if it were disclosed shall be classified as ##IC_CONFIDENTIAL##.
+Information relevant to ##GLOBAL_CLIENT_NAME##'s operational business not intended for use outside of ##GLOBAL_CLIENT_NAME## shall be classified as ##IC_INTERNAL##.
+Information intended for public knowledge and usage shall be classified as ##IC_PUBLIC##.
+Information classification shall apply to all physical and digital information assets used by ##GLOBAL_CLIENT_NAME##.
+Personally identifiable information shall generally be classified as ##IC_CONFIDENTIAL##.
+Appropriate controls shall be maintained to ensure access to ##IC_SECRET## and ##IC_CONFIDENTIAL## classified information is granted on a need to know basis.
+All people with access to ##IC_SECRET##, ##IC_CONFIDENTIAL## or ##IC_INTERNAL## classified information shall be bound to confidentiality through a legally binding agreement.
+The authenticity of information classified as ##IC_PUBLIC## shall be ensured through protective measures.
+Sensitive information such as passwords, credit card data or bank account information shall be masked during entry and display.
+Information relating to ##IC_INAPPROPRIATE## may not be created or used on ##GLOBAL_CLIENT_NAME##'s IT assets.
+All information used by ##GLOBAL_CLIENT_NAME## shall be labelled with the appropriate information class where possible.
+The ##INF_CMLEAD## shall be responsible for capacity management for services and infrastructure.
+Capacity management shall cover business services, IT services and infrastructure.
+Capacity monitoring shall be enabled for network components, hardware components and IT services.
+Capacity planning shall be performed using input from IT strategy describing future developments, IT architecture describing the types of resources in demand, human resources to describe user bases and purchasing functions to describe available resources and capacity monitoring for actual usage.
+Performance analyses shall be performed on a regular basis to identify capacity usage patterns and anticipate and distribute peak load.
+Capacity management shall provide usage information to service owners to assist in effective service level management.
+The ##BCM_OWNER## shall provide service continuity targets for critical services relevant for ensuring capacity for these services.
+All changes of production infrastructure elements shall be subject to a controlled change management process.
+All changes to production infrastructure shall be tested in non-production environments before introducing to production.
+The initiator of any change to production IT Infrastructure shall perform an impact assessment to ensure all dependencies are considered.
+The ##INF_OWNER## shall maintain an inventory of all production IT Infrastructure elements including network diagrams as part of the IT asset inventory and shall ensure that all changes are reflected in a timely manner.
+Infrastructure maintenance shall follow defined change management processes and regularly matched against business need.
+Physical access to network components and ports shall be highly restricted.
+Mechanisms shall be put in place to detect intrusion attempts to internal network resources.
+Logs of intrusion attempts shall be analysed on a regular basis.
+A formal change management process shall be followed to prevent unauthorised changes to network components.
+Known malicious sources shall be prevented from accessing any network components past the initial point of contact.
+Networks shall be logically segregated to separate at least ##NM_SEG## from each other using firewalls and DMZ configuration.
+Configurable rules for network components such as firewalls and routers shall be reviewed every ##NM_RULEFQ##.
+##GLOBAL_CLIENT_NAME##'s IT assets shall not be accessed beyond the means necessary to meet contractual requirements.
+All information gained physically, digitally or in person relating to ##GLOBAL_CLIENT_NAME##'s customers, assets or data shall remain confidential.
+##GLOBAL_CLIENT_NAME##'s financial information and intellectual property shall be treated with utmost care and confidentiality.
+Confidentiality shall remain in place beyond the end of the contract or sub-contracting relationship.
+It shall be prohibited to make copies or remove ##GLOBAL_CLIENT_NAME##'s information without permission.
+Disclosing the existence of a contractual relationship other than employment (e.g. credential) with ##GLOBAL_CLIENT_NAME## shall be prohibited without express approval through an executive of ##GLOBAL_CLIENT_NAME##.
+All personally identifiable information used by ##GLOBAL_CLIENT_NAME## shall be accessed only as advised by supervisors and only as necessary for contract fulfillment.
+All personally identifiable information used by ##GLOBAL_CLIENT_NAME## shall be processed in compliance with ##GLOBAL_CLIENT_NAME## data privacy controls.
+All personally identifiable information used by ##GLOBAL_CLIENT_NAME## shall be kept confidential throughout the contract and beyond.
+Personally identifiable information shall not be collected beyond the scope of the contractual relationship. The signer gives permission to ##GLOBAL_CLIENT_NAME## to collect, store and process his or her personally identifiable information as required for this or further contracts (such as employment, statement of works, services contracts).
+All of ##GLOBAL_CLIENT_NAME##'s non-public information and data shall be securely deleted and all physical information assets returned before the termination of employment or end of service delivery with ##GLOBAL_CLIENT_NAME##.
+All labour laws applicable to the location of contract validity shall apply.
+Creating video, picture and or audio recording is prohibited at ##GLOBAL_CLIENT_NAME## locations without express permission of an executive of ##GLOBAL_CLIENT_NAME##.
+All members of the organisation shall adhere to defined rules and control statements throughout the contractual relationship.
+Should one statement in this document fail to be legally binding, the remaining statements shall remain valid.
+Every work product (concept, data, strategy, physical assets, design or other deliverable related to the contract) shall be the sole property of ##GLOBAL_CLIENT_NAME##.
+Compensation defined in employment, partnership, service delivery or works contract shall compensate for ownership of all work products.
+The creator shall transfer unlimited (time, location, content) and exclusive access rights to all work products to ##GLOBAL_CLIENT_NAME## including the right to modify the work products.
+##GLOBAL_CLIENT_NAME## shall have the right to transfer or sell access rights to the work products.
+Access rights to work products remain unchanged after termination of contract or subcontract.
+Accessing ##GLOBAL_CLIENT_NAME##'s non-public information or data after the end of the contractual relationship shall be prohibited and may result in ##GLOBAL_CLIENT_NAME## taking legal action.
+##GLOBAL_CLIENT_NAME## shall have the right to protect intellectual property resulting from work products through trademarks, patents or comparable legal instruments in the name of ##GLOBAL_CLIENT_NAME##.
+In order to maintain independence between different parts of ##GLOBAL_CLIENT_NAME##'s business it may be necessary to segregate business areas from each other through Chinese Walls for commercial or legal reasons.
+Chinese Walls shall be created and enforced through dedicated awareness and training, organisation separation of reporting lines, physical separation of teams, segregation of data storage as well as need to know access principle to information.
+All errors or complaints shall be referred to the designated supervisor or accountable person promptly and shall be addressed as soon as practicable.
+The ##OO_OWNER## shall establish a consistent IT cost management system to manage, maintain and diligently track IT costs.
+The ##OO_OWNER## shall monitor and measure performance of the IT function and report on overall service delivery.
+An IT strategy shall be defined based on a strategic and tactical IT plan including relevant stakeholders' input.
+Inputs to the IT strategy and tactical plans shall be current capabilities, business strategy, IT priorities, regulatory development, budget constraints and current IT performance.
+Stakeholders and experts shall develop a technology strategy including a plan for technology development, alignment to technology standards, expected trends, current infrastructure assets and requirements.
+The ##OO_OWNER## shall define a portfolio of IT investments based on applicable aspects of the IT strategy, appropriate available funds, evaluate proposed programs and projects and monitor subsequent value delivery.
+Prior to any mergers or acquisitions, a concept shall be developed based on the strategic motivators of the deal to define expected changes to risk, finance and legal impacts and develop required consolidation activities.
+Control statements, procedures, policies and controls shall be documented and published in ##OO_PORTALS##.
+Procedural descriptions of how defined control statements are implemented shall be documented and published.
+All control statements shall be reviewed at least every ##OO_POLICY_REVIEW## and after significant changes to the organisation.
+Business and IT process owners shall be responsible for creating procedural documents describing the processes they manage.
+Stakeholders may request exceptions to defined control statements which shall be approved by ##OO_POLEXCEPTION## for a defined period of time.
+Exceptions to defined control statements shall be reviewed on a regular basis and re-evaluated based on a change to the risk environment.
+The ##OO_OWNER## is responsible for documenting and establishing control statements, procedures, organisational charts and controls for the respective area of accountability within ##GLOBAL_CLIENT_NAME##'s governance framework and raising appropriate awareness.
+The ##OO_CIO## shall be responsible for managing ##GLOBAL_CLIENT_NAME##'s IT, establishing appropriate IT leadership, defining the organisational structure of the unit, defining roles and responsibilities for operating and developing IT, maintaining relationships with business stakeholders, communicating direction to the team and reporting to ##GLOBAL_CLIENT_NAME##'s leadership.
+The ##OO_OWNER## shall establish a set of quality management processes to manage, measure and improve quality in development and operation of the IT capability.
+When external services are procured for a task within an organisational unit, the ##OO_OWNER## shall ensure that relevant controls are in place and regularly reviewed to safeguard ##GLOBAL_CLIENT_NAME## information and interests.
+Due diligence of vendors shall be performed prior to procuring services and regularly thereafter depending on risk profile of the vendor and services.
+A legally binding contract signed by both a ##GLOBAL_CLIENT_NAME## representative and an authorised officer of the vendor shall be in place before any services are performed by a vendor.
+A Security Manager shall be nominated for each service involving information classified as ##IC_SECRET## or ##IC_CONFIDENTIAL## who shall be responsible for managing the security throughout the service delivery.
+All contracts with vendors shall allow ##GLOBAL_CLIENT_NAME## the right to audit the completeness of service delivery and contractual obligations.
+Specific risks shall be analysed and documented before outsourcing a service or a business activity.
+A responsible ##OUTS_SO## shall be defined for each outsourcing arrangement to manage service delivery, risks, assurance and finances throughout the term of the outsourcing contract.
+A detailed business case shall demonstrate financial benefits of outsourcing a specific activity and shall include risk factors and management cost.
+The outsourcing of material business activities shall require approval of ##OUTS_APP##.
+The ##OUTS_SO## shall perform due diligence of preferred vendors appropriate to the risk of the outsourced activity before contract begin.
+The outsourcing agreement shall include at least ##OUTS_CONTRACT##.
+The ##OUTS_SO## shall define and document a contingency plan that allows the outsourced business activity to be transferred to an alternative provider with minimum impact on service continuity.
+The ##OUTS_SO## shall perform an outsourcing readiness assessment to demonstrate that changes to ##GLOBAL_CLIENT_NAME##'s risk profile are reflected in the risk management framework, business continuity plans and strategies have been updated, service monitoring is implemented and the due diligence of the vendor provider has not revealed any excessive risks.
+The ##OUTS_SO## shall assess if regulators need to be informed of planned or implemented outsourcing decisions and will ensure communication accordingly.
+Outsourcing shall be defined into classes of outsourcing minor services and outsourcing material business activities.
+Material business activities shall be defined as all activities that have a significant impact on ##GLOBAL_CLIENT_NAME##'s operations, risk management, regulatory compliance or financial well being.
+Additional controls, risk management and diligence shall be applied when outsourcing and managing outsourced services of a material business activity.
+The ##OUTS_SO## shall ensure a close relationship is maintained with the outsourcing service provider throughout the contract duration.
+The outsourcing provider shall provide at least monthly reports on service delivery, performance, risks and issues to the ##OUTS_SO##.
+The ##OUTS_SO## shall manage and track risks to ##GLOBAL_CLIENT_NAME##'s operations, reputation and financial well being arising from the outsourcing provider and manage mitigation.
+Outsourced material business activities shall be assessed at least every ##OUTS_MONFQ## by internal audit or a nominated separate auditor if internal audit has been outsourced.
+The ##OUTS_OWNER## shall be responsible for managing all outsourced services.
+##GLOBAL_CLIENT_NAME## shall always remain accountable for the business activity and only delegate the management of day-to-day service delivery of a business activity to an outsourcing provider.
+Passwords shall not be stored unprotected in physical or digital form.
+User passwords shall remain confidential and not be disclosed to any other person.
+Passwords shall not be transmitted unencrypted.
+Initial user passwords shall be generated randomly.
+Any default passwords set in hard or software shall be changed before being introduced to production environments.
+Users and system account managers shall be reminded to change passwords prior to expiry.
+Applications shall use secure hash functions to store user, system or privileged access account password information.
+Passwords shall not contain the strings ##PW_EXCLUSION## or any combination thereof independent of character case.
+User passwords shall be prevented from being changed to any of the previous ##PW_HISTUSER## passwords.
+Privileged account passwords shall be prevented from being changed to any of the previous ##PW_HISTPRIV## passwords.
+System account passwords shall be prevented from being changed to any of the previous ##PW_HISTSYS## passwords.
+Privileged access passwords shall be at least ##PW_PAMLENGTH## characters in length.
+Privileged access passwords shall include at least one ##PW_PAMCOMPLEX##.
+Privileged access passwords shall be changed every ##PW_PAMFQ##.
+A privileged access account shall be locked after ##PW_PAMFAIL## consecutive failed authentication attempts for at least 30 minutes.
+System account passwords shall be at least ##PW_SALENGTH## characters in length.
+System account passwords shall include at least one ##PW_SACOMPLEX##.
+System account passwords shall be changed every ##PW_SAFQ##.
+Operating systems or applications storing system account credentials shall be protected through encryption and appropriate access control measures.
+System account passwords shall be generated randomly.
+The system account shall be locked after ##PW_SAFAIL## consecutive failed authentication attempts.
+System account credentials may be stored in scripts or application library files if access to these files is sufficiently restricted and limited to the application using the system account credentials.
+System account creation for productive systems shall be subject to production change management processes.
+User passwords shall be at least ##PW_LENGTH## characters in length.
+User passwords shall include at least ##PW_COMPLEX##.
+User passwords shall be changed every ##PW_FQ##.
+The user account shall be locked after ##PW_FAIL## consecutive failed authentication attempts for at least 30 minutes.
+The ##PS_OWNER## shall define minimum requirements for physically securing ATMs operated by ##GLOBAL_CLIENT_NAME##.
+ATMs operated by ##GLOBAL_CLIENT_NAME## shall be secured by ##PHS_ATMSEC##.
+##PS_OWNER## shall obtain confidence of security features of third party operated ATMs accepting ##GLOBAL_CLIENT_NAME## cards.
+Data centres shall be defined as dedicated facilities for operating enterprise level hardware across multiple IT systems for ##GLOBAL_CLIENT_NAME##. Data centres may be standalone sites or dedicated areas within one of ##GLOBAL_CLIENT_NAME##'s facilities.
+Data centres configured for redundancy shall be physically separated by at least ##PS_DCDISTANCE## from each other.
+Data centres shall be equipped with a backup power generator with sufficient fuel to run the data centre for at least 48 hours.
+Data centres shall have power surge protection in place to prevent damage to hardware.
+Data centres shall be constructed with a buffer zone between adjacent buildings and public spaces.
+An outer fence shall be constructed around data centre facilities using weld mesh fences of at least 2m height with sharpened tips preventing easy climbing.
+The data centre site perimeter shall be covered by video surveillance with motion detection capability within the perimeter.
+Underground entry points to the data centre through sewage or water ducts shall be protected through fortified manhole covers or steel rods within the ducts.
+External lighting of the data centre shall provide sufficient lighting for surveillance cameras to operate.
+Entry points to the data centre property shall either be protected by a manned gate house or heavy vehicle blocks (e.g. pollards, tyre spikes) combined with surveillance cameras and an access pass reader.
+Access to the data centre site shall be highly restricted to personnel directly responsible for operating the data centre or contained hardware.
+Parking spaces shall be located at the furthest possible distance from the data centre. Underground parking beneath a data centre shall be prohibited.
+External walls of the data centre shall be constructed of reinforced concrete or brick reinforced with composite panels and shall be at least 20 cm thick.
+All windows to the data centre shall be protected through steel bars that are no more than 10 cm apart, not externally screwed into the wall and at least 1.5cm in diameter.
+All external facing windows and doors to the data centre shall be equipped with alarms.
+Access to rooms housing IT hardware in the data centre shall be granted through single entry airlocks and monitored by video surveillance.
+Data centres shall be equipped with redundant cooling systems capable of maintaining a maximum temperature of 22 Celsius.
+Data centres shall have redundant and physically separated temperature alarms covering the entire data centre room.
+Data centres shall be equipped with redundant smoke detectors.
+Data centres shall be equipped with a non-liquid fire extinguishing system.
+No flammable material shall be stored in data centres.
+Data centre rooms housing IT hardware shall be segregated from any delivery or operational areas of the data centre accessible through third parties.
+Physical mail shall be screened off site before delivery to the data centre.
+All external connections to data centres (e.g. network, power, cooling water) shall be redundant and physically separated.
+No external signage shall indicate that the data centre facility is part of ##GLOBAL_CLIENT_NAME##.
+Air conditioning ducts leading into restricted spaces in the data centre shall not be wider than 150mm in diameter.
+Racks housing IT equipment in the data centre shall be enclosed in cages that can be locked.
+All doors and rack cages in the data centre shall be closed and locked when not being accessed.
+All cables in the data centre shall be marked at both ends so that they are uniquely identifiable in case of faults.
+The ##PS_OWNER## shall monitor risk exposure of ##GLOBAL_CLIENT_NAME##'s executives and publicly exposed persons taking at least ##PS_VIPRISK## into account.
+The ##PS_OWNER## shall implement protective measures for executives or publicly exposed persons in the organisation appropriate to the determined risk exposure.
+The ##PS_OWNER## shall assess cumulative risks threatening groups of executives (such as common travel, large events, etc.) and take measures to reduce risk as needed.
+Wardens shall be nominated for each facility area to be responsible for coordinating responses to any health and safety incident occurring on ##GLOBAL_CLIENT_NAME## premises.
+Wardens shall be sufficiently trained in evacuation procedures for the facility area under their responsibility.
+Emergency evacuations shall be trained regularly including emergency services as needed.
+All facilities shall be equipped with a public announcement system and an alarm that can be used to initiate and guide emergency evacuations.
+Evacuation plans shall be easily readable and openly displayed so that they can be followed in case of an emergency.
+All IT assets delivering production services for ##GLOBAL_CLIENT_NAME## shall be appropriately physically protected and maintained.
+All members of ##GLOBAL_CLIENT_NAME## shall be issued passes with ##PS_PASSES## that shall be worn visibly at all times when on site.
+All visitors shall be formally signed in and out of all ##GLOBAL_CLIENT_NAME## facilities by an authorised member of the organisation.
+Visitors shall either be issued temporary passes to be returned before leaving the facility or must be accompanied by an authorised member of the organisation at all times.
+Visitors shall provide a government issued form of identification prior to being granted a temporary access pass.
+Access passes shall provide access to areas on ##GLOBAL_CLIENT_NAME## sites based on the principle of least privilege.
+##GLOBAL_CLIENT_NAME##'s sites shall have restricted access implemented for areas where information classified as ##IC_SECRET## or ##IC_CONFIDENTIAL## is regularly processed.
+Access to ##GLOBAL_CLIENT_NAME## sites shall be restricted to business hours. Extended access permissions shall be granted by exception.
+Entry and exit points shall have a security guard or an individual access mechanism (e.g. turnstile or double gate) combined with video surveillance.
+Office sites shall be at least protected through ##PS_PATROL## outside of business hours.
+Office sites shall be equipped with backup power generators to prevent loss of power for critical infrastructure.
+Power outlets that can be powered by the backup power generator shall be clearly marked and only appliances critical to business operations shall be connected to these outlets.
+Doors shall be locked by ##PS_KEYS##.
+Offices buildings shall be secured by alarm systems monitoring at least ##PS_OFFICEALARM##.
+All office buildings shall be equipped with smoke detectors.
+Fire extinguishers shall be positioned at easily accessible and critical points throughout office buildings.
+Office sites shall be equipped with a public announcement system that can be used to inform and guide people in case of emergencies.
+Office spaces shall always be sufficiently illuminated for video surveillance cameras to function either through night lighting or motion sensors lighting activation.
+High risk phone extensions shall be regularly checked for correct configuration.
+Alarm systems and video surveillance of critical sites shall be monitored 24/7.
+The ##PS_OWNER## shall be responsible for physical security of ##GLOBAL_CLIENT_NAME##'s sites.
+Physical security concepts shall be aligned to threat analyses for each site taking natural threats, crime, terrorism political stability and other risks into account.
+The ##PS_OWNER## shall approve physical security concepts for each new location of operations based on inherent risk of the business and threats specific to the site and environment.
+Physical security concepts shall be reviewed and updated for each site at least every ##PS_REVFQ## to ensure protective measures are appropriate.
+Technology rooms shall be defined as locations where IT components such as routers, switches, local servers, dedicated servers, phone systems are operated to serve local facilities and offices.
+Access to technology rooms shall be highly restricted to staff required to service and operate the housed technology.
+Technology rooms shall be monitored by at least ##PS_TECHROOMMON##.
+Technology rooms shall be equipped with sufficient air cooling systems to maintain a room temperature between 18 and 23 degrees Celsius during annual minimum and maximum temperatures of the site's location.
+Doors and walls of technology rooms shall be able to resist penetration attempts with household grade power tools (saws, power drills, axes, hammers) for at least 30 minutes.
+Technology rooms shall not have any windows. Should there be windows, these shall be protected by steel bars that are no more than 10 cm apart, not externally screwed into the wall and at least 1.5cm in diameter.
+No water pipes shall run through a technology room.
+Cabling running into the technology room shall be sufficiently protected and not easily accessible externally.
+Flammable material shall not be stored in technology rooms.
+Air conditioning ducts leading into restricted spaces in a technology room shall not be wider than 150mm in diameter.
+Racks housing IT equipment in a technology room shall be enclosed in cages that can be locked.
+All doors and rack cages in a technology room shall be closed and locked when not being accessed.
+All cables in a technology room shall be marked at both ends so that they are uniquely identifiable in case of faults.
+The ##PS_OWNER## shall monitor risks for locations that ##GLOBAL_CLIENT_NAME##'s staff travel to and provide advisory on travel safety based on internal assessments and relevant government security advisory.
+The ##PS_OWNER## shall publish a current list of restricted countries and regions for travel should security concerns threaten health and safety of ##GLOBAL_CLIENT_NAME## people.
+The ##PS_OWNER## shall publish a current list of permitted airlines to be used for air travel.
+Business travel shall be limited to ##PS_TRAVELMODE## as mode of transportation.
+Video surveillance (CCTV) shall cover at least ##PS_CCTV##.
+Video surveillance (CCTV) shall not capture ##PS_NOCCTV##.
+Footage from security cameras shall be stored for at least ##PS_CCTVSTORE##.
+Access to the video surveillance server shall be restricted to security personnel.
+Areas under video surveillance shall be visibly marked with a sign.
+All repeating activities executed to deliver value or ensure operations of ##GLOBAL_CLIENT_NAME## shall be documented in form of processes.
+Processes shall be published ##PROCM_PUBLISH## so that they are accessible to all employees and stakeholders affected by the respective processes.
+Processes shall be updated to reflect any material changes to the underlying business activities, supporting assets or business requirements in a timely manner.
+Processes shall be checked for currentness by the process owner at least every ##PROCM_FQ##.
+Where applicable, business processes shall clearly document steps along the value chain of ##GLOBAL_CLIENT_NAME##'s products.
+Processes shall be documented through ##PROCM_ELEMENTS##.
+Processes shall be modeled using design languages aligning to ##PROCM_DESIGN##.
+Processes shall be designed using ##PROCM_TOOL##.
+The ##PROCM_OWNER## shall be responsible for managing ##GLOBAL_CLIENT_NAME##'s process model and ensuring consistency, coverage and accuracy of the model across the organisation.
+Every process shall have a process owner.
+New processes or changes to processes shall be approved by at least the ##PROCM_APPROVER##.
+All purchases with an annual value likely to exceed ##PROC_BIDVAL## ##GLOBAL_CURRENCY## shall be sourced from a vendor selected through a competitive bid process for the goods or services.
+All participants of the bring your own device program shall agree to a legal contract providing ##GLOBAL_CLIENT_NAME## access rights to all devices commercially used for work at ##GLOBAL_CLIENT_NAME## and the permission to remote wipe all data in case the device is lost.
+All personal devices shall comply with the control statements defined for systems and applications operated by ##GLOBAL_CLIENT_NAME## including access restrictions, data backup and appropriate use.
+A risk assessment including technology risks, legal risks, privacy risks, data loss risks and compliance risks shall be performed before accepting a new system into the program.
+Devices used within the bring your own device program shall be owned by ##PROC_BYODOWNERSHIP##.
+The ##PROC_OWNER## shall perform a legal assessment of the bring your own device program for each country before deployment to ensure compliance with local privacy, labour and regulatory requirements.
+The device owner shall be liable for any damage to the device and may cover liability with insurance.
+All users of the bring your own device program shall have sufficient awareness of requirements, risks and responsibilities before being permitted to take part in the program.
+##GLOBAL_CLIENT_NAME## shall ensure that employees are notified of any potential taxable benefits through private use of a device.
+##GLOBAL_CLIENT_NAME## shall permit the usage of ##PROC_DEVICES##.
+Devices shall be procured ##PROC_DEVBUY##.
+##GLOBAL_CLIENT_NAME## data shall be processed on personally owned devices only through ##PROC_BYODMETHOD##.
+Systems in the bring your own device program shall include ##PROC_DEVTYPES##.
+All participants of the bring your own device program shall be aware of and agree to potential forensic analyses of the data stored on the device.
+All participants of the bring your own device program shall notify the ##DLP_OWNER## and ##DP_OWNER## immediately if a device has been lost or stolen.
+##GLOBAL_CLIENT_NAME## data processed on personal devices shall be stored online or backed up regularly.
+Private data and business data shall be stored separately on devices used within the bring your own device program so that business data can be backed up and deleted separately.
+Circumventing device controls such as jailbreaking, rooting or hacking shall be prohibited on devices used within the bring your own device program.
+##GLOBAL_CLIENT_NAME## shall provide user support and maintenance services for ##PROC_BYODSUPPORT##.
+Device owners shall be responsible for ensuring only sufficiently licensed software is used for processing ##GLOBAL_CLIENT_NAME## data.
+All devices used within the bring your own device program shall have ##GLOBAL_CLIENT_NAME##'s security monitoring solutions deployed on them as applicable such as anti malware and data loss prevention software.
+All systems used for processing ##GLOBAL_CLIENT_NAME## data shall be securely wiped before being decommissioned.
+All purchasing decisions shall be made based on economic or risk factors benefitting only ##GLOBAL_CLIENT_NAME##.
+Employees involved in a purchasing decision that may personally benefit from an outcome of the purchasing decision shall notify a superior of the potential conflict immediately.
+Employees may not accept inappropriate material benefits from a vendor and must maintain their independence.
+An employee of ##GLOBAL_CLIENT_NAME## may not provide services or goods to the company outside of the employment contract.
+All documentation relevant to the purchase from tender documents, bids, communication with vendors, selection, contracts and invoices shall be provided to the ##PROC_OWNER## for archiving.
+Managers shall request end user devices based on the job role of their employees taking required mobility, connectivity, computing power and screen size into account.
+The ##PROC_OWNER## shall define a list of approved end user devices that managers may request for their employees.
+All purchasing activities exceeding an estimated annual value of the ##PROC_LEVEL## ##GLOBAL_CURRENCY## shall involve the ##PROC_OWNER##.
+All purchases shall be documented through a binding legal contract appropriate to the nature of the purchase.
+Purchases exceeding a value of ##PROC_DUALVAL## ##GLOBAL_CURRENCY## shall require confirmation by two authorised signatories of ##GLOBAL_CLIENT_NAME##.
+The person requesting goods or services shall confirm receipt of goods or services.
+The person requesting goods or services is responsible for ensuring contractual obligations between ##GLOBAL_CLIENT_NAME## and the vendor are met or appropriately escalated if one party fails to meet their commitments.
+The business area requesting goods or services shall initiate the procurement request.
+##PROC_SYS## shall be used where possible and applicable to purchase goods and services.
+The ##PROC_OWNER## shall be responsible for procuring goods and services for ##GLOBAL_CLIENT_NAME##.
+The ##PROC_OWNER## shall define preferred suppliers from the list of all current vendors for ##GLOBAL_CLIENT_NAME##'s goods and services based on financial optimisation (e.g. volume discounts), strategic sourcing priorities and vendor risk minimisation.
+The ##PROC_OWNER## shall analyse all vendor relationships and identify vendors that provide business critical services. A good or service shall be defined as business critical if the good or service is essential for ##GLOBAL_CLIENT_NAME##'s operation and cannot be sourced at similar conditions from an alternative supplier.
+Requesting a purchase shall be segregated from approving a purchase.
+Executing a purchase order shall be segregated from approving a purchase.
+Raising a purchase request shall be segregated from posting an accounts payable invoice.
+Approving a purchase request shall be segregated from posting an accounts payable invoice.
+Executing a purchase order shall be segregated from posting an accounts payable invoice.
+Confirming receipt of goods shall be segregated from posting an accounts payable invoice.
+Posting an accounts payable invoice shall be segregated from releasing funds.
+Business Analysts shall define functional requirements to specify the functional needs the target solution shall fulfill. Each requirement shall define one unique, specific and unambiguous required functionality.
+Business and Technical Analysts shall define non-functional requirements taking technical requirements, performance, security, legal constraints, compliance requirements, internal policies and regulations into account.
+Functional and non-functional requirements shall specify the minimum requirements necessary to achieve the program or project objectives.
+Standard Software capabilities shall be matched against the defined requirements to develop a shortlist of potential software solutions to achieve the program or project objectives.
+Requirements shall cover functional and technical aspects of the system as well as financial constraints and risks for development and operations.
+Documented requirements shall be confirmed by the business stakeholder of the program or project.
+The analysis shall take IT strategy and related strategic decisions into account while defining requirements of the solution.
+The program or project manager shall prepare a business case for the program sponsor to make an investment and funding decision and track benefit realisation.
+The business case shall include total cost deducted from effort estimations from the program plan, expected business benefit, estimated cost of operation and any other operational or capitalisable expenses. Assumptions must be documented and made transparent.
+Business cases shall be calculated for at least ##PM_BC_YEARS##.
+Cash flows for each period shall be discounted with the current weighted annual cost of capital.
+The Program or Project Sponsor shall formally close each Program or Project upon completion or termination.
+The program or project closure shall include an analysis of targets achieved, benefits analysis, communication of outcomes to sponsors and business users and archival of relevant project documentation.
+Program and Project working documents and deliverables shall be stored in a location accessible to all project members, with appropriate access control while ensuring data integrity and availability.
+A feasibility study of alternative options or a proof of concept phase shall be applied if implementation risk requires further lowering.
+The Project Manager shall develop at least ##PM_INIT## to initiate a program or project.
+Programs and Projects shall follow ##PM_METHOD## methodology.
+The program or project manager shall be responsible for developing a program or project plan defining the specification, build, test and deployment of the scope as defined by functional and non-functional requirements.
+The program or project plan shall consist of a logical work breakdown structure of the scope of the program.
+Each work breakdown structure in the program or project plan shall consist of distinct activities with a start date, end date, effort estimate (person days or hours) predecessor activities, successor activities, assigned resource or resource group and a reference to any assumptions made in defining the activity.
+The program or project plan shall incorporate requirements of related functions such as testing, provider management, IT architecture, IT operations and process design.
+The Project or Program Manager may appoint a Project Management Office to manage time, cost and quality of the program or project delivery.
+The Project Management Office shall be responsible for tasks including maintaining the project plan, tracking issues and risks, resourcing, facilitating document sign-offs, maintaining alignment with delivery methodology, status monitoring and reporting, scope management, tracking actions, meeting documentation and all project and program internal and external communications.
+The Program or Project Manager shall report overall status, earned value against plan, key risks and issues, spent budget and upcoming milestones to the program sponsor on a regular basis.
+All functional, non-functional and technical requirements shall be documented and signed-off by the project or program sponsors and stakeholders.
+Changes to requirements shall be documented as change requests and approved by a person or body with appropriate authority over the required funding or the owner of the requirement.
+Development shall address each requirement and build the solution accordingly. The implementation of requirements shall be documented in form of technical design documents.
+Test cases shall be defined to test the appropriate implementation of each defined requirement.
+The fulfillment of each requirement shall be tested and fully documented to demonstrate completeness of the solution.
+The Program or Project Manager shall ensure that developed capability is successfully transferred to ##GLOBAL_CLIENT_NAME##'s operations teams and business units.
+The Program or Project Manager shall define a handover plan with the receiving organisational unit and agree any warranty or support phases after the roll out.
+The handover from the program or project shall include as applicable sufficient user training, training for operating the new capability, updates to continuity plans, funding estimates for operation, approvals from stakeholders as required and supporting documentation.
+The business unit receiving the new capability shall confirm acceptance of the new capability delivered by the program or project. The acceptance shall be formally documented.
+The Program or Project Manager shall ensure that the solution meets all internal, regulatory and legal controls and requirements and document the performed check prior to handover to production.
+Software selection shall be based on an objective evaluation of a criteria catalogue including key functional and non-functional requirements.
+Custom development of software may be considered as an option if supported by a business case against off-the-shelf products.
+The program or project manager shall make a recommendation to the ##PM_EXCO## for selecting a software solution based on a business case.
+Modification of standard software shall be avoided to reduce complexity in application governance.
+The Program or Project Manager shall define required skills to complete the initiative's objectives and estimate the amount of effort required.
+Resource profiles shall be matched to defined skill sets and estimated effort.
+Priorities for staffing shall be driven by resource skill set, internal resource availability, external resource availability and cost of resources.
+Staffing profiles shall be optimised to avoid gaps in resource demand for individual resources.
+A Program or Project shall be initiated for achieving specific business or technology objectives within a specified timeframe.
+A Program shall be defined to govern multiple projects delivering parts of a large or complex objective.
+A Program or Project Manager shall be responsible for delivering the defined outcomes for each program and project.
+One or many sponsors may initiate a program or project and are accountable for the outcome of the program or project.
+Program Sponsors may put a ##PM_EXCO## in place to govern the program or project.
+Risks shall be rated based on probability of occurrence and potential impact.
+Probability of risks occurring shall be rated as ##GLOBAL_RISKPROB1##, ##GLOBAL_RISKPROB2##, ##GLOBAL_RISKPROB3## , ##GLOBAL_RISKPROB4## or ##GLOBAL_RISKPROB5##.
+The potential impact of risks shall be rated as ##GLOBAL_RISKIMPACT1##, ##GLOBAL_RISKIMPACT2##, ##GLOBAL_RISKIMPACT3##, ##GLOBAL_RISKIMPACT4## or ##GLOBAL_RISKIMPACT5##.
+Risks shall be documented and managed in ##RM_SYSTEM##.
+All risks shall be documented through at least ##RM_ATTRIBUTES##.
+Each risk shall be assigned to one of the following risk types: ##RM_TYPE##.
+Each risk shall be aligned to a defined control statement where applicable.
+Identified and qualified risks shall be managed in a timely fashion by defining mitigating actions to reduce risk to an acceptable level.
+Residual risk shall be formally accepted by the risk owner.
+Risks shall be identified through ##RM_SOURCES##.
+The ##RM_OWNER## shall select a representative to produce a risk report for each risk type (##RM_TYPE##) on a regular basis as well as on demand.
+A risk report shall be presented to the executive board every ##RM_REPORTFQ##.
+All identified and qualified risks shall be formally tracked until the risk owner approves closure.
+Each risk shall be reviewed by a peer or superior of the person raising the risk to qualify each risk after it is captured.
+A risk event shall be defined as any risk to ##GLOBAL_CLIENT_NAME## with a probability of 100%.
+All risk events with an impact rating equal to or higher than ##GLOBAL_RISKIMPACT4## shall be formally documented as a risk event.
+Risk events shall be formally documented in ##RM_RESYSTEM##.
+Risk event documentation shall include at least ##RM_REDATA##.
+Risk events shall be escalated to senior stakeholders appropriate to the risk impact of the event.
+Significant risk events of the past reporting period shall be included in the regular risk reports to the executive board.
+The ##RM_OWNER## shall be responsible for the appropriate management of risks across the organisation.
+The chief executives shall be ultimately responsible for risks to ##GLOBAL_CLIENT_NAME##'s business.
+Risk ownership and mitigation can be delegated from the chief executives to appropriate risk owners.
+All employees shall be responsible for raising risks relevant to their daily business and area of expertise according to ##GLOBAL_CLIENT_NAME##'s risk management process.
+The ##RM_OWNER## shall define guiding principles for the risk appetite of ##GLOBAL_CLIENT_NAME## to which risk acceptance shall be aligned.
+A scenario analysis shall be performed to estimate the financial loss exposure for risks with probability at or greater than ##GLOBAL_RISKPROB4## and impact at or greater than ##GLOBAL_RISKIMPACT4##.
+The ##RM_OWNER## shall approve residual risk acceptance for risks with probability at or greater than ##GLOBAL_RISKPROB4## and impact at or greater than ##GLOBAL_RISKIMPACT4##.
+Risk owners shall review open risks at least every ##RM_RISKREVFQ## with priority based on impact and probability rating.
+A business case comparing mitigation cost with expected risk impact shall justify mitigating actions.
+Risks shall be managed along three lines of defence of good governance and risk aware operation.
+The first line of defence shall be formed through organisational units operating aligned to defined policies, processes and controls with clearly defined roles and accountabilities.
+The second line of defence shall consist of dedicated risk, governance and compliance management professionals advising, training and monitoring the business on compliant operations. Identified risks are monitored through the second line of defence and remediation or risk acceptance is managed accordingly.
+The third line of defence shall be provided by audit and assurance services assessing design and effectiveness of controls and risk management in place. The third line shall additionally provide an independent view of risk management performed in the first and second lines of defence.
+The ##SM_OWNER## shall be responsible for taking reasonable measures to support ##GLOBAL_CLIENT_NAME##'s customers in securely using ##GLOBAL_CLIENT_NAME## IT based products and services.
+All customer interactions shall use channels where the customer can verify the authenticity of the interaction with reasonable confidence.
+Provision of customer credentials shall use secure methods to provide initial passwords and user names to customers.
+Risks associated with using IT based services and products including mobile platforms shall be made transparent for customers.
+Terms, conditions, and legal notices of IT service usage shall be available to all users of the service.
+Customers shall have sufficient user support and instructions on using the IT system or services appropriately.
+##GLOBAL_CLIENT_NAME## shall identify and actively manage specific risks associated with browser or mobile internet based financial services.
+Security concepts to secure transaction based financial services shall be integrated into ##GLOBAL_CLIENT_NAME##'s security management and regularly reviewed for currentness.
+Security monitoring capabilities shall manage transaction integrity of financial transaction and alert process responsible of detected security events.
+Alternative authentication mechanisms used by partners shall be subject to risk analysis and approval by the ##SM_OWNER## prior to use through ##GLOBAL_CLIENT_NAME##.
+##GLOBAL_CLIENT_NAME## shall identify and actively manage specific risks to providing card based payment capabilities to customers.
+Payment card data shall be considered highly sensitive and classified as ##IC_SECRET##.
+The ##SM_OWNER## shall define requirements for card security features and regularly review and update requirements based on current technology and threat development.
+Online transaction authorisation of card transaction shall be required from payment service providers.
+Payment card fraud shall be limited through ##SM_CARDFRAUD##.
+The ##SM_OWNER## shall be responsible for managing information security.
+The ##SM_OWNER## shall maintain regular contact with security related expert groups and external peers as appropriate.
+The ##SM_OWNER## shall maintain a culture of security awareness and provide guidance relevant to the daily work of members of ##GLOBAL_CLIENT_NAME## and its customers. The effectiveness of the implemented measures shall be assessed regularly.
+Malware prevention shall be in place for all IT assets with external network connections capable of running anti malware detection software.
+Malware definition files shall be updated at least once a day.
+Malware detection shall be implemented through dedicated solutions for external network connections.
+##SMON_AM## shall be used as the standard malware protection solution.
+Known illegal, dangerous or malicious content and nodes shall be blocked from ##GLOBAL_CLIENT_NAME##'s network.
+Application Configuration Management shall include the monitoring of application file storage, application level encryption, access controls, authentications, application settings, applications files and libraries and business rules to detect unauthorised changes.
+The application configuration shall be monitored against a baseline defined in the release notes of the latest change and application operations documentation.
+The configuration for all IT Infrastructure shall be designed based on the least privileged principle (i.e. access to IT Infrastructure shall be disabled by default and ports, channels, accounts, etc. only opened as needed and by exception).
+Configurations for all IT assets shall be documented and signed-off by the owner of the IT asset. This document shall define the target state.
+The IT asset's current state shall be assessed against the target state on a regular basis. The frequency shall be proportional to the risk rating of the asset.
+IT asset configuration documents shall include ##SMON_CM## as applicable to the asset.
+##GLOBAL_CLIENT_NAME## shall develop capabilities to detect distributed denial of service attacks, combat attacks and prevent its own hardware from being misused for attacks on others.
+Incoming and outgoing internet traffic shall be analysed to detect unusual patterns that could be attributed to denial of service attacks.
+Potential attacks shall be raised as security events for further analysis and mitigation.
+Contracted Internet Service Providers shall support Denial of Service detection and prevention capabilities and have established response procedures and communication channels for dealing with incidents.
+Information security events relevant to availability, integrity and confidentiality of information shall be logged. Accountability for the event, traceability of actions and the effectiveness of security mechanisms shall be deductible from the logs.
+Log data shall be classified and protected to the same standard as the information being processed that the logs relate to.
+Information security logs shall cover at least the following aspects: ##SMON_LOG##.
+Log files shall be retained locally on source systems for at least ##SMON_LOGLOC##.
+All log files shall be sufficiently protected against unauthorised access or modification and meet standards for legal evidence.
+All locally retained log files shall be backed up to a secure environment at least every ##SMON_LOGCENT##.
+Where possible, near time log files shall be integrated with ##SMON_SIEM## and included in daily consumed dashboards.
+All systems shall be integrated securely with a time synchronisation service where possible to ensure accuracy and consistency of timestamps in log files.
+Individual employee's activity shall only be analysed in detail with probable cause.
+The ##SM_OWNER## shall define a list of approved patch sources based on implemented hard and software.
+The patching of hard and software shall be coordinated with the IT Change Management process and driven by threat and vulnerability assessments.
+Patch criticality shall be determined for each asset based on asset criticality, vulnerability impact and classification of data processed in the system.
+Critical patches outdated by more than 30 days shall be escalated to the ##SM_OWNER##.
+Non-critical patches shall be evaluated based on threat and potential impact to production through patching.
+Security Information and Event Management shall be in place to provide information security executives with actionable information on current threats to ##GLOBAL_CLIENT_NAME##'s information.
+The Security Information and Event Management solution shall be based on ##SMON_SIEM##.
+The Security Information and Event Management solution shall aggregate data from ##SMON_SIEMSOURCES##.
+The Security Information and Event Management solution shall alert Information Security Executives via multiple channels of communication of high risk security events.
+The ##SM_OWNER## shall publish a report on detected and actioned security incidents and events to ##GLOBAL_CLIENT_NAME##'s executives on a regular basis.
+Executives shall take appropriate action to respond to incidents leveraging support from the ##DP_OWNER## for data breaches and the ##BCM_OWNER## for disruptive events.
+Incident response plans shall be tested and trained at least every year.
+All externally accessible applications or applications considered high risk shall be penetration tested on a regular basis and before being introduced into production and before major releases.
+All externally accessible IP addresses shall be subject to vulnerability scanning on a regular basis as well as after a significant change.
+Approved wireless networks shall be penetration tested on a regular basis. Unapproved wireless networks shall be detected and disabled as appropriate.
+Penetration testing shall include both white box (details of software and hardware configuration are known to the testers) and black box testing (only limited information is provided to the testers, e.g. domain name).
+All members of ##GLOBAL_CLIENT_NAME## shall maintain appropriate confidentiality of client, employee and intellectual property information when using social networks.
+All members of ##GLOBAL_CLIENT_NAME## outside the ##SMN_OWNER## shall not respond to clients or customers of ##GLOBAL_CLIENT_NAME## apart from referring them to the official contact points of the organisation.
+Senior executives and employees of public interest shall clearly separate private social media accounts from accounts where they post on behalf of their role in ##GLOBAL_CLIENT_NAME##.
+If an employee privately wants to endorse or comment on a ##GLOBAL_CLIENT_NAME## product, the employee shall clearly state employment status in the post.
+Only ##GLOBAL_CLIENT_NAME##'s information classified as ##IC_PUBLIC## shall be shared on social media accounts.
+The ##SMN_OWNER## shall regularly assess awareness of employees' use of social media based on the monitoring activity and take action to raise awareness as necessary.
+The ##SMN_OWNER## shall use ##SMN_MODERATION_TOOLS## to monitor responses and questions on the company's social media accounts.
+##GLOBAL_CLIENT_NAME## shall maintain active accounts on ##SMN_NETWORKS##.
+The ##SMN_OWNER## will moderate social media accounts based on the following principles: ##SMN_MODERATION_PRINCIPLES##.
+The ##SMN_OWNER## shall approve all new social media accounts to officially represent ##GLOBAL_CLIENT_NAME##.
+The ##SMN_OWNER## shall coordinate with the ##BCM_OWNER## to integrate ##GLOBAL_CLIENT_NAME##'s social media accounts into the communications plan in the event of a crisis requiring customers or the public to be informed.
+Credentials for ##GLOBAL_CLIENT_NAME##'s social media accounts shall be considered privileged access and shall meet the requirements defined for privileged access password management.
+The ##SMN_OWNER## shall only delete posts of users from social media accounts if ##SMN_ACTION##.
+Edits of previous posts shall be made transparent and avoided if possible.
+The ##SMN_OWNER## shall be responsible for monitoring and moderating activities on all social media platforms ##GLOBAL_CLIENT_NAME## is active on.
+The ##SMN_OWNER## shall monitor social media accounts on a regular basis for defamatory, offensive, brand damaging or in otherwise inappropriate comments by users and respond with factual and de-escalating statements.
+The ##SMN_OWNER## shall monitor social media where ##GLOBAL_CLIENT_NAME## does not maintain official accounts on a regular basis to prevent brand reputation and gain customer feedback.
+The ##SMN_OWNER## shall monitor developing social media sites and new forms of communication reaching critical mass and assess if ##GLOBAL_CLIENT_NAME## can benefit from participating.
+The ##SMN_OWNER## shall raise, document and mitigate issues identified through moderating social networks on a regular basis.
+Issues rated ##GLOBAL_ISSUE1## shall be raised for items such as ##SMN_LOW##.
+Issues rated ##GLOBAL_ISSUE2## shall be raised for items such as ##SMN_MEDIUM##.
+Issues rated ##GLOBAL_ISSUE3## shall be raised for items such as ##SMN_HIGH##.
+Issues rated ##GLOBAL_ISSUE4## shall be raised for items such as ##SMN_SEVERE##.
+Code shall be developed to match defined functional or non-functional requirements.
+All developed code shall be peer reviewed by an additional developer to ensure quality and security of the developed code.
+Software shall be developed in logical and functional separately executable components where possible.
+An integration plan into the software solution shall be defined for each executable component.
+Developers shall add sufficient comments to each logical group of source code to ensure the code is understandable for knowledgeable third parties.
+The program or project shall develop or update a user guide for each new software functionality delivered to users.
+The program or project shall develop or update operations instructions for each new software functionality handed over to operations teams.
+Access to source code shall be restricted to prevent unauthorised modification.
+Development and test accounts shall be deactivated before moving software into production.
+Developers shall have sufficient awareness and knowledge of secure coding standards.
+Coding vulnerabilities including injection flaws, buffer overflows, error handling weaknesses, cross site scripting and cross site request forgery shall be avoided.
+All code modification, customisation and configuration with major impact to functionality shall be developed and tested in non-production environments.
+The Project Manager or ##AG_OWNER## shall nominate a Test Manager to be responsible for testing the developed software capability matches the functional and non-functional requirements.
+All changes to the production environment shall be approved by the business owner of the application either through written confirmation or formal user acceptance testing.
+The Test Manager shall ensure that testing is executed on stable, reproducible and versioned test environments with appropriate ability to simulate production environments.
+The Test Manager shall ensure test data represents all complexity of production data in volume and structure while complying with data privacy requirements for personally identifiable information of customers and employees.
+Appropriate integration testing shall be included in the test cycle for the release, if the software interfaces with other systems or data sources.
+##AG_ISSUEMGMT## shall be maintained to track issues and defects identified in testing.
+An Issue or Defect shall contain at least the following information: ##SD_DEFECT_DATA##.
+The Test Manager shall define a test strategy to document the approach of testing all requirements for the planned release.
+The Test Manager shall implement the test strategy by creating a test plan defining sequencing, scope breakdown structure, timing, environments, test data, test cycles, required test resources and project milestone alignment.
+The Test Manager is responsible for ensuring all scope of the release has been tested against functional requirements, performance requirements, security requirements and integration requirements.
+The Test Manager shall ensure that sufficient regression testing is performed on previously tested scope to minimise the risk of inadvertent impact through changes in a different area of scope.
+The Test Manager shall be responsible for reporting the current status of testing and defect resolution to project and business stakeholders.
+Traceability of requirements to specification, implementation, testing, issue and defect resolution and deployment shall be maintained and transparently documented.
+##GLOBAL_CLIENT_NAME## shall only install and use software to which it has obtained sufficient licenses.
+##SLM_OWNER## shall be responsible for managing all software assets and relating contract compliance.
+The person authorising the use of a specific software asset shall be responsible for ensuring appropriate licenses are in place or obtained.
+All installations of a software asset shall be removed or the licenses shall be extended, when a license for a software asset expires.
+All employees shall power off unused technology at the end of the business day.
+All lighting which is not centrally managed shall be switched off at the end of the business day or when it is no longer needed.
+Excessive heating or cooling of workplace areas shall be avoided.
+Printing of documents shall be as limited as possible and digital options shall be used for all other reading.
+Double sided printing shall be enabled on all printing devices by default.
+Color printing shall only be selected if color in the print out increases the informational value of the document.
+All non-administrative users shall be prevented from executing programs apart from an approved list of applications.
+Exceptions shall be granted only for a specified use case for a defined period of time.
+An application whitelisting solution shall prevent unauthorised programs and libraries from being executed on protected computers.
+##WS_WL## shall be used to implement application whitelisting.
+Users shall be responsible to ensure laptops are backed up regularly.
+All information created on workstations shall be stored on ##GLOBAL_CLIENT_NAME##'s network resources. Unique data stored on offline on workstations should be temporary or by exception.
+Users shall be responsible for backing up unique data stored on workstations on a sufficiently frequent basis to avoid any disruption through loss or damage of the workstation.
+Workstations and Servers in this context shall include desktop computers, servers and laptops both inside and outside of the perimeter.
+External interfaces capable of reading and writing data (e.g. USB ports, Firewire ports, optical drives) shall be set to ##WS_USB## for standard users.
+All hard disks on end user devices shall be encrypted.
+Users shall logon to operating systems and execute programs with non-administrative accounts.
+Endpoint data loss prevention capability shall be enabled on end user workstations.
+Malware protection software shall be enabled on every workstation and prevented from disabling by users.
+Malware definition files shall be updated at least once a day for each workstation.
+Configuration of the operating systems shall include measures to harden the system against attacks and information leakage.
+Personal firewall software shall be enabled to prevent traffic from untrusted networks.
+All devices shall be authenticated for network access.
+Infiltration through keyloggers shall be prevented through awareness of staff and regular physical sweeps through security specialists in sensitive areas.
+Only approved software shall be installed on workstations.
+Limited and appropriate private use of ##GLOBAL_CLIENT_NAME##'s workstations shall be permitted.
+The connection to any wireless network shall be considered an external network connection.
+Users shall take precaution to ensure confidentiality of information when using mobile computers in public places.
+All user devices and user sessions shall be configured to be locked after ##WS_LOCK## minutes of inactivity.
+Users shall use privacy screen filters if ##IC_SECRET##, ##IC_CONFIDENTIAL## or ##IC_INTERNAL## classified information is used in a public place where unauthorised people may see the screen.
+Unauthorised hacking or masking of activity shall be prohibited on ##GLOBAL_CLIENT_NAME## IT.
+
+Unauthorised hacking or masking of activity shall be prohibited on IT.
+Requesting a purchase shall be segregated from approving a purchase.
+The organization shall be responsible for procuring goods and services.
+All commercial information shall be retained and archived. Commercial information.
+All archived commercial information shall be retained.
+Personally identifiable information shall generally be classified.
+All information shall be considered personally identifiable information.
+All mobile devices that contain information shall be encrypted.
+
+IT is great.

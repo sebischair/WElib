@@ -20,6 +20,7 @@ public class ConfigWord2VecFactory extends ConfigFactory {
 	private Double 		negativeSample 	= 0.0;
 	
 	private File			corpusFile;	
+	private File			corpusSourceFile;	
 	
 	public ConfigWord2VecFactory() {
 		super(ConfigType.WORD2VEC);
@@ -74,6 +75,11 @@ public class ConfigWord2VecFactory extends ConfigFactory {
 		return this;
 	}
 	
+	public ConfigWord2VecFactory corpusSourceFile(File corpusSourceFile) {
+		this.corpusSourceFile = corpusSourceFile;
+		return this;
+	}
+	
 	public ConfigWord2VecFactory windowSize(Integer windowSize) {
 		this.windowSize = windowSize;
 		return this;
@@ -122,7 +128,7 @@ public class ConfigWord2VecFactory extends ConfigFactory {
 	@Override
 	public Config build() throws InvalidConfigException {
 		
-		if (corpusFile == null) {
+		if (corpusFile == null && corpusSourceFile == null) {
 			throw new InvalidConfigException();
 		}
 		
@@ -141,6 +147,7 @@ public class ConfigWord2VecFactory extends ConfigFactory {
 		configWORD2VEC.setWindowSize(windowSize);
 		configWORD2VEC.setBatchSize(batchSize);
 		configWORD2VEC.setCorpusFile(corpusFile);
+		configWORD2VEC.setCorpusSourceFile(corpusSourceFile);
 		configWORD2VEC.setMinLearningRate(minLearningRate);	
 		configWORD2VEC.setLearningRate(learningRate);	
 		configWORD2VEC.setSampling(sampling); 

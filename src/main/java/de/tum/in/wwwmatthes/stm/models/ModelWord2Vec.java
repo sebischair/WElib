@@ -45,12 +45,11 @@ class ModelWord2Vec extends ModelImpl {
         			.learningRate(config.getLearningRate())
         			.minLearningRate(config.getMinLearningRate())
         			.sampling(config.getSampling())
-        			.negativeSample(config.getNegativeSample())
-        			
+        			.negativeSample(config.getMinLearningRate())
+
+        			.seed(42)
         			.allowParallelTokenization(false)
 	        		.tokenizerFactory(tokenizerFactory)
-	        		.seed(42)
-
 	        		.build();
 	}
 
@@ -59,9 +58,12 @@ class ModelWord2Vec extends ModelImpl {
 		// Fit Model
 		vectors.fit();
 		
+		// Set Vocab
+		vocab = vectors.getVocab();
+		
 		//vectors.getLookupTable().plotVocab(100, new File("/Users/christopherl/Desktop/test.plot"));
 		System.out.println(vectors.getConfiguration());
-		System.out.println(vectors.wordsNearest("data", 20));
+		System.out.println(vectors.wordsNearest("day", 20));
 	
 		// Create Documents Lookup Table
 		updateDocumentsLookupTable();
@@ -72,7 +74,24 @@ class ModelWord2Vec extends ModelImpl {
         Tokenizer tokenizer = tokenizerFactory.create(text);
         List<String> tokens = tokenizer.getTokens();
         
-        INDArray vector = null; 
+        //System.out.println(tokens.size());
+        
+        INDArray vector = new org.nd4j.linalg.api.ndarray.BaseNDArray(1, 100) {
+
+			@Override
+			public INDArray unsafeDuplication() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public INDArray unsafeDuplication(boolean blocking) {
+				// TODO Auto-generated method stub
+				return null;
+			} 
+        	
+        };
+        //INDArray vector = null; //new org.nd4j.linalg.api.ndarray.BaseNDArray(new float[]()) {0.0, 0.0}); 
         for(String token : tokens) {
         		INDArray tokenVector = vectors.getWordVectorMatrix(token);
         		if(vector == null && tokenVector != null) {
@@ -80,7 +99,31 @@ class ModelWord2Vec extends ModelImpl {
         		} else if (tokenVector != null) {
         			vector.add(tokenVector);
         		}
+        		if(tokenVector != null) {
+            		//System.out.println("is Matrix: " + tokenVector.isMatrix());
+            		//System.out.println("Length: " + tokenVector.length());
+            		//System.out.println("Rows: " + tokenVector.rows());
+        		} else {
+        			//System.out.println("tokenVector: " + null);
+        		}
         }
+        
+        if (tokens.size() == 16) {
+	        INDArray vector1 = null; 
+	        for(String token : tokens) {
+	        		//System.out.println("Token: " + token);
+	        		
+	        		INDArray tokenVector = vectors.getWordVectorMatrix(token);
+	        		//System.out.println("Token Vector: " + tokenVector);
+	        		if(vector1 == null && tokenVector != null) {
+	        			vector1 = tokenVector;
+	        		} else if (tokenVector != null) {
+	        			vector1.add(tokenVector);
+	        		}
+	        }
+	        //System.out.println(vector1);
+	        return vector1;
+		}
         
 		return vector;
 	}

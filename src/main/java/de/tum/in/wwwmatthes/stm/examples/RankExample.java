@@ -7,12 +7,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.uima.resource.ResourceInitializationException;
 import org.datavec.api.util.ClassPathResource;
+import org.deeplearning4j.models.paragraphvectors.ParagraphVectors;
 import org.deeplearning4j.models.word2vec.Word2Vec;
 import org.deeplearning4j.text.sentenceiterator.SentenceIterator;
 import org.deeplearning4j.text.tokenization.tokenizer.preprocessor.CommonPreprocessor;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.DefaultTokenizerFactory;
+import org.deeplearning4j.text.tokenization.tokenizerfactory.PosUimaTokenizerFactory;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.TokenizerFactory;
+import org.deeplearning4j.text.tokenization.tokenizerfactory.UimaTokenizerFactory;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+
 import org.deeplearning4j.text.sentenceiterator.BasicLineIterator;
 
 import de.tum.in.wwwmatthes.stm.evaluation.DataSet;
@@ -25,14 +34,16 @@ import de.tum.in.wwwmatthes.stm.models.config.ConfigFactory;
 import de.tum.in.wwwmatthes.stm.models.config.ConfigTfidfFactory;
 import de.tum.in.wwwmatthes.stm.models.config.ConfigType;
 import de.tum.in.wwwmatthes.stm.models.config.ConfigWord2VecFactory;
+import de.tum.in.wwwmatthes.stm.preprocessing.PreProcessor;
 import de.tum.in.wwwmatthes.stm.preprocessing.StopWords;
+import de.tum.in.wwwmatthes.stm.tokenizers.CustomTokenizerFactory;
 import de.tum.in.wwwmatthes.stm.models.Model;
 import de.tum.in.wwwmatthes.stm.models.ModelFactory;
 
 public class RankExample {
 
-	public static void main(String[] args) throws IOException, InvalidConfigException {
-		
+	public static void main(String[] args) throws IOException, InvalidConfigException, ResourceInitializationException {
+	
 		//runNativeWord2Vec();
 		//System.exit(0);
 
@@ -43,29 +54,39 @@ public class RankExample {
 		// Config config = ConfigFactory.buildFromFile(configFile);
 		// config.writeToFile(new File("/path/to/file"));
 		
+        List<String> tags = new ArrayList<String>(); 
+        tags.addAll(Arrays.asList("NN", "NNS", "NNP", "NNPS"));
+        //tags.addAll(Arrays.asList("CC", "CD", "DT", "EX", "FW", "IN"));
+        //tags.addAll(Arrays.asList("JJ", "JJR", "JJS", "LS", "MD"));
+        //tags.addAll(Arrays.asList("VB", "VBD", "VBG", "VBN", "VBP", "VBZ"));
+		
+		// [analysis, processing, applications, making, information, velocity, logs, cameras]
 		// [night, week, year, game, season, group, time, office, second, off]
-		Config config = new ConfigWord2VecFactory()
-				
-				//.useStemming(true)
-				//.allowedPosTags(Arrays.asList("NN", "NNS"))
-				
+		Config config = new ConfigDoc2VecFactory()
 				//.documentsSourceFile(new ClassPathResource("examples/labeled").getFile())
-				.documentsSourceFile(new File("/Users/christopherl/citadel/data/labels/DOC"))
 				//.corpusFile(new ClassPathResource("examples/corpus/corpus.txt").getFile())
 				.corpusFile(new ClassPathResource("examples/corpus/corpus_ctrls_reg.txt").getFile())
-				//.corpusFile(new ClassPathResource("examples/corpus/raw_sentences.txt").getFile())
+				
+				.corpusSourceFile(new ClassPathResource("examples/corpus-doc").getFile())
+				.documentsSourceFile(new File("/Users/christopherl/citadel/data/labels/DOC"))
+				//.corpusFile(new ClassPathResource("examples/corpus/corpus_ctrls_reg.txt").getFile())
+				
+				.minWordFrequency(3)
 				.addDefaultStopWords(true)
+				.enablePreprocessing(true)
+				.enableStemming(true)
+				.allowedPosTags(null)
 				
 				.epochs(10)
+				.iterations(10)
 				.layerSize(100)
 				.windowSize(5)
-				.iterations(10)
-				.minWordFrequency(2)
-				// .sampling(0)
-				// .negativeSample(0)
-				// .batchSize(32)
+				.batchSize(512)
 				
-				// [analysis, processing, applications, making, information, velocity, logs, cameras]
+				.learningRate(0.025)
+				.minLearningRate(0.0001)
+				.sampling(0.0)
+				.negativeSample(0.0)
 				
 				.build();
 		
@@ -92,8 +113,16 @@ public class RankExample {
 		// dataSets.writeToFile(new File("/path/to/file"));
 	}
 	
-	private static void evaluateDatasetsForCTRLS_REG(Model model) {
 
+	private static void evaluateDatasetsForCTRLS_REG(Model model) throws JsonSyntaxException, IOException {
+		
+		File dataSetsFile = new ClassPathResource("examples/datasets/truths.json").getFile();
+		DataSets dataSets = new Gson().fromJson(FileUtils.readFileToString(dataSetsFile), DataSets.class);
+		
+		dataSets.evaluateWithModel(model);
+		System.out.println(dataSets.getMRR());
+
+		/*
 		DataSetItem item1 = new DataSetItem("i1", "Configuration for each change shall be managed through version control solution.",
 				Arrays.asList("55d4ab6d9d3fbfcdb0f4f79d|16"));
 		
@@ -111,6 +140,7 @@ public class RankExample {
 				//System.out.println(dataSetItem.getSimilarities());
 			}
 		}
+		*/
 	}
 
 	private static DataSets createDatasets() {
@@ -155,28 +185,49 @@ public class RankExample {
 		return new DataSets(new DataSet("Random", itemList));
 	}
 	
-	private static void runNativeWord2Vec() throws FileNotFoundException {
+	private static void runNativeWord2Vec() throws FileNotFoundException, ResourceInitializationException {
         // Strip white space before and after for each line
 		for(int i = 0; i < 1; i++) {
 	        SentenceIterator iter = new BasicLineIterator(new ClassPathResource("examples/corpus/raw_sentences.txt").getFile());
+	        
+	        List<String> tags = new ArrayList<String>(); 
+	        //tags.addAll(Arrays.asList("NOUN"));
+	        tags.addAll(Arrays.asList("NN", "NNS", "NNP", "NNPS"));
+	        //tags.addAll(Arrays.asList("CC", "CD", "DT", "EX", "FW", "IN"));
+	        tags.addAll(Arrays.asList("JJ", "JJR", "JJS", "LS", "MD"));
 
-	        TokenizerFactory t = new DefaultTokenizerFactory();
-	        t.setTokenPreProcessor(new CommonPreprocessor());
 
-	        Word2Vec vec = new Word2Vec.Builder()
+	        //TokenizerFactory t = new DefaultTokenizerFactory();
+	        //TokenizerFactory t = new DefaultTokenizerFactory();
+	        //TokenizerFactory t = new UimaTokenizerFactory();
+	        
+	        CustomTokenizerFactory t = new CustomTokenizerFactory();
+	        t.setStemmingEnabled(true);
+	        t.setPreprocessingEnabled(true);
+	        t.setAllowedPosTags(tags);
+	        
+	        //TokenizerFactory t = new PosUimaTokenizerFactory(tags);
+	        //TokenizerFactory t = new PosUimaTokenizerFactory(Arrays.asList("NN", "NNS"), false);
+
+	        ParagraphVectors vec = new ParagraphVectors.Builder()
+	        //Word2Vec vec = new Word2Vec.Builder()
 	                .minWordFrequency(5)
-	                .iterations(1)
+	                .epochs(5)
+	                .iterations(5)
 	                .layerSize(100)
 	                .seed(42)
 	                .windowSize(5)
 	                .iterate(iter)
 	                .tokenizerFactory(t)
+	                .allowParallelTokenization(false)
+	                .trainWordVectors(true)
 	                .build();
 	        vec.fit();
 	        
+	        System.out.println(vec.getVocab().docAppearedIn("day"));
 	        System.out.println(vec.getConfiguration());
 	        
-			System.out.println(vec.wordsNearest("day", 10));
+			System.out.println(vec.wordsNearest("day", 20));
 			// [night, week, year, game, season, group, time, office, second, off]
 		}
 	}

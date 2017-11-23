@@ -98,11 +98,7 @@ public class ConfigImpl implements Config {
 			this.documentsSourcePath = null;
 		}
 	}
-	
-	public File getCorpusFile() {
-		return null;
-	}
-	
+		
 	public void setStemmingEnabled(Boolean stemmingEnabled) {
 		this.stemmingEnabled = stemmingEnabled;
 	}
@@ -121,53 +117,55 @@ public class ConfigImpl implements Config {
 	}
 	
 	@Override
+	public File getCorpusFile() {
+		return null;
+	}
+	
+	@Override
+	public File getCorpusSourceFile() {
+		return null;
+	}
+	
+	@Override
 	public Integer getBatchSize() {
-		return -1;
+		return null;
 	}
 	
 	@Override
 	public Integer getIterations() {
-		return -1;
+		return null;
 	}
 	
 	@Override
 	public Double getLearningRate() {
-		return -1.0;
+		return null;
 	}
 	
 	@Override
 	public Double getMinLearningRate() {
-		return -1.0;
+		return null;
 	}
 	
 	@Override
 	public Double getSampling() {
-		return -1.0;
+		return null;
 	}
 
 	@Override
 	public Double getNegativeSample() {
-		return -1.0;
+		return null;
 	}
 	
 	public Integer getEpochs() {
-		return -1;
+		return null;
 	}
 
 	public Integer getLayerSize() {
-		return -1;
+		return null;
 	}
 
 	public Integer getWindowSize() {
-		return -1;
-	}
-
-	@Override
-	public String toString() {
-		return "ConfigImpl [type=" + type + ", identifier=" + identifier + ", stopWords=" + stopWords
-				+ ", addDefaultStopWords=" + addDefaultStopWords + ", minWordFrequency=" + minWordFrequency
-				+ ", documentsSourcePath=" + documentsSourcePath + ", useStemming=" + stemmingEnabled + ", allowedPosTags="
-				+ allowedPosTags + "]";
+		return null;
 	}
 
 	@Override
@@ -178,6 +176,14 @@ public class ConfigImpl implements Config {
 	@Override
 	public Boolean isStemmingEnabled() {
 		return stemmingEnabled;
+	}
+
+	@Override
+	public String toString() {
+		return "ConfigImpl [type=" + type + ", identifier=" + identifier + ", stopWords=" + stopWords
+				+ ", addDefaultStopWords=" + addDefaultStopWords + ", minWordFrequency=" + minWordFrequency
+				+ ", documentsSourcePath=" + documentsSourcePath + ", preprocessingEnabled=" + preprocessingEnabled
+				+ ", stemmingEnabled=" + stemmingEnabled + ", allowedPosTags=" + allowedPosTags + "]";
 	}
 	
 }

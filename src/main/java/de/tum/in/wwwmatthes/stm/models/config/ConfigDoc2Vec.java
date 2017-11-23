@@ -17,6 +17,7 @@ class ConfigDoc2Vec extends ConfigImpl {
 	private Double 		negativeSample;
 	
 	private String		corpusPath;	
+	private String		corpusSourcePath;
 	
 	ConfigDoc2Vec() {
 		super(ConfigType.DOC2VEC);
@@ -122,20 +123,31 @@ class ConfigDoc2Vec extends ConfigImpl {
 			this.corpusPath = null;
 		}
 	}
+	
+	@Override
+	public File getCorpusSourceFile() {
+		if(corpusSourcePath!=null) {
+			return new File(corpusSourcePath);
+		}
+		return null;
+	}
+	
+	public void setCorpusSourceFile(File corpusSourceFile) {
+		if(corpusSourceFile!=null) {
+			this.corpusSourcePath = corpusSourceFile.getPath();
+		} else {
+			this.corpusSourcePath = null;
+		}
+	}
 
 	@Override
 	public String toString() {
-		return "ConfigWord2Vec [iterations=" + iterations + ", epochs=" + epochs + ", layerSize=" + layerSize
+		return "ConfigDoc2Vec [iterations=" + iterations + ", epochs=" + epochs + ", layerSize=" + layerSize
 				+ ", windowSize=" + windowSize + ", batchSize=" + batchSize + ", learningRate=" + learningRate
 				+ ", minLearningRate=" + minLearningRate + ", sampling=" + sampling + ", negativeSample="
-				+ negativeSample + ", corpusPath=" + corpusPath + ", getType()=" + getType() + ", getIdentifier()="
-				+ getIdentifier() + ", getStopWords()=" + getStopWords() + ", isAddDefaultStopWords()="
-				+ isAddDefaultStopWords() + ", getTotalStopWords()=" + getTotalStopWords() + ", getMinWordFrequency()="
-				+ getMinWordFrequency() + ", getDocumentsSourceFile()=" + getDocumentsSourceFile()
-				+ ", isPreprocessingEnabled()=" + isPreprocessingEnabled() + ", getAllowedPosTags()="
-				+ getAllowedPosTags() + ", toString()=" + super.toString() + ", isProcessingEnabled()="
-				+ isPreprocessingEnabled() + ", isStemmingEnabled()=" + isStemmingEnabled() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + "]";
+				+ negativeSample + ", corpusPath=" + corpusPath + ", toString()=" + super.toString() + "]";
 	}
+
+
 	
 }

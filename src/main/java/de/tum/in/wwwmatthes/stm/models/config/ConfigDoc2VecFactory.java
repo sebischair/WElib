@@ -20,6 +20,7 @@ public class ConfigDoc2VecFactory extends ConfigFactory {
 	private Double 		negativeSample 	= 0.0;
 	
 	private File			corpusFile;	
+	private File			corpusSourceFile;	
 	
 	public ConfigDoc2VecFactory() {
 		super(ConfigType.DOC2VEC);
@@ -75,6 +76,11 @@ public class ConfigDoc2VecFactory extends ConfigFactory {
 		return this;
 	}
 	
+	public ConfigDoc2VecFactory corpusSourceFile(File corpusSourceFile) {
+		this.corpusSourceFile = corpusSourceFile;
+		return this;
+	}
+	
 	public ConfigDoc2VecFactory windowSize(Integer windowSize) {
 		this.windowSize = windowSize;
 		return this;
@@ -123,7 +129,7 @@ public class ConfigDoc2VecFactory extends ConfigFactory {
 	@Override
 	public Config build() throws InvalidConfigException {
 		
-		if (corpusFile == null) {
+		if (corpusFile == null && corpusSourceFile == null) {
 			throw new InvalidConfigException();
 		}
 		
@@ -139,15 +145,16 @@ public class ConfigDoc2VecFactory extends ConfigFactory {
 		configDOC2VEC.setAddDefaultStopWords(addDefaultStopWords);
 		
 		configDOC2VEC.setEpochs(epochs);	
+		configDOC2VEC.setIterations(iterations);
 		configDOC2VEC.setLayerSize(layerSize);
 		configDOC2VEC.setWindowSize(windowSize);
 		configDOC2VEC.setBatchSize(batchSize);
 		configDOC2VEC.setCorpusFile(corpusFile);
+		configDOC2VEC.setCorpusSourceFile(corpusSourceFile);
 		configDOC2VEC.setMinLearningRate(minLearningRate);	
 		configDOC2VEC.setLearningRate(learningRate);	
 		configDOC2VEC.setSampling(sampling); 
 		configDOC2VEC.setNegativeSample(negativeSample); 
-		configDOC2VEC.setIterations(iterations);
 		
 		return configDOC2VEC;
 	}

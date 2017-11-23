@@ -1,6 +1,7 @@
 package de.tum.in.wwwmatthes.stm.models;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -8,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.deeplearning4j.models.word2vec.VocabWord;
+import org.deeplearning4j.models.word2vec.wordstore.VocabCache;
 import org.deeplearning4j.text.documentiterator.FileLabelAwareIterator;
 import org.deeplearning4j.text.documentiterator.LabelAwareIterator;
 import org.deeplearning4j.text.documentiterator.LabelledDocument;
@@ -18,7 +21,7 @@ import org.nd4j.linalg.primitives.Pair;
 
 import de.tum.in.wwwmatthes.stm.exceptions.VocabularyMatchException;
 import de.tum.in.wwwmatthes.stm.models.config.Config;
-import de.tum.in.wwwmatthes.stm.tokenizers.STMTokenizerFactory;
+import de.tum.in.wwwmatthes.stm.tokenizers.CustomTokenizerFactory;
 
 abstract class ModelImpl implements Model {
 		
@@ -27,10 +30,14 @@ abstract class ModelImpl implements Model {
 	
 	// Variables
 	protected LabelAwareIterator 	documentsLabelAwareIterator;
-	protected TokenizerFactory 		tokenizerFactory;
+	protected CustomTokenizerFactory 	tokenizerFactory;
+	protected VocabCache<VocabWord>	vocab;
 	
 	ModelImpl(Config config) {
 		super();
+		
+		System.out.println("Config:");
+		System.out.println(config);
 				
 		// Documents Label Aware Iterator
 		documentsLabelAwareIterator = new FileLabelAwareIterator.Builder()
@@ -38,7 +45,7 @@ abstract class ModelImpl implements Model {
 	              .build();
 		
 		// Tokenizer Factory
-		STMTokenizerFactory tokenizerFactory = new STMTokenizerFactory();
+		CustomTokenizerFactory tokenizerFactory = new CustomTokenizerFactory();
 		tokenizerFactory.setPreprocessingEnabled(config.isPreprocessingEnabled());
 		tokenizerFactory.setStemmingEnabled(config.isStemmingEnabled());
 		tokenizerFactory.setAllowedPosTags(config.getAllowedPosTags());
@@ -57,7 +64,7 @@ abstract class ModelImpl implements Model {
 	 * @param  text Text to convert.         
 	 * @return vector Vector converted from text.
 	 */
-	public abstract INDArray vectorFromText(String text) throws VocabularyMatchException;
+	public abstract INDArray vectorFromText(String text);
 		
 	/**
 	 * Calculates the similarity between two vectors.
@@ -67,7 +74,9 @@ abstract class ModelImpl implements Model {
 	 * @return similarity Similarity between two vectors.
 	 */
 	public double similarity(INDArray vector1, INDArray vector2) {
-		return Transforms.cosineSim(vector1, vector2);
+		if (vector1 != null && vector2 != null)
+			return Transforms.cosineSim(vector1, vector2);
+		return -1;
 	}
 	
 	/**
@@ -77,8 +86,8 @@ abstract class ModelImpl implements Model {
 	 * @param  text Text to compare.         
 	 * @return similarity Similarity between text and label.
 	 */
-	public double similarity(String text, String label) throws VocabularyMatchException {
-		INDArray vector1 = vectorFromText(text);
+	public double similarity(String text, String label) {
+		INDArray vector1 = createVectorFromText(text);
 		INDArray vector2 = documentsLookupTable.get(label);
 		return similarity(vector1, vector2);
 	}
@@ -89,27 +98,29 @@ abstract class ModelImpl implements Model {
 	 * @param  text Text to compare.         
 	 * @return similarities List of labels and their similarities.
 	 */
-	public List<Pair<String, Double>> rankedDocumentsWithSimilaritiesForText(String text) throws VocabularyMatchException {
-		INDArray vector 							= vectorFromText(text);
-		List<Pair<String, Double>> similarDocs 	= new ArrayList<Pair<String, Double>>();
+	public List<Pair<String, Double>> rankedDocumentsWithSimilaritiesForText(String text) {
+		INDArray vector	= createVectorFromText(text);
 		
-		// Add
-		for(Entry<String, INDArray> entry : documentsLookupTable.entrySet()) {	
-			Double similarity = similarity(entry.getValue(), vector);
-			if(similarity.isNaN()) {
-				similarity = -0.1;
+		if(vector != null) {
+			List<Pair<String, Double>> similarDocs 	= new ArrayList<Pair<String, Double>>();
+			
+			// Add
+			for(Entry<String, INDArray> entry : documentsLookupTable.entrySet()) {	
+				Double similarity = similarity(entry.getValue(), vector);
+				similarDocs.add(new Pair<String, Double>(entry.getKey(), similarity));
 			}
-			similarDocs.add(new Pair<String, Double>(entry.getKey(), similarity));
+			
+			// Sort 
+			Collections.sort(similarDocs, new Comparator<Pair<String, Double>>() {
+				public int compare(Pair<String, Double> o1, Pair<String, Double> o2) {
+					return o2.getValue().compareTo(o1.getValue());
+				}
+			});
+			
+			return similarDocs;
 		}
 		
-		// Sort 
-		Collections.sort(similarDocs, new Comparator<Pair<String, Double>>() {
-			public int compare(Pair<String, Double> o1, Pair<String, Double> o2) {
-				return o2.getValue().compareTo(o1.getValue());
-			}
-		});
-		
-		return similarDocs;
+		return null;
 	}
 	
 	/**
@@ -118,15 +129,18 @@ abstract class ModelImpl implements Model {
 	 * @param  text Text to compare.         
 	 * @return similarities List of labels and their similarities.
 	 */
-	public List<String> rankedDocumentsForText(String text) throws VocabularyMatchException {
+	public List<String> rankedDocumentsForText(String text) {
 
 		List<Pair<String, Double>> similarDocs = rankedDocumentsWithSimilaritiesForText(text);
+		if (similarDocs != null) {
+			List<String> list = new ArrayList<String>();
+			for(Pair<String, Double> pair : similarDocs) {	
+				list.add(pair.getKey());
+			}		
+			return list;
+		}
 		
-		List<String> list = new ArrayList<String>();
-		for(Pair<String, Double> pair : similarDocs) {	
-			list.add(pair.getKey());
-		}		
-		return list;
+		return null;
 	}
 	
 	/**
@@ -153,17 +167,10 @@ abstract class ModelImpl implements Model {
 			LabelledDocument 	labelledDocument 		= documentsLabelAwareIterator.nextDocument();
 			String 				labelledDocumentId 		= labelledDocument.getLabels().get(0);
 
-			try {
-				INDArray labelledDocumentVector = vectorFromText(labelledDocument.getContent());
-				if (labelledDocumentId != null && labelledDocumentVector != null) {
-					lookupTable.put(labelledDocumentId, labelledDocumentVector);
-					documentsContentLookupTable.put(labelledDocumentId, labelledDocument.getContent());
-				}
-				
-			} catch (VocabularyMatchException e) {
-				System.err.println("Label " + labelledDocument.getContent() + " has no matches in model vocabulary. It will be ignored.");
-			} catch (Exception e) {
-				System.err.println("Label " + labelledDocument.getContent() + " has an error.");
+			INDArray labelledDocumentVector = createVectorFromText(labelledDocument.getContent());
+			if (labelledDocumentId != null && labelledDocumentVector != null) {
+				lookupTable.put(labelledDocumentId, labelledDocumentVector);
+				documentsContentLookupTable.put(labelledDocumentId, labelledDocument.getContent());
 			}
 		}
 		
@@ -174,6 +181,30 @@ abstract class ModelImpl implements Model {
 	@Override
 	public Map<String, String> getDocumentContents() {
 		return documentsContentLookupTable;
+	}
+	
+	// Private Methods
+	
+	private static String createStringFromList(List<String> tokens) {
+		tokens.removeAll(Arrays.asList(""));		
+		return String.join(" ", tokens);
+	}
+	
+	private static boolean validTokens(VocabCache<VocabWord> vocab, List<String> tokens) {
+        for (String token : tokens) {
+            if (vocab.containsWord(token)) {
+                return true;
+            }
+        }
+        return false;
+	}
+	
+	private INDArray createVectorFromText(String text) {
+		List<String> tokens = tokenizerFactory.create(text).getTokens();
+		if (ModelImpl.validTokens(vocab, tokens)) {
+			return vectorFromText(ModelImpl.createStringFromList(tokens));
+		}
+		return null;
 	}
 	
 }
