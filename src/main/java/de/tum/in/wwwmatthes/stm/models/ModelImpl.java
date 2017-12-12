@@ -25,13 +25,13 @@ import de.tum.in.wwwmatthes.stm.tokenizers.CustomTokenizerFactory;
 
 abstract class ModelImpl implements Model {
 		
-	private Map<String, String> documentsContentLookupTable = new HashMap<String, String>(); // Only for debugging
-	private Map<String, INDArray> documentsLookupTable = new HashMap<String, INDArray>();
+	private Map<String, String> documentsContentLookupTable	= new HashMap<String, String>(); // Only for debugging
+	private Map<String, INDArray> documentsLookupTable 		= new HashMap<String, INDArray>();
 	
 	// Variables
-	protected LabelAwareIterator 	documentsLabelAwareIterator;
+	protected LabelAwareIterator 		documentsLabelAwareIterator;
 	protected CustomTokenizerFactory 	tokenizerFactory;
-	protected VocabCache<VocabWord>	vocab;
+	protected VocabCache<VocabWord>		vocab;
 	
 	ModelImpl(Config config) {
 		super();
@@ -43,8 +43,8 @@ abstract class ModelImpl implements Model {
 		documentsLabelAwareIterator = new FileLabelAwareIterator.Builder()
 	              .addSourceFolder(config.getDocumentsSourceFile())
 	              .build();
-		
-		// Tokenizer Factory
+				
+		// Tokenizer Factory - Init
 		CustomTokenizerFactory tokenizerFactory = new CustomTokenizerFactory();
 		tokenizerFactory.setPreprocessingEnabled(config.isPreprocessingEnabled());
 		tokenizerFactory.setStemmingEnabled(config.isStemmingEnabled());
@@ -98,8 +98,13 @@ abstract class ModelImpl implements Model {
 	 * @param  text Text to compare.         
 	 * @return similarities List of labels and their similarities.
 	 */
-	public List<Pair<String, Double>> rankedDocumentsWithSimilaritiesForText(String text) {
-		INDArray vector	= createVectorFromText(text);
+	public List<Pair<String, Double>> rankedDocumentsWithSimilaritiesForText(String text) throws VocabularyMatchException {
+		INDArray vector	= null;
+		try {
+			vector = createVectorFromText(text);
+		} catch (org.nd4j.linalg.exception.ND4JIllegalStateException exception) {
+			throw new VocabularyMatchException(text);
+		}
 		
 		if(vector != null) {
 			List<Pair<String, Double>> similarDocs 	= new ArrayList<Pair<String, Double>>();
@@ -129,7 +134,7 @@ abstract class ModelImpl implements Model {
 	 * @param  text Text to compare.         
 	 * @return similarities List of labels and their similarities.
 	 */
-	public List<String> rankedDocumentsForText(String text) {
+	public List<String> rankedDocumentsForText(String text) throws VocabularyMatchException {
 
 		List<Pair<String, Double>> similarDocs = rankedDocumentsWithSimilaritiesForText(text);
 		if (similarDocs != null) {
@@ -166,7 +171,7 @@ abstract class ModelImpl implements Model {
 		while(documentsLabelAwareIterator.hasNext()) {
 			LabelledDocument 	labelledDocument 		= documentsLabelAwareIterator.nextDocument();
 			String 				labelledDocumentId 		= labelledDocument.getLabels().get(0);
-
+			
 			INDArray labelledDocumentVector = createVectorFromText(labelledDocument.getContent());
 			if (labelledDocumentId != null && labelledDocumentVector != null) {
 				lookupTable.put(labelledDocumentId, labelledDocumentVector);
@@ -185,26 +190,31 @@ abstract class ModelImpl implements Model {
 	
 	// Private Methods
 	
+	/*
 	private static String createStringFromList(List<String> tokens) {
 		tokens.removeAll(Arrays.asList(""));		
 		return String.join(" ", tokens);
 	}
-	
+	*/
+	/*
 	private static boolean validTokens(VocabCache<VocabWord> vocab, List<String> tokens) {
         for (String token : tokens) {
+        		System.out.println(token);
+        		if(token == "organization") {
+        			System.out.println(token);
+        			System.out.println(vocab.containsWord(token));
+        		}
+        	
             if (vocab.containsWord(token)) {
                 return true;
             }
         }
         return false;
 	}
+	*/
 	
 	private INDArray createVectorFromText(String text) {
-		List<String> tokens = tokenizerFactory.create(text).getTokens();
-		if (ModelImpl.validTokens(vocab, tokens)) {
-			return vectorFromText(ModelImpl.createStringFromList(tokens));
-		}
-		return null;
+		return vectorFromText(text);
 	}
 	
 }

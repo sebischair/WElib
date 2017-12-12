@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.resource.ResourceConfigurationException;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -41,7 +42,7 @@ public class CustomTokenizerFactory implements TokenizerFactory {
 
 	@Override
 	public Tokenizer create(String toTokenize) {
-		Tokenizer tokenizer = new CustomTokenizer(toTokenize, getAnalysisEngine(), allowedPosTags, true);
+		Tokenizer tokenizer = new CustomTokenizer(toTokenize, getAnalysisEngine(), getCAS(), allowedPosTags, true);
 		if (tokenPreProcess != null) {
         		tokenizer.setTokenPreProcessor(tokenPreProcess);
 		}
@@ -109,15 +110,27 @@ public class CustomTokenizerFactory implements TokenizerFactory {
 	// Analysis Engine
 	private boolean analysisNeedsRefresh		= false;
 	private AnalysisEngine analysisEngine	= null;
+	private CAS cas							= null;
 	
 	private AnalysisEngine getAnalysisEngine() {
 		
 		if (analysisEngine == null || analysisNeedsRefresh) {
 			analysisEngine = de.tum.in.wwwmatthes.stm.tokenizers.AnalysisEngineFactory.createAnalysisEngine(stemmingEnabled, allowedPosTags);
+			try {
+				cas = analysisEngine.newCAS();
+			} catch (ResourceInitializationException e) {
+				e.printStackTrace();
+				return null;
+			}
 		}
+		
 		return analysisEngine;
 	}
- 
+
+	private CAS getCAS() {
+		return cas;
+	}
+	
    public static void main(String[] args) {
 		// TODO Auto-generated method stub
 	   Collection<String> allowedPosTagsEmpty = new ArrayList<String>();
@@ -136,17 +149,19 @@ public class CustomTokenizerFactory implements TokenizerFactory {
   		String string6 	= "All commercial information shall be retained and archived. Commercial information includes .";
   		String string7 	= "Requesting a purchase shall be segregated from approving a purchase.";
   		String string8 	= "Unauthorised hacking or masking of activity shall be prohibited on  IT.";
+  		
+  		String string9 = "be communicated within the organization; and";
     	
        for(int i = 0; i<2; i++) {
 	   		CustomTokenizerFactory tokenizerFactory = new CustomTokenizerFactory();
 	   		tokenizerFactory.setStemmingEnabled(i%2==0);
 	   		tokenizerFactory.setPreprocessingEnabled(true);
-	   		tokenizerFactory.setAllowedPosTags(null);
+	   		tokenizerFactory.setAllowedPosTags(Arrays.asList("NN", "NNS"));
 	   		
 	   		Tokenizer tokenizer = tokenizerFactory.create(string);
 	   		List<String> tokens = tokenizer.getTokens();
 	   		
-	   		System.out.println(tokenizerFactory.processString(string3));
+	   		System.out.println(tokenizerFactory.processString(string9));
        }
 	}
     

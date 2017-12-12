@@ -11,6 +11,7 @@ import org.deeplearning4j.text.sentenceiterator.UimaSentenceIterator;
 import org.deeplearning4j.text.uima.UimaResource;
 import org.nd4j.linalg.api.ndarray.INDArray;
 
+import de.tum.in.wwwmatthes.stm.exceptions.VocabularyMatchException;
 import de.tum.in.wwwmatthes.stm.models.config.Config;
 
 class ModelDoc2Vec extends ModelImpl {
@@ -47,7 +48,7 @@ class ModelDoc2Vec extends ModelImpl {
         			.learningRate(config.getLearningRate())
         			.minLearningRate(config.getMinLearningRate())
         			.sampling(config.getSampling())
-        			.negativeSample(config.getMinLearningRate())
+        			.negativeSample(config.getNegativeSample())
 				.trainWordVectors(true)
         			.seed(42)
         			.allowParallelTokenization(false)
@@ -63,13 +64,13 @@ class ModelDoc2Vec extends ModelImpl {
 		
 		// Set Vocab
 		vocab = vectors.getVocab();
-
+		
 		// Create Documents Lookup Table
 		updateDocumentsLookupTable();
 	}
 
 	@Override
-	public INDArray vectorFromText(String text) {
+	public INDArray vectorFromText(String text) {		
 		return vectors.inferVector(text);	
 	}
 

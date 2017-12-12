@@ -2,16 +2,23 @@ package de.tum.in.wwwmatthes.stm.models;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.deeplearning4j.models.paragraphvectors.ParagraphVectors;
+import org.deeplearning4j.models.word2vec.VocabWord;
 import org.deeplearning4j.models.word2vec.Word2Vec;
 import org.deeplearning4j.text.documentiterator.FileLabelAwareIterator;
 import org.deeplearning4j.text.documentiterator.LabelAwareIterator;
 import org.deeplearning4j.text.sentenceiterator.BasicLineIterator;
+import org.deeplearning4j.text.sentenceiterator.FileSentenceIterator;
 import org.deeplearning4j.text.sentenceiterator.SentenceIterator;
 import org.deeplearning4j.text.tokenization.tokenizer.Tokenizer;
 import org.nd4j.linalg.api.ndarray.INDArray;
+import org.nd4j.linalg.factory.Nd4j;
 
 import de.tum.in.wwwmatthes.stm.models.config.Config;
 
@@ -26,11 +33,17 @@ class ModelWord2Vec extends ModelImpl {
 		
 		Word2Vec.Builder builder = new Word2Vec.Builder();
 		
-		try {
-			corpusSentenceIterator = new BasicLineIterator(config.getCorpusFile());
+		if (config.getCorpusFile() != null) {
+			try {				
+				SentenceIterator corpusSentenceIterator = new BasicLineIterator(config.getCorpusFile());
+				builder.iterate(corpusSentenceIterator);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			
+		} else if (config.getCorpusSourceFile() != null) {
+			FileSentenceIterator corpusSentenceIterator = new FileSentenceIterator(config.getCorpusSourceFile());
 			builder.iterate(corpusSentenceIterator);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		}
 		
 		vectors = builder
@@ -45,7 +58,7 @@ class ModelWord2Vec extends ModelImpl {
         			.learningRate(config.getLearningRate())
         			.minLearningRate(config.getMinLearningRate())
         			.sampling(config.getSampling())
-        			.negativeSample(config.getMinLearningRate())
+        			.negativeSample(config.getNegativeSample())
 
         			.seed(42)
         			.allowParallelTokenization(false)
@@ -74,58 +87,29 @@ class ModelWord2Vec extends ModelImpl {
         Tokenizer tokenizer = tokenizerFactory.create(text);
         List<String> tokens = tokenizer.getTokens();
         
-        //System.out.println(tokens.size());
-        
-        INDArray vector = new org.nd4j.linalg.api.ndarray.BaseNDArray(1, 100) {
-
-			@Override
-			public INDArray unsafeDuplication() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public INDArray unsafeDuplication(boolean blocking) {
-				// TODO Auto-generated method stub
-				return null;
-			} 
-        	
-        };
-        //INDArray vector = null; //new org.nd4j.linalg.api.ndarray.BaseNDArray(new float[]()) {0.0, 0.0}); 
-        for(String token : tokens) {
-        		INDArray tokenVector = vectors.getWordVectorMatrix(token);
-        		if(vector == null && tokenVector != null) {
-        			vector = tokenVector;
-        		} else if (tokenVector != null) {
-        			vector.add(tokenVector);
+        List<VocabWord> words = getVocabWords(tokens);
+        if(words.size() > 0) {
+        		INDArray result = vectors.getWordVectorMatrix(words.get(0).getWord());
+        		for(int i = 1; i < words.size(); i++) {
+        			result.add(vectors.getWordVectorMatrix(words.get(0).getWord()));
         		}
-        		if(tokenVector != null) {
-            		//System.out.println("is Matrix: " + tokenVector.isMatrix());
-            		//System.out.println("Length: " + tokenVector.length());
-            		//System.out.println("Rows: " + tokenVector.rows());
-        		} else {
-        			//System.out.println("tokenVector: " + null);
-        		}
+        		return result;
         }
         
-        if (tokens.size() == 16) {
-	        INDArray vector1 = null; 
-	        for(String token : tokens) {
-	        		//System.out.println("Token: " + token);
-	        		
-	        		INDArray tokenVector = vectors.getWordVectorMatrix(token);
-	        		//System.out.println("Token Vector: " + tokenVector);
-	        		if(vector1 == null && tokenVector != null) {
-	        			vector1 = tokenVector;
-	        		} else if (tokenVector != null) {
-	        			vector1.add(tokenVector);
-	        		}
-	        }
-	        //System.out.println(vector1);
-	        return vector1;
+		return null;
+	}
+	
+	// Private Helper Methods
+	
+	private List<VocabWord> getVocabWords(List<String> tokens) {
+		List<VocabWord> words = new ArrayList<VocabWord>();
+		for(String token : tokens) {
+	 		VocabWord word = vocab.tokenFor(token);
+	 		if(word != null) {
+	 			words.add(word);
+    			}
 		}
-        
-		return vector;
+		return words;
 	}
 
 }

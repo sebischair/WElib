@@ -6,7 +6,7 @@ import org.deeplearning4j.text.tokenization.tokenizer.preprocessor.CommonPreproc
 
 public class PreProcessor extends CommonPreprocessor {
 	
-	private static final Pattern punctPattern = Pattern.compile("[$%]+");
+	private static final Pattern punctPattern = Pattern.compile("[$%;]+");
 	
 	@Override
 	public String preProcess(String token) {		

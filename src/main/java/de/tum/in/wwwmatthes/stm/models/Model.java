@@ -31,7 +31,7 @@ public interface Model {
 	 * @param  text Text to compare.         
 	 * @return similarities List of ranked documents.
 	 */
-	public List<String> rankedDocumentsForText(String text);
+	public List<String> rankedDocumentsForText(String text) throws VocabularyMatchException;
 	
 	/**
 	 * Returns the documents ranked by the similarities between a given text and all labels.
@@ -39,7 +39,7 @@ public interface Model {
 	 * @param  text Text to compare.         
 	 * @return documents List of ranked documents with their their similarities.
 	 */
-	public List<Pair<String, Double>> rankedDocumentsWithSimilaritiesForText(String text);
+	public List<Pair<String, Double>> rankedDocumentsWithSimilaritiesForText(String text) throws VocabularyMatchException;
 	
 	/**
 	 * Returns the content for the given document label.

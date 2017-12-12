@@ -6,15 +6,9 @@ import java.util.List;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.cas.CAS;
-import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.util.JCasUtil;
 import org.cleartk.token.type.Sentence;
 import org.cleartk.token.type.Token;
-import org.deeplearning4j.text.annotator.PoStagger;
-import org.deeplearning4j.text.annotator.SentenceAnnotator;
-import org.deeplearning4j.text.annotator.StemmerAnnotator;
-import org.deeplearning4j.text.annotator.TokenizerAnnotator;
-import org.deeplearning4j.text.tokenization.tokenizer.PosUimaTokenizer;
 import org.deeplearning4j.text.tokenization.tokenizer.TokenPreProcess;
 import org.deeplearning4j.text.tokenization.tokenizer.Tokenizer;
 
@@ -22,32 +16,25 @@ import lombok.NonNull;
 
 class CustomTokenizer implements Tokenizer {
 
-    private AnalysisEngine engine;
     private List<String> tokens;
     private Collection<String> allowedPosTags;
     private int index;
-    private static CAS cas;
     private TokenPreProcess preProcessor;
     private boolean stripNones = false;
 
-    CustomTokenizer(String tokens, AnalysisEngine engine, Collection<String> allowedPosTags) {
-        this(tokens, engine, allowedPosTags, false);
+    CustomTokenizer(String tokens, AnalysisEngine engine, CAS cas, Collection<String> allowedPosTags) {
+        this(tokens, engine, cas, allowedPosTags, false);
     }
 
-    CustomTokenizer(String tokens, AnalysisEngine engine, Collection<String> allowedPosTags,
+    CustomTokenizer(String tokens, AnalysisEngine en, CAS cas, Collection<String> allowedPosTags,
                     boolean stripNones) {
-    		if (this.engine == null)
-    			this.engine = engine;   
         this.allowedPosTags = allowedPosTags;
         this.tokens = new ArrayList<String>();
         this.stripNones = stripNones;
         try {
-            if (cas == null)
-                cas = engine.newCAS();
-
             cas.reset();
             cas.setDocumentText(tokens);
-        		this.engine.process(cas);
+            en.process(cas);
             for (Sentence s : JCasUtil.select(cas.getJCas(), Sentence.class)) {
                 for (Token t : JCasUtil.selectCovered(Token.class, s)) {
                     //add NONE for each invalid token
@@ -62,13 +49,9 @@ class CustomTokenizer implements Tokenizer {
                         this.tokens.add("NONE");
                 }
             }
-
-
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
 
     private boolean valid(Token token) {
@@ -78,9 +61,7 @@ class CustomTokenizer implements Tokenizer {
             return false;
         return true;
     }
-
-
-
+    
     @Override
     public boolean hasMoreTokens() {
         return index < tokens.size();
