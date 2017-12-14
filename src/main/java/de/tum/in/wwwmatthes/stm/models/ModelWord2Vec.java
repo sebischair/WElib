@@ -20,6 +20,7 @@ import org.deeplearning4j.text.tokenization.tokenizer.Tokenizer;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
+import de.tum.in.wwwmatthes.stm.exceptions.VocabularyMatchException;
 import de.tum.in.wwwmatthes.stm.models.config.Config;
 
 class ModelWord2Vec extends ModelImpl {
@@ -67,7 +68,7 @@ class ModelWord2Vec extends ModelImpl {
 	}
 
 	@Override
-	public void fit() {
+	public void fit() throws VocabularyMatchException {
 		// Fit Model
 		vectors.fit();
 		

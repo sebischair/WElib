@@ -56,7 +56,7 @@ abstract class ModelImpl implements Model {
 	/**
 	 * Trains the model.
 	 */
-	public abstract void fit();
+	public abstract void fit() throws VocabularyMatchException;
 	
 	/**
 	 * Converts a text to a vector.
@@ -64,7 +64,7 @@ abstract class ModelImpl implements Model {
 	 * @param  text Text to convert.         
 	 * @return vector Vector converted from text.
 	 */
-	public abstract INDArray vectorFromText(String text);
+	public abstract INDArray vectorFromText(String text) throws VocabularyMatchException;
 		
 	/**
 	 * Calculates the similarity between two vectors.
@@ -87,8 +87,8 @@ abstract class ModelImpl implements Model {
 	 * @param  text Text to compare.         
 	 * @return similarity Similarity between text and label.
 	 */
-	public double similarity(String text, String label) {
-		INDArray vector1 = createVectorFromText(text);
+	public double similarity(String text, String label) throws VocabularyMatchException {
+		INDArray vector1 = vectorFromText(text);
 		INDArray vector2 = documentsLookupTable.get(label);
 		return similarity(vector1, vector2);
 	}
@@ -100,12 +100,7 @@ abstract class ModelImpl implements Model {
 	 * @return similarities List of labels and their similarities.
 	 */
 	public List<Pair<String, Double>> rankedDocumentsWithSimilaritiesForText(String text) throws VocabularyMatchException {
-		INDArray vector	= null;
-		try {
-			vector = createVectorFromText(text);
-		} catch (org.nd4j.linalg.exception.ND4JIllegalStateException exception) {
-			throw new VocabularyMatchException(text);
-		}
+		INDArray vector = vectorFromText(text);
 		
 		if(vector != null && vector.amaxNumber().doubleValue() != 0) {
 			List<Pair<String, Double>> similarDocs 	= new ArrayList<Pair<String, Double>>();
@@ -162,7 +157,7 @@ abstract class ModelImpl implements Model {
 	/**
 	 * Updates Documents lookup table.
 	 */
-	protected void updateDocumentsLookupTable() {
+	protected void updateDocumentsLookupTable() throws VocabularyMatchException {
 		Map<String, INDArray> lookupTable = new HashMap<String, INDArray>();
 		
 		// Reset
@@ -173,7 +168,7 @@ abstract class ModelImpl implements Model {
 			LabelledDocument 	labelledDocument 		= documentsLabelAwareIterator.nextDocument();
 			String 				labelledDocumentId 		= labelledDocument.getLabels().get(0);
 			
-			INDArray labelledDocumentVector = createVectorFromText(labelledDocument.getContent());
+			INDArray labelledDocumentVector = vectorFromText(labelledDocument.getContent());
 			if (labelledDocumentId != null && labelledDocumentVector != null) {
 				lookupTable.put(labelledDocumentId, labelledDocumentVector);
 				documentsContentLookupTable.put(labelledDocumentId, labelledDocument.getContent());
@@ -187,12 +182,6 @@ abstract class ModelImpl implements Model {
 	@Override
 	public Map<String, String> getDocumentContents() {
 		return documentsContentLookupTable;
-	}
-	
-	// Private Methods
-	
-	private INDArray createVectorFromText(String text) {
-		return vectorFromText(text);
-	}
+	}	
 	
 }

@@ -34,7 +34,7 @@ public class EvaluationTests {
 	private static String testInput3 = "Time and health are two precious assets that we don't recognize and appreciate until they have been depleted. The way to make money is to buy when blood is running in the streets.";
 	
 	@Test
-	public void test() throws FileNotFoundException, InvalidConfigException {
+	public void test() throws Exception {
 		
 		// Create Config
 		Config config = new ConfigTfidfFactory()

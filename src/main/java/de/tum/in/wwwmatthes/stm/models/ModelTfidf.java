@@ -3,6 +3,7 @@ package de.tum.in.wwwmatthes.stm.models;
 import org.deeplearning4j.bagofwords.vectorizer.TfidfVectorizer;
 import org.nd4j.linalg.api.ndarray.INDArray;
 
+import de.tum.in.wwwmatthes.stm.exceptions.VocabularyMatchException;
 import de.tum.in.wwwmatthes.stm.models.config.Config;
 
 class ModelTfidf extends ModelImpl {
@@ -22,7 +23,7 @@ class ModelTfidf extends ModelImpl {
 	}
 	
 	@Override
-	public void fit() {
+	public void fit() throws VocabularyMatchException {
 		// Fit Model
 		tfidfVectorizer.fit();
 		
@@ -34,8 +35,13 @@ class ModelTfidf extends ModelImpl {
 	}
 	
 	@Override
-	public INDArray vectorFromText(String text) {
-		return tfidfVectorizer.transform(text);
+	public INDArray vectorFromText(String text) throws VocabularyMatchException {
+		INDArray vector = tfidfVectorizer.transform(text);
+		// Vector may not be null and not only zeros
+		if(vector != null && vector.amaxNumber().doubleValue() != 0) {
+			throw new VocabularyMatchException(text);
+		}
+		return vector;
 	}
 	
 }

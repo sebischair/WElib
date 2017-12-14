@@ -20,6 +20,7 @@ import de.tum.in.wwwmatthes.stm.evaluation.datasets.DataSet;
 import de.tum.in.wwwmatthes.stm.evaluation.datasets.DataSetItem;
 import de.tum.in.wwwmatthes.stm.evaluation.datasets.DataSets;
 import de.tum.in.wwwmatthes.stm.exceptions.InvalidConfigException;
+import de.tum.in.wwwmatthes.stm.exceptions.VocabularyMatchException;
 import de.tum.in.wwwmatthes.stm.models.Model;
 import de.tum.in.wwwmatthes.stm.models.ModelFactory;
 import de.tum.in.wwwmatthes.stm.models.config.Config;
@@ -28,7 +29,7 @@ import de.tum.in.wwwmatthes.stm.tokenizers.CustomTokenizerFactory;
 
 public class RankExample {
 
-	public static void main(String[] args) throws IOException, InvalidConfigException, ResourceInitializationException {
+	public static void main(String[] args) throws Exception {
 		
 		// Build Config
 		Config config = new ConfigDoc2VecFactory()

@@ -16,7 +16,6 @@ import de.tum.in.wwwmatthes.stm.evaluation.EvaluationDataSets;
 import de.tum.in.wwwmatthes.stm.evaluation.datasets.DataSet;
 import de.tum.in.wwwmatthes.stm.evaluation.datasets.DataSetItem;
 import de.tum.in.wwwmatthes.stm.evaluation.datasets.DataSets;
-import de.tum.in.wwwmatthes.stm.exceptions.InvalidConfigException;
 import de.tum.in.wwwmatthes.stm.models.Model;
 import de.tum.in.wwwmatthes.stm.models.ModelFactory;
 import de.tum.in.wwwmatthes.stm.models.config.Config;
@@ -25,7 +24,7 @@ import de.tum.in.wwwmatthes.stm.models.config.ConfigTfidfFactory;
 public class EvaluationErrorTests {
 	
 	@Test
-	public void test() throws FileNotFoundException, InvalidConfigException {
+	public void test() throws Exception {
 		
 		// Create Config
 		Config config = new ConfigTfidfFactory()

@@ -14,7 +14,7 @@ public interface Model {
 	/**
 	 * Trains the model.
 	 */
-	public void fit();
+	public void fit() throws VocabularyMatchException;
 	
 	/**
 	 * Calculates the similarity between a text and a label.
@@ -23,7 +23,7 @@ public interface Model {
 	 * @param  text Text to compare.         
 	 * @return similarity Similarity between text and label.
 	 */
-	public double similarity(String text, String label);
+	public double similarity(String text, String label) throws VocabularyMatchException;
 	
 	/**
 	 * Returns the documents ranked by the similarities between a given text and all labels.

@@ -57,7 +57,7 @@ class ModelDoc2Vec extends ModelImpl {
 	}
 
 	@Override
-	public void fit() {
+	public void fit() throws VocabularyMatchException {
 		// Fit Model
 		vectors.fit();		
 		System.out.println(vectors.wordsNearest("data", 20));
@@ -70,8 +70,12 @@ class ModelDoc2Vec extends ModelImpl {
 	}
 
 	@Override
-	public INDArray vectorFromText(String text) {		
-		return vectors.inferVector(text);	
+	public INDArray vectorFromText(String text) throws VocabularyMatchException {	
+		try {
+			return vectors.inferVector(text);
+		} catch (org.nd4j.linalg.exception.ND4JIllegalStateException exception) {
+			throw new VocabularyMatchException(text);
+		}
 	}
 
 }
