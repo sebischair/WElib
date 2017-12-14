@@ -1,270 +1,82 @@
 package de.tum.in.wwwmatthes.stm.examples;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.datavec.api.util.ClassPathResource;
 import org.deeplearning4j.models.paragraphvectors.ParagraphVectors;
-import org.deeplearning4j.models.word2vec.Word2Vec;
-import org.deeplearning4j.text.sentenceiterator.SentenceIterator;
-import org.deeplearning4j.text.tokenization.tokenizer.preprocessor.CommonPreprocessor;
-import org.deeplearning4j.text.tokenization.tokenizerfactory.DefaultTokenizerFactory;
-import org.deeplearning4j.text.tokenization.tokenizerfactory.PosUimaTokenizerFactory;
-import org.deeplearning4j.text.tokenization.tokenizerfactory.TokenizerFactory;
-import org.deeplearning4j.text.tokenization.tokenizerfactory.UimaTokenizerFactory;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
-
 import org.deeplearning4j.text.sentenceiterator.BasicLineIterator;
+import org.deeplearning4j.text.sentenceiterator.SentenceIterator;
 
 import de.tum.in.wwwmatthes.stm.evaluation.Evaluation;
 import de.tum.in.wwwmatthes.stm.evaluation.EvaluationDataSet;
-import de.tum.in.wwwmatthes.stm.evaluation.EvaluationDataSetItemOutput;
+import de.tum.in.wwwmatthes.stm.evaluation.EvaluationDataSetItem;
+import de.tum.in.wwwmatthes.stm.evaluation.EvaluationDataSets;
 import de.tum.in.wwwmatthes.stm.evaluation.datasets.DataSet;
 import de.tum.in.wwwmatthes.stm.evaluation.datasets.DataSetItem;
 import de.tum.in.wwwmatthes.stm.evaluation.datasets.DataSets;
 import de.tum.in.wwwmatthes.stm.exceptions.InvalidConfigException;
-import de.tum.in.wwwmatthes.stm.models.config.Config;
-import de.tum.in.wwwmatthes.stm.models.config.ConfigDoc2VecFactory;
-import de.tum.in.wwwmatthes.stm.models.config.ConfigFactory;
-import de.tum.in.wwwmatthes.stm.models.config.ConfigTfidfFactory;
-import de.tum.in.wwwmatthes.stm.models.config.ConfigType;
-import de.tum.in.wwwmatthes.stm.models.config.ConfigWord2VecFactory;
-import de.tum.in.wwwmatthes.stm.tokenizers.CustomTokenizerFactory;
 import de.tum.in.wwwmatthes.stm.models.Model;
 import de.tum.in.wwwmatthes.stm.models.ModelFactory;
+import de.tum.in.wwwmatthes.stm.models.config.Config;
+import de.tum.in.wwwmatthes.stm.models.config.ConfigDoc2VecFactory;
+import de.tum.in.wwwmatthes.stm.tokenizers.CustomTokenizerFactory;
 
 public class RankExample {
 
 	public static void main(String[] args) throws IOException, InvalidConfigException, ResourceInitializationException {
 		
-		// Model
-		
-		Config config = new ConfigTfidfFactory()
-				//.corpusSourceFile(corpusSourcePath)
-				//.corpusSourceFile(new ClassPathResource("examples/corpus-doc/corpus_1").getFile())
-				.documentsSourceFile(new File("/Users/christopherl/citadel/data/labels/DOC"))
+		// Build Config
+		Config config = new ConfigDoc2VecFactory()
+				.corpusSourceFile(new ClassPathResource("examples/labeled").getFile())
+				.documentsSourceFile(new ClassPathResource("examples/unlabeled").getFile())
 				.minWordFrequency(0)
 				.addDefaultStopWords(true)
 				.enablePreprocessing(true)
 				//.enableStemming(true)
-				// .allowedPosTags(Arrays.asList("NN", "NNS", "NNP", "NNPS", "VB", "VBD", "VBG", "VBN"))
-				.allowedPosTags(Arrays.asList("NN", "NNS", "NNP", "NNPS"))
+				//.allowedPosTags(Arrays.asList("NN", "NNS", "NNP", "NNPS"))
 				//.epochs(5)
 				.build();
-				
-		
-		/*
-		Config config = new ConfigDoc2VecFactory()
-				//.corpusSourceFile(corpusSourcePath)
-				.corpusSourceFile(new File("/Users/christopherl/citadel/data/corpus/CTRLS"))
-				//.corpusSourceFile(new ClassPathResource("examples/corpus-doc/corpus_1").getFile())
-				.documentsSourceFile(new File("/Users/christopherl/citadel/data/labels/DOC_SUBTOPIC_TAGS_TOPIC"))
-				.minWordFrequency(1)
-				.addDefaultStopWords(true)
-				.enablePreprocessing(true)
-				//.enableStemming(true)
-				// .allowedPosTags(Arrays.asList("NN", "NNS", "NNP", "NNPS", "VB", "VBD", "VBG", "VBN"))
-				.allowedPosTags(Arrays.asList("NN", "NNS", "NNP", "NNPS"))
-				//.epochs(5)
-				.build();
-				*/
-		
+
 		// Create Model
 		Model model = ModelFactory.createFromConfig(config);
 		model.fit();
 		
 		// Evaluation
-		DataSets dataSets = DataSets.readFromFile(new File("/Users/christopherl/citadel/data/datasets/DEFAULT_CLEAN"));
-		Evaluation evaluation = new Evaluation(dataSets);
-		evaluation.evaluate(model);
+		EvaluationDataSets evaluatedDataSets = Evaluation.evaluate(createDatasets(), model);
 		
-		System.out.println(evaluation.getMrr());
+		System.out.println();
+		System.out.println("=Data Sets=");
+		System.out.println(evaluatedDataSets.getAverageMrr());
+		System.out.println(evaluatedDataSets.getAverageInputLength());
 		
-		System.exit(0);
-		
-		System.out.println(" ");
-		Map<String, EvaluationDataSetItemOutput> map = evaluation.getEvaluationDataSets().getDataSetList().get(0).getDataSetItemList().get(0).getOutputMap();
-		for(String key : map.keySet()) {
-			System.out.println(map.get(key).getRank());
-		}
-		
-		System.out.println(" ");
-		map = evaluation.getEvaluationDataSets().getDataSetList().get(1).getDataSetItemList().get(0).getOutputMap();
-		for(String key : map.keySet()) {
-			System.out.println(map.get(key).getRank());
-		}
-		
-		System.out.println(" ");
-		map = evaluation.getEvaluationDataSets().getDataSetList().get(2).getDataSetItemList().get(0).getOutputMap();
-		for(String key : map.keySet()) {
-			System.out.println(map.get(key).getRank());
-		}
-		
-		
-		System.exit(0);
-		
-		//compareWord2VecAndDoc2Vec();
-		//System.exit(0);
-		
-		//testTfidf();
-		//System.exit(0);
-		
-		//runNativeWord2Vec();
-		//System.exit(0);
-
-		// Load Configuration File
-		//File configFile = new ClassPathResource("examples/config/example.config").getFile();
-
-		// Create Configuration
-		// Config config = ConfigFactory.buildFromFile(configFile);
-		// config.writeToFile(new File("/path/to/file"));
-		//List<Config> configs = Arrays.asList(config1, config2, config3, config4, config5);
-		
-		/*
-		File corpusSourcePath = new File("/Users/christopherl/citadel/data/corpus/REG");
-		
-		for(int i = 0; i <  1; i++) {
+		for(EvaluationDataSet evaluatedDataSet: evaluatedDataSets.getEvaluatedDataSetList()) {
+			System.out.println();
+			System.out.println("==Data Set==");
+			System.out.println(evaluatedDataSet.getDataSet().getIdentifier());
+			System.out.println(evaluatedDataSet.getAverageMrr());
+			System.out.println(evaluatedDataSet.getAverageInputLength());
 			
-			
-			Config config = new ConfigDoc2VecFactory()
-					//.corpusSourceFile(corpusSourcePath)
-					.corpusSourceFile(new ClassPathResource("examples/corpus-doc/corpus_1").getFile())
-					.documentsSourceFile(new File("/Users/christopherl/citadel/data/labels/DOC_SUBTOPIC_TITLE_TOPIC"))
-					.minWordFrequency(1)
-					.addDefaultStopWords(true)
-					.enablePreprocessing(true)
-					.epochs(5)
-					.iterations(10)
-					.windowSize(5)
-					.layerSize(100)
-					
-					.build();
-			
-			// Create Model
-			Model model = ModelFactory.createFromConfig(config);
-
-			// Fit Model
-			model.fit();
-			
-			// Evaluate
-			evaluateDatasetsForCTRLS_REG(model);
-		}
-		System.exit(0);
-		*/
-		/*
-		
-        List<String> tags = new ArrayList<String>(); 
-        tags.addAll(Arrays.asList("NN", "NNS", "NNP", "NNPS"));
-        //tags.addAll(Arrays.asList("CC", "CD", "DT", "EX", "FW", "IN"));
-        //tags.addAll(Arrays.asList("JJ", "JJR", "JJS", "LS", "MD"));
-        //tags.addAll(Arrays.asList("VB", "VBD", "VBG", "VBN", "VBP", "VBZ"));
-		
-		// [analysis, processing, applications, making, information, velocity, logs, cameras]
-		// [night, week, year, game, season, group, time, office, second, off]
-		Config config1 = new ConfigDoc2VecFactory()
-				
-				.corpusSourceFile(new ClassPathResource("examples/corpus-doc/corpus_2").getFile())
-				.documentsSourceFile(new File("/Users/christopherl/citadel/data/labels/DOC_SUBTOPIC_TITLE_TOPIC"))
-				
-				.minWordFrequency(0)
-				.addDefaultStopWords(true)
-				.enablePreprocessing(true)
-				.epochs(9)
-				
-				.build();
-		
-		Config config2 = new ConfigDoc2VecFactory()
-				
-				.corpusSourceFile(new ClassPathResource("examples/corpus-doc/corpus_2").getFile())
-				.documentsSourceFile(new File("/Users/christopherl/citadel/data/labels/DOC_SUBTOPIC_TITLE_TOPIC"))
-				
-				.minWordFrequency(1)
-				.addDefaultStopWords(true)
-				.enablePreprocessing(true)
-				.epochs(9)
-				
-				.build();
-		
-		Config config3 = new ConfigDoc2VecFactory()
-				
-				.corpusSourceFile(new ClassPathResource("examples/corpus-doc/corpus_2").getFile())
-				.documentsSourceFile(new File("/Users/christopherl/citadel/data/labels/DOC_SUBTOPIC_TITLE_TOPIC"))
-				
-				.minWordFrequency(5)
-				.addDefaultStopWords(true)
-				.enablePreprocessing(true)
-				.epochs(9)
-				
-				.build();
-		
-		Config config4 = new ConfigDoc2VecFactory()
-				
-				.corpusSourceFile(new ClassPathResource("examples/corpus-doc/corpus_2").getFile())
-				.documentsSourceFile(new File("/Users/christopherl/citadel/data/labels/DOC_SUBTOPIC_TITLE_TOPIC"))
-				
-				.minWordFrequency(2)
-				.addDefaultStopWords(true)
-				.enablePreprocessing(true)
-				.epochs(9)
-				
-				.build();
-		
-		Config config5 = new ConfigDoc2VecFactory()
-				
-				.corpusSourceFile(new ClassPathResource("examples/corpus-doc/corpus_2").getFile())
-				.documentsSourceFile(new File("/Users/christopherl/citadel/data/labels/DOC_SUBTOPIC_TITLE_TOPIC"))
-				
-				.minWordFrequency(2)
-				.addDefaultStopWords(true)
-				.enablePreprocessing(true)
-				.epochs(9)
-				
-				.build();
-		  
-		List<Config> configs = Arrays.asList(config1, config2, config3, config4, config5);
-		for(Config config : configs) {
-			
-			// Create Model
-			Model model = ModelFactory.createFromConfig(config);
-
-			// Fit Model
-			model.fit();
-			
-			// Evaluate
-			evaluateDatasetsForCTRLS_REG(model);
-		}	
-		*/
-	}
-	
-
-	private static void evaluateDatasetsForCTRLS_REG(Model model) throws JsonSyntaxException, IOException {
-		
-		File dataSetsFile = new ClassPathResource("examples/datasets/truths.json").getFile();
-		DataSets dataSets = new Gson().fromJson(FileUtils.readFileToString(dataSetsFile), DataSets.class);
-		
-		Evaluation evaluation = new Evaluation(dataSets);
-		evaluation.evaluate(model);
-
-		System.out.println("MRR: " + evaluation.getEvaluationDataSets().getMrr());
-		System.out.println("AIDR: " + evaluation.getEvaluationDataSets().getAverageInputDocumentRatio());
-		for(EvaluationDataSet dataSet : evaluation.getEvaluationDataSets().getDataSetList()) {
-			System.out.println("Id: " + dataSet.getDataSet().getIdentifier() + " AIDR: " + dataSet.getAverageInputDocumentRatio());
+			for(EvaluationDataSetItem evaluatedDataSetItem: evaluatedDataSet.getEvaluatedDataSetItemList()) {
+				System.out.println();
+				System.out.println("===Data Set Item===");
+				System.out.println(evaluatedDataSetItem.getDataSetItem().getIdentifier());
+				System.out.println(evaluatedDataSetItem.getOutputMap());
+				System.out.println("MRR: " + evaluatedDataSetItem.getMrr());
+				System.out.println("AR: " + evaluatedDataSetItem.getAverageRank());
+				System.out.println("AR%: " + evaluatedDataSetItem.getAverageRankInPercentage());
+				System.out.println("EOR: " + evaluatedDataSetItem.getEvaluationOptimalRank());
+				System.out.println("EOR%: " + evaluatedDataSetItem.getEvaluationOptimalRankInPercentage());
+				System.out.println("RAR%: " + evaluatedDataSetItem.getRelativeAverageRankInPercentage());
+			}
 		}
 	}
 
 	private static DataSets createDatasets() {
-
-		List<String> item1List = new ArrayList<String>();
-		item1List.add("finance");
 
 		DataSetItem item1 = new DataSetItem("i1",
 				"The Russian Trading System (RTS) was a stock market established in 1995 in Moscow, consolidating various regional trading floors into one exchange.\n" + 
@@ -274,11 +86,8 @@ public class RankExample {
 				"The RTS Index, RTSI, the official Moscow Exchange indicator, was first calculated on September 1, 1995.\n" + 
 				"The RTS is a capitalization-weighted composite index calculated based on prices of the 50 most liquid Russian stocks listed on Moscow Exchange.\n" + 
 				"The Index is calculated in real time and denominated in US dollars.",
-				item1List);
-
-		List<String> item2List = new ArrayList<String>();
-		item2List.add("health");
-
+				Arrays.asList("finance"));
+		
 		DataSetItem item2 = new DataSetItem("i2",
 				"Human immunodeficiency virus infection and acquired immune deficiency syndrome (HIV/AIDS) is a spectrum of conditions caused by infection with the human immunodeficiency virus (HIV).\n" + 
 				"It may also be referred to as HIV disease or HIV infection.\n" + 
@@ -294,13 +103,27 @@ public class RankExample {
 				"While antiretroviral treatment reduces the risk of death and complications from the disease, these medications are expensive and have side effects. Diagnosis.\n" + 
 				"Treatment is recommended as soon as the diagnosis is made.\n" + 
 				"Without treatment, the average survival time after infection with HIV is estimated to be 9 to 11 years, depending on the HIV subtype.",
-				item2List);
+				Arrays.asList("health"));
+		
+		DataSetItem item3 = new DataSetItem("i3",
+				"The first wealth is health.",
+				Arrays.asList("health"));
+		DataSetItem item4 = new DataSetItem("i4",
+				"In this world nothing can be said to be certain, except death and taxes.",
+				Arrays.asList("finance"));
+		DataSetItem item5 = new DataSetItem("i5",
+				"Time and health are two precious assets that we don't recognize and appreciate until they have been depleted."
+				+ " The way to make money is to buy when blood is running in the streets.",
+				Arrays.asList("health", "finance"));
 
 		List<DataSetItem> itemList = new ArrayList<DataSetItem>();
 		itemList.add(item1);
 		itemList.add(item2);
 
-		return new DataSets(new DataSet("Random", itemList));
+		return new DataSets(Arrays.asList(
+				new DataSet("Something1", Arrays.asList(item1, item2)), 
+				new DataSet("Something2", Arrays.asList(item3, item4, item5)))
+			);
 	}
 	
 	private static void runNativeWord2Vec() throws FileNotFoundException, ResourceInitializationException {
@@ -348,60 +171,6 @@ public class RankExample {
 			System.out.println(vec.wordsNearest("day", 20));
 			// [night, week, year, game, season, group, time, office, second, off]
 		}
-	}
-	
-	static void testTfidf() throws InvalidConfigException, JsonSyntaxException, IOException {
-		Config config = new ConfigTfidfFactory()
-				.documentsSourceFile(new File("/Users/christopherl/citadel/data/labels/DOC_SUBTOPIC_TITLE"))
-				
-				.minWordFrequency(1)
-				.addDefaultStopWords(true)
-				.enablePreprocessing(true)
-				.enableStemming(true)
-				.allowedPosTags(null)
-										
-				.build();
-		
-		// Create Model
-		Model model = ModelFactory.createFromConfig(config);
-
-		// Fit Model
-		model.fit();
-		
-		evaluateDatasetsForCTRLS_REG(model);
-	}
-
-	private static void compareWord2VecAndDoc2Vec() throws InvalidConfigException, JsonSyntaxException, IOException {
-		
-		// Word2Vec 
-		Config config = new ConfigWord2VecFactory()
-				.corpusSourceFile(new ClassPathResource("examples/corpus-doc/corpus_1").getFile())
-				.documentsSourceFile(new File("/Users/christopherl/citadel/data/labels/DOC"))
-				.minWordFrequency(1)
-				.addDefaultStopWords(true)
-				.enablePreprocessing(true)
-				.epochs(1)
-				
-				.build();
-		
-		Model model = ModelFactory.createFromConfig(config);
-		model.fit();
-		evaluateDatasetsForCTRLS_REG(model);
-		
-		// Doc2 Vec
-		Config config2 = new ConfigDoc2VecFactory()
-				.corpusSourceFile(new ClassPathResource("examples/corpus-doc/corpus_2").getFile())
-				.documentsSourceFile(new File("/Users/christopherl/citadel/data/labels/DOC"))
-				.minWordFrequency(1)
-				.addDefaultStopWords(true)
-				.enablePreprocessing(true)
-				.epochs(5)
-				
-				.build();
-		
-		Model model2 = ModelFactory.createFromConfig(config2);
-		model2.fit();
-		evaluateDatasetsForCTRLS_REG(model2);
 	}
 	
 }

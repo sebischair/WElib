@@ -55,5 +55,5 @@ public interface Model {
 	 * @return dictionary Dictionary of labels and its contents
 	 */
 	public Map<String, String> getDocumentContents();
-	
+		
 }

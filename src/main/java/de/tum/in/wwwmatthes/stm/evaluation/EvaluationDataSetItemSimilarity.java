@@ -1,8 +1,5 @@
 package de.tum.in.wwwmatthes.stm.evaluation;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.nd4j.linalg.primitives.Pair;
 
 public class EvaluationDataSetItemSimilarity {
@@ -10,7 +7,7 @@ public class EvaluationDataSetItemSimilarity {
 	private String 	document;
 	private Double 	similarity;
 	private Integer 	documentLength;
-	private Double 	documentInputRatio;
+	private Double 	documentInputLengthRatio;
 	
 	public EvaluationDataSetItemSimilarity(String document, Double similarity) {
 		this.document 	= document;
@@ -29,14 +26,6 @@ public class EvaluationDataSetItemSimilarity {
 		this.document = document;
 	}
 
-	public double getSimilarity() {
-		return similarity;
-	}
-
-	public void setSimilarity(double similarity) {
-		this.similarity = similarity;
-	}
-
 	public Integer getDocumentLength() {
 		return documentLength;
 	}
@@ -45,12 +34,26 @@ public class EvaluationDataSetItemSimilarity {
 		this.documentLength = documentLength;
 	}
 
-	public Double getDocumentInputRatio() {
-		return documentInputRatio;
+	public Double getDocumentInputLengthRatio() {
+		return documentInputLengthRatio;
 	}
 
-	public void setDocumentInputRatio(Double documentInputRatio) {
-		this.documentInputRatio = documentInputRatio;
+	public void setDocumentInputLengthRatio(Double documentInputLengthRatio) {
+		this.documentInputLengthRatio = documentInputLengthRatio;
 	}
 
+	public void setSimilarity(Double similarity) {
+		this.similarity = similarity;
+	}
+
+	public Double getSimilarity() {
+		return similarity;
+	}
+
+	@Override
+	public String toString() {
+		return "EvaluationDataSetItemSimilarity [document=" + document + ", similarity=" + similarity
+				+ ", documentLength=" + documentLength + ", documentInputLengthRatio=" + documentInputLengthRatio + "]";
+	}
+	
 }

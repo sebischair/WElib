@@ -74,8 +74,9 @@ abstract class ModelImpl implements Model {
 	 * @return similarity Similarity between two vectors.
 	 */
 	public double similarity(INDArray vector1, INDArray vector2) {
-		if (vector1 != null && vector2 != null)
+		if (vector1 != null && vector2 != null) {
 			return Transforms.cosineSim(vector1, vector2);
+		}
 		return -1;
 	}
 	
@@ -106,12 +107,12 @@ abstract class ModelImpl implements Model {
 			throw new VocabularyMatchException(text);
 		}
 		
-		if(vector != null) {
+		if(vector != null && vector.amaxNumber().doubleValue() != 0) {
 			List<Pair<String, Double>> similarDocs 	= new ArrayList<Pair<String, Double>>();
 			
 			// Add
 			for(Entry<String, INDArray> entry : documentsLookupTable.entrySet()) {	
-				Double similarity = similarity(entry.getValue(), vector);
+				Double similarity = similarity(vector, entry.getValue());
 				similarDocs.add(new Pair<String, Double>(entry.getKey(), similarity));
 			}
 			
@@ -125,7 +126,7 @@ abstract class ModelImpl implements Model {
 			return similarDocs;
 		}
 		
-		return null;
+		throw new VocabularyMatchException(text);
 	}
 	
 	/**
@@ -189,29 +190,6 @@ abstract class ModelImpl implements Model {
 	}
 	
 	// Private Methods
-	
-	/*
-	private static String createStringFromList(List<String> tokens) {
-		tokens.removeAll(Arrays.asList(""));		
-		return String.join(" ", tokens);
-	}
-	*/
-	/*
-	private static boolean validTokens(VocabCache<VocabWord> vocab, List<String> tokens) {
-        for (String token : tokens) {
-        		System.out.println(token);
-        		if(token == "organization") {
-        			System.out.println(token);
-        			System.out.println(vocab.containsWord(token));
-        		}
-        	
-            if (vocab.containsWord(token)) {
-                return true;
-            }
-        }
-        return false;
-	}
-	*/
 	
 	private INDArray createVectorFromText(String text) {
 		return vectorFromText(text);

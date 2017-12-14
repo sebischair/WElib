@@ -5,111 +5,87 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.tum.in.wwwmatthes.stm.evaluation.datasets.DataSet;
+import de.tum.in.wwwmatthes.stm.evaluation.datasets.DataSetItem;
 import de.tum.in.wwwmatthes.stm.evaluation.datasets.DataSets;
 import de.tum.in.wwwmatthes.stm.models.Model;
 
-public class EvaluationDataSets {
+public class EvaluationDataSets extends EvaluationDataSetItemCollection {
 	
-	private DataSets dataSets;
-	private Map<String, String> contents; 
-	private List<EvaluationDataSet> dataSetList;
+	// Attributes
+	private DataSets 			dataSets;
+	private Map<String, String> 	contents; 
 	
-	// Evaluation
-	private Double mrr;
-	private Double averageInputDocumentRatio;
-	private Double averageRank;
-	
-	// Public Methods
-	
-	public void evaluate(Model model) {
+	private List<EvaluationDataSet> evaluatedDataSetList;
+	private List<EvaluationDataSet> evaluatedDataSetListWithError;
 		
-		// Contents
-		this.contents = model.getDocumentContents();
+	// Public Methods: Evaluation
+	public static EvaluationDataSets evaluate(DataSets dataSets, Model model) {
 		
-		// Evaluate Data Set Items
-		for(EvaluationDataSet item : dataSetList) {
-			item.evaluate(model);
-		}
-		
-		// Calculate MRR from evaluated Data Set Items
-		Double mrr = 0.0;
-		Double averageInputDocumentRatio = 0.0;
-		Double averageRank = 0.0;
-		
-		List<EvaluationDataSet> evaluatedItems = getEvaluatedItems();
-		if (evaluatedItems.size() > 0) {
-			for(EvaluationDataSet item : evaluatedItems) {
-				mrr += item.getMrr();
-				averageInputDocumentRatio += item.getAverageInputDocumentRatio();
-				averageRank += item.getAverageRank();
-			}
-			this.mrr = mrr / evaluatedItems.size();
-			this.averageInputDocumentRatio = averageInputDocumentRatio / evaluatedItems.size();
-			this.averageRank = averageRank / evaluatedItems.size();
+		// Initialize Map & Evaluate Data Set Item
+		Map<DataSet, List<EvaluationDataSetItem>> evaluatedDataSetItemMap 			= new HashMap<DataSet, List<EvaluationDataSetItem>>();
+		Map<DataSet, List<EvaluationDataSetItem>> evaluatedDataSetItemMapWithError 	= new HashMap<DataSet, List<EvaluationDataSetItem>>();
+		for(DataSet dataSet: dataSets.getItems()) {
+			evaluatedDataSetItemMap.put(dataSet, new ArrayList<EvaluationDataSetItem>());
+			evaluatedDataSetItemMapWithError.put(dataSet, new ArrayList<EvaluationDataSetItem>());
 			
-		} else {
-			this.mrr = null;
-			this.averageInputDocumentRatio = null;
-			this.averageRank = null;
+			for(DataSetItem dataSetItem: dataSet.getItems()) {
+				EvaluationDataSetItem evaluatedDataSetItem = EvaluationDataSetItem.evaluate(dataSetItem, model);
+				if(!evaluatedDataSetItem.hasErrorAppeared()) {
+					evaluatedDataSetItemMap.get(dataSet).add(evaluatedDataSetItem);
+				} else {
+					evaluatedDataSetItemMapWithError.get(dataSet).add(evaluatedDataSetItem);
+				}
+			}
 		}
+		
+		// Data Sets
+		List<EvaluationDataSetItem> evaluatedDataSetItemList = new ArrayList<EvaluationDataSetItem>();
+		for(DataSet key: evaluatedDataSetItemMap.keySet()) {
+			evaluatedDataSetItemList.addAll(evaluatedDataSetItemMap.get(key));
+		}
+		
+		EvaluationDataSets evaluationDataSets = (EvaluationDataSets) EvaluationDataSetItemCollection.evaluate(new EvaluationDataSets(), evaluatedDataSetItemList, model);
+		evaluationDataSets.contents = model.getDocumentContents();
+		evaluationDataSets.dataSets = dataSets;
+		
+		// Data Set
+		List<EvaluationDataSet> evaluatedDataSetList = new ArrayList<EvaluationDataSet>();
+		List<EvaluationDataSet> evaluatedDataSetListWithError = new ArrayList<EvaluationDataSet>();
+		for(DataSet dataSet: evaluatedDataSetItemMap.keySet()) {
+			List<EvaluationDataSetItem> evaluatedDataSetItemListPerDataSet = evaluatedDataSetItemMap.get(dataSet);
+			List<EvaluationDataSetItem> evaluatedDataSetItemListWithErrorPerDataSet = evaluatedDataSetItemMapWithError.get(dataSet);
+			EvaluationDataSet evaluationDataSet = (EvaluationDataSet) EvaluationDataSetItemCollection.evaluate(new EvaluationDataSet(), evaluatedDataSetItemListPerDataSet, model);
+			evaluationDataSet.setDataSet(dataSet);
+			evaluationDataSet.setEvaluatedDataSetItemList(evaluatedDataSetItemListPerDataSet);
+			evaluationDataSet.setEvaluatedDataSetItemListWithError(evaluatedDataSetItemListWithErrorPerDataSet);
+			
+			if (!evaluationDataSet.hasErrorAppeared()) {
+				evaluatedDataSetList.add(evaluationDataSet);
+			} else {
+				evaluatedDataSetListWithError.add(evaluationDataSet);
+			}			
+		}
+
+		evaluationDataSets.evaluatedDataSetList 			= evaluatedDataSetList;
+		evaluationDataSets.evaluatedDataSetListWithError = evaluatedDataSetListWithError;
+		return evaluationDataSets;
 	}
-	
-	// Getters & Setters
-	
-	public Double getMrr() {
-		return mrr;
-	}
-	public Double getAverageInputDocumentRatio() {
-		return averageInputDocumentRatio;
-	}
+
 	public DataSets getDataSets() {
 		return dataSets;
 	}
-	public List<EvaluationDataSet> getDataSetList() {
-		return dataSetList;
-	}
-	void setMrr(Double mrr) {
-		this.mrr = mrr;
-	}
-	void setAverageInputDocumentRatio(Double averageInputDocumentRatio) {
-		this.averageInputDocumentRatio = averageInputDocumentRatio;
-	}
-	void setDataSets(DataSets dataSets) {
-		this.dataSets = dataSets;
-	}
-	void setDataSetList(List<EvaluationDataSet> dataSetList) {
-		this.dataSetList = dataSetList;
-	}
-	
-	// Private Methods
-	
+
 	public Map<String, String> getContents() {
 		return contents;
 	}
 
-	public void setContents(Map<String, String> contents) {
-		this.contents = contents;
+	public List<EvaluationDataSet> getEvaluatedDataSetList() {
+		return evaluatedDataSetList;
 	}
 
-	public Double getAverageRank() {
-		return averageRank;
+	public List<EvaluationDataSet> getEvaluatedDataSetListWithError() {
+		return evaluatedDataSetListWithError;
 	}
-
-	public void setAverageRank(Double averageRank) {
-		this.averageRank = averageRank;
-	}
-
-	private List<EvaluationDataSet> getEvaluatedItems() {
-		if (dataSetList != null) {
-			List<EvaluationDataSet> evaluatedItems = new ArrayList<EvaluationDataSet>();
-			for(EvaluationDataSet item : dataSetList) {
-				if (item.getMrr() != null) {
-					evaluatedItems.add(item);
-				}
-			}
-			return evaluatedItems;
-		}
-		return null;
-	}
-
+	
 }
