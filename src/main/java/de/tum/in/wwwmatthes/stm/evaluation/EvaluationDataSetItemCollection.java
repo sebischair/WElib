@@ -128,7 +128,7 @@ public class EvaluationDataSetItemCollection extends EvaluationBaseObject {
 		return averageMrr;
 	}
 
-	public Double getAverageInputDocumentLengthRatio() {
+	public Double getAverageDocumentInputLengthRatio() {
 		return averageDocumentInputLengthRatio;
 	}
 

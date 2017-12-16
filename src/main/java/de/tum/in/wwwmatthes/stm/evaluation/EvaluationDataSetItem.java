@@ -145,6 +145,7 @@ public class EvaluationDataSetItem extends EvaluationBaseObject {
 			//e.printStackTrace();
 			
 			EvaluationDataSetItem evaluationDataSetItem 	= new EvaluationDataSetItem();
+			evaluationDataSetItem.dataSetItem			= dataSetItem;
 			evaluationDataSetItem.hasErrorAppeared		= true;
 			evaluationDataSetItem.errorMessage 			= "Input '" + dataSetItem.getInput() + "' is invalid."; 
 			return evaluationDataSetItem;
@@ -198,6 +199,7 @@ public class EvaluationDataSetItem extends EvaluationBaseObject {
 						
 			EvaluationDataSetItemOutput output = new EvaluationDataSetItemOutput();
 			output.setRank(rank);
+			output.setRankInPercentage(rankInPercentage(rank, minRank, maxRank));
 			output.setOutputLength((long) outputLength);
 			output.setOutputInputLengthRatio(outputInputLengthRatio);
 			

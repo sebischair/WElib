@@ -38,7 +38,7 @@ class ModelTfidf extends ModelImpl {
 	public INDArray vectorFromText(String text) throws VocabularyMatchException {
 		INDArray vector = tfidfVectorizer.transform(text);
 		// Vector may not be null and not only zeros
-		if(vector != null && vector.amaxNumber().doubleValue() != 0) {
+		if(vector == null || vector.amaxNumber().doubleValue() == 0) {
 			throw new VocabularyMatchException(text);
 		}
 		return vector;
