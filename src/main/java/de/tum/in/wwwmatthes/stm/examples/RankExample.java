@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import org.apache.uima.resource.ResourceInitializationException;
@@ -11,6 +12,7 @@ import org.datavec.api.util.ClassPathResource;
 import org.deeplearning4j.models.paragraphvectors.ParagraphVectors;
 import org.deeplearning4j.text.sentenceiterator.BasicLineIterator;
 import org.deeplearning4j.text.sentenceiterator.SentenceIterator;
+import org.nd4j.linalg.primitives.Pair;
 
 import de.tum.in.wwwmatthes.stm.evaluation.Evaluation;
 import de.tum.in.wwwmatthes.stm.evaluation.EvaluationDataSet;
@@ -25,6 +27,8 @@ import de.tum.in.wwwmatthes.stm.models.Model;
 import de.tum.in.wwwmatthes.stm.models.ModelFactory;
 import de.tum.in.wwwmatthes.stm.models.config.Config;
 import de.tum.in.wwwmatthes.stm.models.config.ConfigDoc2VecFactory;
+import de.tum.in.wwwmatthes.stm.models.config.ConfigWord2VecFactory;
+import de.tum.in.wwwmatthes.stm.models.config.ConfigWord2VecTfidfFactory;
 import de.tum.in.wwwmatthes.stm.tokenizers.CustomTokenizerFactory;
 
 public class RankExample {
@@ -32,7 +36,30 @@ public class RankExample {
 	public static void main(String[] args) throws Exception {
 		
 		// Build Config
-		Config config = new ConfigDoc2VecFactory()
+		Config config2 = new ConfigDoc2VecFactory()
+				.corpusSourceFile(new ClassPathResource("examples/labeled").getFile())
+				.documentsSourceFile(new ClassPathResource("examples/unlabeled").getFile())
+				.minWordFrequency(0)
+				.epochs(5)
+				.addDefaultStopWords(true)
+				.enablePreprocessing(true)
+				.build();
+
+		// Create Model
+		Model model2 = ModelFactory.createFromConfig(config2);
+		model2.fit();
+		
+		// Evaluation
+		EvaluationDataSets evaluatedDataSets2 = Evaluation.evaluate(createDatasets(), model2);
+		
+		System.out.println();
+		System.out.println("=Data Sets=");
+		System.out.println(evaluatedDataSets2.getRelativeAverageRankInPercentage());
+		
+		System.exit(0);
+		
+		// Build Config
+		Config config = new ConfigWord2VecFactory()
 				.corpusSourceFile(new ClassPathResource("examples/labeled").getFile())
 				.documentsSourceFile(new ClassPathResource("examples/unlabeled").getFile())
 				.minWordFrequency(0)

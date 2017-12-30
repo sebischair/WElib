@@ -5,10 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum ConfigType {
-	TFIDF, WORD2VEC, DOC2VEC;
+	TFIDF, WORD2VEC, WORD2VEC_TFIDF, DOC2VEC;
 	
 	public static List<ConfigType> list() {
-		return Arrays.asList(TFIDF, WORD2VEC, DOC2VEC);
+		return Arrays.asList(TFIDF, WORD2VEC, WORD2VEC_TFIDF, DOC2VEC);
 	}
 	
 	public static List<String> stringList() {
@@ -25,7 +25,9 @@ public enum ConfigType {
 				return ConfigType.TFIDF;
 			} else if (string.equalsIgnoreCase("word2vec")) {
 				return ConfigType.WORD2VEC;
-			} else if (string.equalsIgnoreCase("doc2Vec")) {
+			} else if (string.equalsIgnoreCase("word2vecTfidf")) {
+				return ConfigType.WORD2VEC_TFIDF;
+			} else if (string.equalsIgnoreCase("doc2vec")) {
 				return ConfigType.DOC2VEC;
 			}
 		}
@@ -42,6 +44,8 @@ public enum ConfigType {
 			return "tfidf";
 		} else if (this == ConfigType.WORD2VEC) {
 			return "word2vec";
+		} else if (this == ConfigType.WORD2VEC_TFIDF) {
+			return "word2vecTfidf";
 		} else if (this == ConfigType.DOC2VEC) {
 			return "doc2vec";
 		}

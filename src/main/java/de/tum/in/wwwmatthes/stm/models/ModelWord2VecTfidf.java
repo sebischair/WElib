@@ -1,37 +1,33 @@
 package de.tum.in.wwwmatthes.stm.models;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
 
-import org.deeplearning4j.models.paragraphvectors.ParagraphVectors;
+import org.deeplearning4j.bagofwords.vectorizer.TfidfVectorizer;
 import org.deeplearning4j.models.word2vec.VocabWord;
 import org.deeplearning4j.models.word2vec.Word2Vec;
-import org.deeplearning4j.text.documentiterator.FileLabelAwareIterator;
-import org.deeplearning4j.text.documentiterator.LabelAwareIterator;
+import org.deeplearning4j.models.word2vec.wordstore.VocabCache;
 import org.deeplearning4j.text.sentenceiterator.BasicLineIterator;
 import org.deeplearning4j.text.sentenceiterator.FileSentenceIterator;
 import org.deeplearning4j.text.sentenceiterator.SentenceIterator;
-import org.deeplearning4j.text.tokenization.tokenizer.Tokenizer;
+import org.deeplearning4j.util.MathUtils;
 import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.factory.Nd4j;
 
 import de.tum.in.wwwmatthes.stm.exceptions.VocabularyMatchException;
 import de.tum.in.wwwmatthes.stm.models.config.Config;
-import de.tum.in.wwwmatthes.stm.util.meansbuilder.DefaultMeansBuilder;
 import de.tum.in.wwwmatthes.stm.util.meansbuilder.MeansBuilder;
+import de.tum.in.wwwmatthes.stm.util.meansbuilder.TfidfMeansBuilder;
 
-class ModelWord2Vec extends ModelImpl {
-	
+class ModelWord2VecTfidf extends ModelImpl {
+
 	// Variables
-	private Word2Vec 			vectors;
+	private Word2Vec 			word2VecVectors;
+	private TfidfVectorizer		tfidfVectors;
+	
 	private MeansBuilder 		meansBuilder;
 	
-	ModelWord2Vec(Config config) {
+	ModelWord2VecTfidf(Config config) {
 		super(config);
 		
 		Word2Vec.Builder builder = new Word2Vec.Builder();
@@ -49,7 +45,7 @@ class ModelWord2Vec extends ModelImpl {
 			builder.iterate(corpusSentenceIterator);
 		}
 		
-		vectors = builder
+		word2VecVectors = builder
 				
 				.minWordFrequency(config.getMinWordFrequency())
 				.stopWords(config.getTotalStopWords())
@@ -67,22 +63,32 @@ class ModelWord2Vec extends ModelImpl {
         			.allowParallelTokenization(false)
 	        		.tokenizerFactory(tokenizerFactory)
 	        		.build();
+		
+		// Tfidf
+		tfidfVectors = new TfidfVectorizer.Builder()
+				.setMinWordFrequency(config.getMinWordFrequency())
+				.setStopWords(config.getTotalStopWords())
+				.setTokenizerFactory(tokenizerFactory)
+			 	.setIterator(documentsLabelAwareIterator)
+			    	.build();
 	}
 
 	@Override
 	public void fit() throws VocabularyMatchException {
-		// Fit Model
-		vectors.fit();
 		
+		// Fit Model
+		word2VecVectors.fit();
+		tfidfVectors.fit();
+				
 		// Set Vocab
-		vocab = vectors.getVocab();
+		vocab = word2VecVectors.getVocab();
 		
 		//vectors.getLookupTable().plotVocab(100, new File("/Users/christopherl/Desktop/test.plot"));
-		System.out.println(vectors.getConfiguration());
-		System.out.println(vectors.wordsNearest("day", 20));
+		System.out.println(word2VecVectors.getConfiguration());
+		System.out.println(word2VecVectors.wordsNearest("day", 20));
 	
 		// Setup Means Builder
-		meansBuilder = new DefaultMeansBuilder(vectors.getLookupTable(), tokenizerFactory);
+		meansBuilder = new TfidfMeansBuilder(word2VecVectors.getLookupTable(), tokenizerFactory, tfidfVectors);
 		
 		// Create Documents Lookup Table
 		updateDocumentsLookupTable();
@@ -92,5 +98,5 @@ class ModelWord2Vec extends ModelImpl {
 	public INDArray vectorFromText(String text) {
 		return meansBuilder.transformString(text);
 	}
-	
+    
 }

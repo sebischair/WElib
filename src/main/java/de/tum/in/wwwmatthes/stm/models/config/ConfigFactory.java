@@ -86,6 +86,9 @@ public class ConfigFactory {
 		case WORD2VEC:
 			return new Gson().fromJson(json, ConfigWord2Vec.class);
 			
+		case WORD2VEC_TFIDF:
+			return new Gson().fromJson(json, ConfigWord2VecTfidf.class);
+			
 		case DOC2VEC:
 			return new Gson().fromJson(json, ConfigDoc2Vec.class);
 

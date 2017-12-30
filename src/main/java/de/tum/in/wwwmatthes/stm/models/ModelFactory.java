@@ -24,6 +24,9 @@ public class ModelFactory {
 		case WORD2VEC:
 			return new ModelWord2Vec(config);
 			
+		case WORD2VEC_TFIDF:
+			return new ModelWord2VecTfidf(config);
+			
 		case DOC2VEC:
 			return new ModelDoc2Vec(config);
 

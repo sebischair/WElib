@@ -114,7 +114,7 @@ abstract class ModelImpl implements Model {
 			// Sort 
 			Collections.sort(similarDocs, new Comparator<Pair<String, Double>>() {
 				public int compare(Pair<String, Double> o1, Pair<String, Double> o2) {
-					return o2.getValue().compareTo(o1.getValue());
+					return ModelImpl.compare(o1.getValue(), o2.getValue());
 				}
 			});
 			
@@ -183,5 +183,20 @@ abstract class ModelImpl implements Model {
 	public Map<String, String> getDocumentContents() {
 		return documentsContentLookupTable;
 	}	
+	
+	// Private Functions
+	
+	private static int compare(Double o1, Double o2) {
+        if (o1 == null && o2 == null) {
+            return 0;
+        }
+        if (o1 == null) {
+            return 1;
+        }
+        if (o2 == null) {
+            return -1;
+        }
+        return o2.compareTo(o1);
+	}
 	
 }

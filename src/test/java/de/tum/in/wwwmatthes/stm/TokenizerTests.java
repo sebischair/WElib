@@ -40,7 +40,7 @@ public class TokenizerTests {
 		CustomTokenizerFactory factory = new CustomTokenizerFactory();
 		factory.setAllowedPosTags(Arrays.asList("NN", "NNS", "NNP", "NNPS"));
 		
-		String expectedOutput 	= "casino yesterday tomorrow";
+		String expectedOutput 	= "casino yesterday tomorrow"; // "casino";
 		String actualOutput		= factory.processString(input);
 		
 		assertString(actualOutput, expectedOutput);
