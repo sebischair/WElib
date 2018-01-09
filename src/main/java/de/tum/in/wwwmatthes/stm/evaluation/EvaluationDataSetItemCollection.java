@@ -32,6 +32,10 @@ public class EvaluationDataSetItemCollection extends EvaluationBaseObject {
 	private Double 	averageRank;
 	private Double 	averageRankInPercentage;
 	private Double 	relativeAverageRankInPercentage;
+	
+	private Double 	averageBestRank;
+	private Double 	averageBestRankInPercentage;
+	private Double 	relativeAverageBestRankInPercentage;
 		
 	public static EvaluationDataSetItemCollection evaluate(EvaluationDataSetItemCollection evaluationCollection, List<EvaluationDataSetItem> dataSetItems, Model model) {
 		
@@ -60,6 +64,10 @@ public class EvaluationDataSetItemCollection extends EvaluationBaseObject {
 			Double averageRankInPercentageSum					= 0.0;
 			Double relativeAverageRankInPercentageSum			= 0.0;
 			
+			Double averageBestRankSum 								= 0.0;
+			Double averageBestRankInPercentageSum					= 0.0;
+			Double relativeAverageBestRankInPercentageSum			= 0.0;
+			
 			for(EvaluationDataSetItem item : dataSetItems) {
 				averageMrrSum 								+= item.getMrr();
 				averageInputLengthSum						+= item.getInputLength();
@@ -81,6 +89,10 @@ public class EvaluationDataSetItemCollection extends EvaluationBaseObject {
 				averageRankSum 								+= item.getAverageRank();
 				averageRankInPercentageSum					+= item.getAverageRankInPercentage();
 				relativeAverageRankInPercentageSum 			+= item.getRelativeAverageRankInPercentage();
+				
+				averageBestRankSum 								+= item.getBestRank();
+				averageBestRankInPercentageSum					+= item.getBestRankInPercentage();
+				relativeAverageBestRankInPercentageSum 			+= item.getRelativeBestRankInPercentage();
 				
 				// Min Max
 				Integer minRank = item.getMinRank();
@@ -112,6 +124,11 @@ public class EvaluationDataSetItemCollection extends EvaluationBaseObject {
 			
 			Double minRank = evaluationCollection.averageEvaluationMinRank;
 			Double maxRank = evaluationCollection.averageEvaluationMaxRank;
+			
+			evaluationCollection.averageBestRank								= averageBestRankSum 						/ dataSetItemListSize;
+			evaluationCollection.averageBestRankInPercentage					= averageBestRankInPercentageSum 			/ dataSetItemListSize;
+			evaluationCollection.relativeAverageBestRankInPercentage 			= relativeAverageBestRankInPercentageSum 	/ dataSetItemListSize;
+			
 			evaluationCollection.minMaxRankDifference					= evaluationCollection.maxRank - evaluationCollection.minRank;
 			evaluationCollection.minRankInPercentage						= EvaluationDataSetItem.rankInPercentage(evaluationCollection.minRank, minRank, maxRank);
 			evaluationCollection.maxRankInPercentage						= EvaluationDataSetItem.rankInPercentage(evaluationCollection.maxRank, minRank, maxRank);
@@ -210,6 +227,18 @@ public class EvaluationDataSetItemCollection extends EvaluationBaseObject {
 
 	public Double getAverageOutputInputLengthRatio() {
 		return averageOutputInputLengthRatio;
-	}	
+	}
+
+	public Double getAverageBestRank() {
+		return averageBestRank;
+	}
+
+	public Double getAverageBestRankInPercentage() {
+		return averageBestRankInPercentage;
+	}
+
+	public Double getRelativeAverageBestRankInPercentage() {
+		return relativeAverageBestRankInPercentage;
+	}
 	
 }

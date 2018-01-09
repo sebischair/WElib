@@ -37,6 +37,10 @@ public class EvaluationDataSetItem extends EvaluationBaseObject {
 	private Double 	averageRankInPercentage;
 	private Double 	relativeAverageRankInPercentage;
 	
+	private Integer 	bestRank = Integer.MAX_VALUE;
+	private Double 	bestRankInPercentage;
+	private Double 	relativeBestRankInPercentage;
+	
 	// Similarities
 	private List<EvaluationDataSetItemSimilarity> similarityList;
 	
@@ -134,6 +138,18 @@ public class EvaluationDataSetItem extends EvaluationBaseObject {
 	public void setAverageOutputInputLengthRatio(Double averageOutputInputLengthRatio) {
 		this.averageOutputInputLengthRatio = averageOutputInputLengthRatio;
 	}
+	
+	public Integer getBestRank() {
+		return bestRank;
+	}
+
+	public Double getBestRankInPercentage() {
+		return bestRankInPercentage;
+	}
+
+	public Double getRelativeBestRankInPercentage() {
+		return relativeBestRankInPercentage;
+	}
 
 	public static EvaluationDataSetItem evaluate(DataSetItem dataSetItem, Model model) {
 		
@@ -211,6 +227,7 @@ public class EvaluationDataSetItem extends EvaluationBaseObject {
 			// Min Max
 			if(rank < evaluationDataSetItem.minRank) { evaluationDataSetItem.minRank = rank; }
 			if(rank > evaluationDataSetItem.maxRank) { evaluationDataSetItem.maxRank = rank; }
+			if(rank < evaluationDataSetItem.bestRank) { evaluationDataSetItem.bestRank = rank; }
 		}
 
 		evaluationDataSetItem.outputMap 							= outputMap;
@@ -222,6 +239,9 @@ public class EvaluationDataSetItem extends EvaluationBaseObject {
 		evaluationDataSetItem.averageRank						= averageRank / dataSetItem.getOutput().size();
 		evaluationDataSetItem.averageRankInPercentage			= rankInPercentage(evaluationDataSetItem.averageRank, minRank, maxRank);
 		evaluationDataSetItem.relativeAverageRankInPercentage 	= rankInPercentage(evaluationDataSetItem.averageRank, evaluationDataSetItem.evaluationOptimalRank, maxRank);
+		
+		evaluationDataSetItem.bestRankInPercentage				= rankInPercentage(evaluationDataSetItem.bestRank, minRank, maxRank);
+		evaluationDataSetItem.relativeBestRankInPercentage 		= rankInPercentage(evaluationDataSetItem.bestRank, evaluationDataSetItem.evaluationOptimalRank, maxRank);
 		
 		evaluationDataSetItem.averageOutputLength				= averageOutputLength / dataSetItem.getOutput().size();
 		evaluationDataSetItem.averageOutputInputLengthRatio		= averageOutputInputLengthRatio / dataSetItem.getOutput().size();

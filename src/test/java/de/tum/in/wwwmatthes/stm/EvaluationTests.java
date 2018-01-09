@@ -39,6 +39,7 @@ public class EvaluationTests {
 		// Create Config
 		Config config = new ConfigTfidfFactory()
 				.documentsSourceFile(new ClassPathResource("examples/unlabeled").getFile())
+				.enableStemming(true)
 				.build();
 
 		// Create Model
@@ -51,6 +52,9 @@ public class EvaluationTests {
 		// -- Data Set 1
 		EvaluationDataSet evaluatedDataSet1 = evaluatedDataSets.getEvaluatedDataSetList().get(1);
 		
+		assertDouble(evaluatedDataSet1.getAverageBestRank(), 1);
+		assertDouble(evaluatedDataSet1.getAverageBestRankInPercentage(), 1);
+		assertDouble(evaluatedDataSet1.getRelativeAverageBestRankInPercentage(), 1.1666);
 		assertDouble(evaluatedDataSet1.getAverageMrr(), (1 + 0.5 + 1/3.0)/3);
 		assertDouble(evaluatedDataSet1.getAverageRank(), 2);
 		assertDouble(evaluatedDataSet1.getAverageRankInPercentage(), 0.5);
@@ -303,7 +307,7 @@ public class EvaluationTests {
 	}
 	
 	private static void assertDouble(double actual, double expected) {
-		assertEquals(expected, actual, 0.000005);
+		assertEquals(expected, actual, 0.005);
 	}
 	
 }
