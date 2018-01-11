@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.StringTokenizer;
 
 import org.apache.commons.io.FilenameUtils;
 import org.deeplearning4j.models.embeddings.loader.WordVectorSerializer;
@@ -30,12 +31,14 @@ import de.tum.in.wwwmatthes.stm.examples.RankExample;
 import de.tum.in.wwwmatthes.stm.exceptions.VocabularyMatchException;
 import de.tum.in.wwwmatthes.stm.models.config.Config;
 import de.tum.in.wwwmatthes.stm.models.config.ConfigFactory;
+import de.tum.in.wwwmatthes.stm.preprocessing.StopWords;
 import de.tum.in.wwwmatthes.stm.tokenizers.CustomTokenizerFactory;
 
 abstract class ModelImpl implements Model {
 		
-	private Map<String, String> documentsContentLookupTable	= new HashMap<String, String>(); // Only for debugging
-	private Map<String, INDArray> documentsLookupTable 		= new HashMap<String, INDArray>();
+	private Map<String, String> documentsPreprocessedContentLookupTable	= new HashMap<String, String>();
+	private Map<String, String> documentsContentLookupTable				= new HashMap<String, String>(); // Only for debugging
+	private Map<String, INDArray> documentsLookupTable 					= new HashMap<String, INDArray>();
 	
 	// Variables
 	protected LabelAwareIterator 		documentsLabelAwareIterator;
@@ -160,6 +163,23 @@ abstract class ModelImpl implements Model {
 		return null;
 	}
 	
+	@Override
+	public String processString(String text) {
+		String preprocessedString = tokenizerFactory.processString(text);
+		
+		List<String> result		 	= new ArrayList<String>();
+		StringTokenizer tokenizer	= new StringTokenizer(preprocessedString);
+		
+		while(tokenizer.hasMoreTokens()) {
+			String token = tokenizer.nextToken();
+			if(!StopWords.getStopWords().contains(token)){
+				result.add(token);
+	        }
+		}
+
+		return String.join(" ", result);
+	}
+	
 	/**
 	 * Returns the content for the given document label.
 	 * 
@@ -168,6 +188,11 @@ abstract class ModelImpl implements Model {
 	 */
 	public String getContentForDocument(String label) {
 		return documentsContentLookupTable.get(label);
+	}
+	
+	@Override
+	public String getContentPreprocessedForDocument(String label) {
+		return documentsPreprocessedContentLookupTable.get(label);
 	}
 		
 	/**
@@ -187,7 +212,11 @@ abstract class ModelImpl implements Model {
 			INDArray labelledDocumentVector = vectorFromText(labelledDocument.getContent());
 			if (labelledDocumentId != null && labelledDocumentVector != null) {
 				lookupTable.put(labelledDocumentId, labelledDocumentVector);
+				
 				documentsContentLookupTable.put(labelledDocumentId, labelledDocument.getContent());
+				
+				String tokenizedString = processString(labelledDocument.getContent());
+				documentsPreprocessedContentLookupTable.put(labelledDocumentId, tokenizedString);
 			}
 		}
 		
@@ -198,7 +227,13 @@ abstract class ModelImpl implements Model {
 	@Override
 	public Map<String, String> getDocumentContents() {
 		return documentsContentLookupTable;
+	}
+	
+	@Override
+	public Map<String, String> getDocumentPreprocessedContents() {
+		return documentsContentLookupTable;
 	}	
+	
 	
 	@Override
 	public void write(File directory, String identifier) throws IOException {

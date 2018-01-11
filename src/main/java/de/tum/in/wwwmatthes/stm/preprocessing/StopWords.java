@@ -5,13 +5,16 @@ import java.util.List;
 public class StopWords {
 	
 	public static List<String> getStopWords() {
-		List<String> list = org.deeplearning4j.text.stopwords.StopWords.getStopWords();
-		list.add("shall");
-		//list.add("s");
-		//list.add("c");
-		//list.add("may");
-		//list.add("can");
+		if (list == null) {
+			List<String> newList = org.deeplearning4j.text.stopwords.StopWords.getStopWords();
+			newList.add("shall");
+			
+			list = newList;
+		}
 		return list;
+
 	}
+	
+	private static List<String> list = null;
 
 }

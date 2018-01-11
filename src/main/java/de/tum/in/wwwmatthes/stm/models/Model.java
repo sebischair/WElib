@@ -59,9 +59,25 @@ public interface Model {
 	public Map<String, String> getDocumentContents();
 	
 	/**
+	 * Returns a dictionary with the label as key and content as value.
+	 * 
+	 * @return dictionary Dictionary of labels and its contents
+	 */
+	public Map<String, String> getDocumentPreprocessedContents();
+	
+	public String getContentPreprocessedForDocument(String label);
+	
+	/**
 	 * Writes the Model.
 	 * 
 	 */
 	public void write(File directory, String identifier) throws IOException;
+
+	/**
+	 * Tokenizes a string
+	 * 
+	 */
+	public String processString(String text);
+	
 		
 }
