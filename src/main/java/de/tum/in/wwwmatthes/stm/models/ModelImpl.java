@@ -1,5 +1,7 @@
 package de.tum.in.wwwmatthes.stm.models;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -9,7 +11,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.commons.io.FilenameUtils;
+import org.deeplearning4j.models.embeddings.loader.WordVectorSerializer;
 import org.deeplearning4j.models.word2vec.VocabWord;
+import org.deeplearning4j.models.word2vec.Word2Vec;
 import org.deeplearning4j.models.word2vec.wordstore.VocabCache;
 import org.deeplearning4j.text.documentiterator.FileLabelAwareIterator;
 import org.deeplearning4j.text.documentiterator.LabelAwareIterator;
@@ -18,9 +23,13 @@ import org.deeplearning4j.text.tokenization.tokenizerfactory.TokenizerFactory;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.ops.transforms.Transforms;
 import org.nd4j.linalg.primitives.Pair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import de.tum.in.wwwmatthes.stm.examples.RankExample;
 import de.tum.in.wwwmatthes.stm.exceptions.VocabularyMatchException;
 import de.tum.in.wwwmatthes.stm.models.config.Config;
+import de.tum.in.wwwmatthes.stm.models.config.ConfigFactory;
 import de.tum.in.wwwmatthes.stm.tokenizers.CustomTokenizerFactory;
 
 abstract class ModelImpl implements Model {
@@ -33,8 +42,15 @@ abstract class ModelImpl implements Model {
 	protected CustomTokenizerFactory 	tokenizerFactory;
 	protected VocabCache<VocabWord>		vocab;
 	
+	protected Config 					config;
+	
+	protected static Logger log = LoggerFactory.getLogger(ModelImpl.class);
+	
 	ModelImpl(Config config) {
 		super();
+		
+		// Set Config
+		this.config = config;
 		
 		System.out.println("Config:");
 		System.out.println(config);
@@ -184,6 +200,30 @@ abstract class ModelImpl implements Model {
 		return documentsContentLookupTable;
 	}	
 	
+	@Override
+	public void write(File directory, String identifier) throws IOException {
+				
+		// Save Config
+		config.writeToFile(getConfigFile(directory, identifier));
+		
+		// Save Model
+		writeModel(getModelFile(directory, identifier));
+	}
+	
+	protected abstract void writeModel(File file);
+	
+	protected void read(File file) throws Exception {
+		String identifier	= FilenameUtils.getBaseName(file.getAbsolutePath());
+		File directory 		= new File(FilenameUtils.getFullPath(file.getAbsolutePath()));
+				
+		Config config 		= ConfigFactory.buildFromFile(getConfigFile(directory, identifier));
+		File modelFile 		= getModelFile(directory, identifier);
+
+		readModel(modelFile, config);
+	}
+	
+	protected abstract void readModel(File modelFile, Config config) throws Exception;
+	
 	// Private Functions
 	
 	private static int compare(Double o1, Double o2) {
@@ -197,6 +237,21 @@ abstract class ModelImpl implements Model {
             return -1;
         }
         return o2.compareTo(o1);
+	}
+	
+	static File getConfigFile(File directory, String identifier) {
+		return new File(directory, identifier + ".config");
+	}
+	
+	static File getConfigFileFromModeFile(File file) {
+		String identifier	= FilenameUtils.getBaseName(file.getAbsolutePath());
+		File directory 		= new File(FilenameUtils.getFullPath(file.getAbsolutePath()));
+		
+		return getConfigFile(directory, identifier);
+	}
+	
+	static File getModelFile(File directory, String identifier) {
+		return new File(directory, identifier + ".model");
 	}
 	
 }

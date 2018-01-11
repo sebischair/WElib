@@ -1,5 +1,7 @@
 package de.tum.in.wwwmatthes.stm.models;
 
+import java.io.File;
+
 import org.deeplearning4j.bagofwords.vectorizer.TfidfVectorizer;
 import org.nd4j.linalg.api.ndarray.INDArray;
 
@@ -42,6 +44,16 @@ class ModelTfidf extends ModelImpl {
 			throw new VocabularyMatchException(text);
 		}
 		return vector;
+	}
+
+	@Override
+	protected void writeModel(File file) {
+		
+	}
+	
+	@Override
+	protected void readModel(File modelFile, Config config) throws Exception {
+		fit();
 	}
 	
 }

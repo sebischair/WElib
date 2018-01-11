@@ -8,7 +8,7 @@ import de.tum.in.wwwmatthes.stm.models.config.Config;
 import de.tum.in.wwwmatthes.stm.models.config.ConfigFactory;
 
 public class ModelFactory {
-
+	
 	public static Model createFromConfigFile(File file) throws IOException, InvalidConfigException {
 		Config config = ConfigFactory.buildFromFile(file);
 		return createFromConfig(config);
@@ -34,6 +34,38 @@ public class ModelFactory {
 			return null;
 		}
 		
+	}
+	
+	
+	public static Model read(File file) throws Exception {
+		
+		Config config 	= ConfigFactory.buildFromFile(ModelImpl.getConfigFileFromModeFile(file));
+		
+		ModelImpl model 	= null;
+		switch (config.getType()) {
+		
+		case TFIDF:
+			model = new ModelTfidf(config);
+			break;
+			
+		case WORD2VEC:
+			model = new ModelWord2Vec(config);
+			break;
+			
+		case WORD2VEC_TFIDF:
+			model = new ModelWord2VecTfidf(config);
+			break;
+			
+		case DOC2VEC:
+			model = new ModelDoc2Vec(config);
+			break;
+
+		default:
+			return null;
+		}
+		
+		model.read(file);
+		return model;
 	}
 
 }

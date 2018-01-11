@@ -1,5 +1,7 @@
 package de.tum.in.wwwmatthes.stm.models;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -55,5 +57,11 @@ public interface Model {
 	 * @return dictionary Dictionary of labels and its contents
 	 */
 	public Map<String, String> getDocumentContents();
+	
+	/**
+	 * Writes the Model.
+	 * 
+	 */
+	public void write(File directory, String identifier) throws IOException;
 		
 }
