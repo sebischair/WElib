@@ -8,7 +8,7 @@ public enum ConfigType {
 	TFIDF, WORD2VEC, WORD2VEC_TFIDF, DOC2VEC;
 	
 	public static List<ConfigType> list() {
-		return Arrays.asList(TFIDF, WORD2VEC, WORD2VEC_TFIDF, DOC2VEC);
+		return Arrays.asList(TFIDF, WORD2VEC, DOC2VEC);
 	}
 	
 	public static List<String> stringList() {

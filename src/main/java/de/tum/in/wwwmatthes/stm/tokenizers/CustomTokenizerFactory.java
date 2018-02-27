@@ -42,7 +42,8 @@ public class CustomTokenizerFactory implements TokenizerFactory {
 
 	@Override
 	public Tokenizer create(String toTokenize) {
-		Tokenizer tokenizer = new CustomTokenizer(toTokenize, getAnalysisEngine(), getCAS(), allowedPosTags, true);
+		CustomTokenizer tokenizer = new CustomTokenizer(toTokenize, getAnalysisEngine(), getCAS(), allowedPosTags, true);
+		
 		if (tokenPreProcess != null) {
         		tokenizer.setTokenPreProcessor(tokenPreProcess);
 		}
