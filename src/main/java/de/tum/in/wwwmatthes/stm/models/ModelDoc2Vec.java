@@ -64,13 +64,6 @@ class ModelDoc2Vec extends ModelImpl {
 	public void fit() throws VocabularyMatchException {
 		// Fit Model
 		vectors.fit();		
-		System.out.println(vectors.wordsNearest("data", 20));
-		
-		// Set Vocab
-		vocab = vectors.getVocab();
-		
-		// Create Documents Lookup Table
-		updateDocumentsLookupTable();
 	}
 
 	@Override
@@ -98,10 +91,6 @@ class ModelDoc2Vec extends ModelImpl {
 		vectors.setTokenizerFactory(tokenizerFactory);
 
 		this.vectors			= vectors;
-		this.vocab 			= vectors.getVocab();
-		
-		// Create Documents Lookup Table
-		this.updateDocumentsLookupTable();
 	}
 
 }

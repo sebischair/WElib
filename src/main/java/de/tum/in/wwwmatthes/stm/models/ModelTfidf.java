@@ -1,8 +1,13 @@
 package de.tum.in.wwwmatthes.stm.models;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
 
 import org.deeplearning4j.bagofwords.vectorizer.TfidfVectorizer;
+import org.deeplearning4j.text.documentiterator.DocumentIterator;
+import org.deeplearning4j.text.sentenceiterator.CollectionSentenceIterator;
 import org.nd4j.linalg.api.ndarray.INDArray;
 
 import de.tum.in.wwwmatthes.stm.exceptions.VocabularyMatchException;
@@ -15,25 +20,27 @@ class ModelTfidf extends ModelImpl {
 
 	ModelTfidf(Config config) {
 		super(config);
-			
-		tfidfVectorizer = new TfidfVectorizer.Builder()
-			.setMinWordFrequency(config.getMinWordFrequency())
-			.setStopWords(config.getTotalStopWords())
-			.setTokenizerFactory(tokenizerFactory)
-		 	.setIterator(documentsLabelAwareIterator)
-		    	.build();
+		
+		fit(new ArrayList<String>());
 	}
 	
 	@Override
 	public void fit() throws VocabularyMatchException {
-		// Fit Model
-		tfidfVectorizer.fit();
+		// Nothing to do here
+	}
+	
+	@Override
+	public void putDocuments(Map<String, String> documents) throws VocabularyMatchException {
 		
-		// Set Vocab
-		vocab = tfidfVectorizer.getVocabCache();
+		Collection<String> collection = new ArrayList<String>();
+		for(String key : documents.keySet()) {
+			collection.add(documents.get(key));
+		}
+		
+		fit(collection);
 				
-		// Update documents look up table
-		updateDocumentsLookupTable();
+		// Super Put Documents
+		super.putDocuments(documents);
 	}
 	
 	@Override
@@ -54,6 +61,18 @@ class ModelTfidf extends ModelImpl {
 	@Override
 	protected void readModel(File modelFile, Config config) throws Exception {
 		fit();
+	}
+	
+	// Private Methods
+	
+	private void fit(Collection<String> documents) {
+		tfidfVectorizer = new TfidfVectorizer.Builder()
+				.setMinWordFrequency(config.getMinWordFrequency())
+				.setStopWords(config.getTotalStopWords())
+				.setTokenizerFactory(tokenizerFactory)
+				.setIterator(new CollectionSentenceIterator(documents))
+			    	.build();
+		tfidfVectorizer.fit();
 	}
 	
 }

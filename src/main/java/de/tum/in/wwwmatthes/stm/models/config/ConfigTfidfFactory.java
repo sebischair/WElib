@@ -18,7 +18,6 @@ public class ConfigTfidfFactory extends ConfigFactory {
 		config.setStemmingEnabled(stemmingEnabled);
 		config.setAllowedPosTags(allowedPosTags);
 		config.setStopWords(stopWords);
-		config.setDocumentsSourceFile(documentsSourceFile);
 		config.setAddDefaultStopWords(addDefaultStopWords);
 		
 		return config;

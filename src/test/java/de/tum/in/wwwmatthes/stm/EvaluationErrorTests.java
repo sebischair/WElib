@@ -23,12 +23,13 @@ import de.tum.in.wwwmatthes.stm.models.config.ConfigTfidfFactory;
 
 public class EvaluationErrorTests {
 	
+	/*
 	@Test
 	public void test() throws Exception {
 		
 		// Create Config
 		Config config = new ConfigTfidfFactory()
-				.documentsSourceFile(new ClassPathResource("examples/unlabeled").getFile())
+				//.documentsSourceFile(new ClassPathResource("examples/unlabeled").getFile())
 				.minWordFrequency(0)
 				.build();
 
@@ -69,5 +70,7 @@ public class EvaluationErrorTests {
 				new DataSet("DataSet2", Arrays.asList(item3)))
 			);
 	}
+	
+	*/
 
 }

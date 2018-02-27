@@ -78,15 +78,9 @@ class ModelWord2Vec extends ModelImpl {
 	public void fit() throws VocabularyMatchException {
 		// Fit Model
 		vectors.fit();
-		
-		// Set Vocab
-		vocab = vectors.getVocab();
-	
+			
 		// Setup Means Builder
 		meansBuilder = new DefaultMeansBuilder(vectors.getLookupTable(), tokenizerFactory);
-		
-		// Create Documents Lookup Table
-		updateDocumentsLookupTable();
 	}
 
 	@Override
@@ -109,11 +103,7 @@ class ModelWord2Vec extends ModelImpl {
 		Word2Vec vectors 	= WordVectorSerializer.readWord2VecModel(modelFile);
 
 		this.vectors			= vectors;
-		this.vocab 			= vectors.getVocab();
 		this.meansBuilder	= new DefaultMeansBuilder(vectors.getLookupTable(), tokenizerFactory);
-		
-		// Create Documents Lookup Table
-		this.updateDocumentsLookupTable();
 	}
 		
 }

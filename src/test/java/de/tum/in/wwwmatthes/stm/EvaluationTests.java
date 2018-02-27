@@ -6,11 +6,16 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.bytedeco.javacpp.avfilter.avfilter_action_func;
 import org.datavec.api.util.ClassPathResource;
+import org.deeplearning4j.iterator.provider.FileLabeledSentenceProvider;
+import org.deeplearning4j.text.documentiterator.FileLabelAwareIterator;
+import org.deeplearning4j.text.sentenceiterator.labelaware.LabelAwareFileSentenceIterator;
 import org.junit.Test;
 
 import de.tum.in.wwwmatthes.stm.evaluation.Evaluation;
@@ -25,10 +30,12 @@ import de.tum.in.wwwmatthes.stm.models.Model;
 import de.tum.in.wwwmatthes.stm.models.ModelFactory;
 import de.tum.in.wwwmatthes.stm.models.config.Config;
 import de.tum.in.wwwmatthes.stm.models.config.ConfigTfidfFactory;
+import de.tum.in.wwwmatthes.stm.models.config.ConfigWord2VecFactory;
 import junit.framework.Assert;
 
 public class EvaluationTests {
 	
+	/*
 	private static String testInput1 = "Before healing others, heal yourself.";
 	private static String testInput2 = "Exchange dollars in a stock market .";
 	private static String testInput3 = "Time and health are two precious assets that we don't recognize and appreciate until they have been depleted. The way to make money is to buy when blood is running in the streets.";
@@ -36,16 +43,31 @@ public class EvaluationTests {
 	@Test
 	public void test() throws Exception {
 		
+		Map<String, String> documents = new HashMap<String, String>();
+		documents.put("1", "Big Data");
+		documents.put("2", "I");
+		documents.put("3", "am");
+		documents.put("4", "Max");
+		documents.put("5", "how");
+		documents.put("6", "are");
+		documents.put("7", "you");
+		
 		// Create Config
-		Config config = new ConfigTfidfFactory()
-				.documentsSourceFile(new ClassPathResource("examples/unlabeled").getFile())
+		Config config = new ConfigWord2VecFactory()
+				//.documentsSourceFile(new ClassPathResource("examples/unlabeled").getFile())
+				.corpusSourceFile(new ClassPathResource("examples/corpus").getFile())
 				.enableStemming(true)
 				.build();
-
+	
 		// Create Model
 		Model model = ModelFactory.createFromConfig(config);
 		model.fit();
+		model.putDocuments(documents);
 		
+		FileLabelAwareIterator iterator = new FileLabelAwareIterator.Builder()
+				.addSourceFolder(new ClassPathResource("examples/unlabeled").getFile())
+				.build();
+
 		// Evaluation
 		EvaluationDataSets evaluatedDataSets = Evaluation.evaluate(createDatasets(), model);
 				
@@ -198,12 +220,7 @@ public class EvaluationTests {
 		
 	}
 	
-	/*
-	 * item i1: health and should be health
-	 * item i2: finance and should be health
-	 * item i3: science and should be health
-	 */
-	
+
 	private static DataSets createDatasets() {	
 		
 		 // Health
@@ -309,5 +326,6 @@ public class EvaluationTests {
 	private static void assertDouble(double actual, double expected) {
 		assertEquals(expected, actual, 0.005);
 	}
+	*/
 	
 }

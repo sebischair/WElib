@@ -24,9 +24,6 @@ public class ModelFactory {
 		case WORD2VEC:
 			return new ModelWord2Vec(config);
 			
-		case WORD2VEC_TFIDF:
-			return new ModelWord2VecTfidf(config);
-			
 		case DOC2VEC:
 			return new ModelDoc2Vec(config);
 
@@ -50,10 +47,6 @@ public class ModelFactory {
 			
 		case WORD2VEC:
 			model = new ModelWord2Vec(config);
-			break;
-			
-		case WORD2VEC_TFIDF:
-			model = new ModelWord2VecTfidf(config);
 			break;
 			
 		case DOC2VEC:

@@ -24,9 +24,7 @@ public interface Config {
 	public List<String> getAllowedPosTags();
 
 	public Integer getMinWordFrequency();
-	
-	public File getDocumentsSourceFile();
-	
+		
 	public File getCorpusFile();
 	public File getCorpusSourceFile();
 

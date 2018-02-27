@@ -2,11 +2,14 @@ package de.tum.in.wwwmatthes.stm.models;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.deeplearning4j.models.embeddings.WeightLookupTable;
 import org.deeplearning4j.models.word2vec.VocabWord;
+import org.deeplearning4j.text.documentiterator.LabelAwareIterator;
+import org.deeplearning4j.text.documentiterator.LabelledDocument;
 import org.nd4j.linalg.primitives.Pair;
 
 import de.tum.in.wwwmatthes.stm.exceptions.VocabularyMatchException;
@@ -58,15 +61,10 @@ public interface Model {
 	 */
 	public Map<String, String> getDocumentContents();
 	
-	/**
-	 * Returns a dictionary with the label as key and content as value.
-	 * 
-	 * @return dictionary Dictionary of labels and its contents
-	 */
-	public Map<String, String> getDocumentPreprocessedContents();
 	
-	public String getContentPreprocessedForDocument(String label);
-	
+	public void putDocuments(LabelAwareIterator documentsLabelAwareIterator) throws VocabularyMatchException;
+	public void putDocuments(Map<String, String> documents) throws VocabularyMatchException;
+		
 	/**
 	 * Writes the Model.
 	 * 

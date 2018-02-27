@@ -12,6 +12,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.StringTokenizer;
 
+import javax.annotation.Nonnull;
+
 import org.apache.commons.io.FilenameUtils;
 import org.deeplearning4j.models.embeddings.loader.WordVectorSerializer;
 import org.deeplearning4j.models.word2vec.VocabWord;
@@ -36,15 +38,11 @@ import de.tum.in.wwwmatthes.stm.tokenizers.CustomTokenizerFactory;
 
 abstract class ModelImpl implements Model {
 		
-	private Map<String, String> documentsPreprocessedContentLookupTable	= new HashMap<String, String>();
 	private Map<String, String> documentsContentLookupTable				= new HashMap<String, String>(); // Only for debugging
 	private Map<String, INDArray> documentsLookupTable 					= new HashMap<String, INDArray>();
 	
 	// Variables
-	protected LabelAwareIterator 		documentsLabelAwareIterator;
 	protected CustomTokenizerFactory 	tokenizerFactory;
-	protected VocabCache<VocabWord>		vocab;
-	
 	protected Config 					config;
 	
 	protected static Logger log = LoggerFactory.getLogger(ModelImpl.class);
@@ -55,14 +53,6 @@ abstract class ModelImpl implements Model {
 		// Set Config
 		this.config = config;
 		
-		System.out.println("Config:");
-		System.out.println(config);
-				
-		// Documents Label Aware Iterator
-		documentsLabelAwareIterator = new FileLabelAwareIterator.Builder()
-	              .addSourceFolder(config.getDocumentsSourceFile())
-	              .build();
-				
 		// Tokenizer Factory - Init
 		CustomTokenizerFactory tokenizerFactory = new CustomTokenizerFactory();
 		tokenizerFactory.setPreprocessingEnabled(config.isPreprocessingEnabled());
@@ -189,51 +179,46 @@ abstract class ModelImpl implements Model {
 	public String getContentForDocument(String label) {
 		return documentsContentLookupTable.get(label);
 	}
-	
-	@Override
-	public String getContentPreprocessedForDocument(String label) {
-		return documentsPreprocessedContentLookupTable.get(label);
-	}
 		
-	/**
-	 * Updates Documents lookup table.
-	 */
-	protected void updateDocumentsLookupTable() throws VocabularyMatchException {
-		Map<String, INDArray> lookupTable = new HashMap<String, INDArray>();
+	public void putDocuments(LabelAwareIterator documentsLabelAwareIterator) throws VocabularyMatchException {
+		Map<String, String> documents = new HashMap<String, String>();
 		
-		// Reset
-		documentsLabelAwareIterator.reset();
-
 		// Iterate
 		while(documentsLabelAwareIterator.hasNext()) {
 			LabelledDocument 	labelledDocument 		= documentsLabelAwareIterator.nextDocument();
 			String 				labelledDocumentId 		= labelledDocument.getLabels().get(0);
-			
-			INDArray labelledDocumentVector = vectorFromText(labelledDocument.getContent());
-			if (labelledDocumentId != null && labelledDocumentVector != null) {
-				lookupTable.put(labelledDocumentId, labelledDocumentVector);
-				
-				documentsContentLookupTable.put(labelledDocumentId, labelledDocument.getContent());
-				
-				String tokenizedString = processString(labelledDocument.getContent());
-				documentsPreprocessedContentLookupTable.put(labelledDocumentId, tokenizedString);
-			}
+			documents.put(labelledDocumentId, labelledDocument.getContent());
 		}
 		
-		// Set
-		documentsLookupTable = lookupTable;
+		putDocuments(documents);
 	}
 	
+	public void putDocuments(Map<String, String> documents) throws VocabularyMatchException {
+		
+		for(String key: documents.keySet()) {
+			putDocument(key, documents.get(key));
+		}
+		
+	}
+	
+	private void putDocument(String id, String content) throws VocabularyMatchException {
+		if (id!=null && content!=null) {
+			try {
+				INDArray labelledDocumentVector = vectorFromText(content);
+				documentsLookupTable.put(id, labelledDocumentVector);
+				documentsContentLookupTable.put(id, content);	
+			} catch (VocabularyMatchException e) {
+				throw new VocabularyMatchException(content);
+			}
+		} else {
+			log.error("Parameters may not be null. (id=" + id + ", content " + content + ")");
+		}
+	}
+			
 	@Override
 	public Map<String, String> getDocumentContents() {
 		return documentsContentLookupTable;
 	}
-	
-	@Override
-	public Map<String, String> getDocumentPreprocessedContents() {
-		return documentsContentLookupTable;
-	}	
-	
 	
 	@Override
 	public void write(File directory, String identifier) throws IOException {

@@ -60,11 +60,6 @@ public class ConfigDoc2VecFactory extends ConfigFactory {
 	}
 	
 	@Override
-	public ConfigDoc2VecFactory documentsSourceFile(File documentsSourceFile) {
-		return (ConfigDoc2VecFactory) super.documentsSourceFile(documentsSourceFile);
-	}
-	
-	@Override
 	public ConfigDoc2VecFactory stopWords(List<String> stopWords) {
 		return (ConfigDoc2VecFactory) super.stopWords(stopWords);
 	}
@@ -141,7 +136,6 @@ public class ConfigDoc2VecFactory extends ConfigFactory {
 		configDOC2VEC.setPreprocessingEnabled(preprocessingEnabled);
 		configDOC2VEC.setAllowedPosTags(allowedPosTags);
 		configDOC2VEC.setStopWords(stopWords);
-		configDOC2VEC.setDocumentsSourceFile(documentsSourceFile);
 		configDOC2VEC.setAddDefaultStopWords(addDefaultStopWords);
 		
 		configDOC2VEC.setEpochs(epochs);	

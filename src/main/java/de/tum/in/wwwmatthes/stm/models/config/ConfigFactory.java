@@ -23,8 +23,6 @@ public class ConfigFactory {
 	protected Boolean		addDefaultStopWords	= false;			
 	protected Integer 		minWordFrequency		= 0;
 	
-	protected File 			documentsSourceFile;
-	
 	protected ConfigFactory(ConfigType type) {
 		this.type = type;
 	}
@@ -64,11 +62,6 @@ public class ConfigFactory {
 		return this;
 	}
 	
-	public ConfigFactory documentsSourceFile(File documentsSourceFile) {
-		this.documentsSourceFile = documentsSourceFile;
-		return this;
-	}
-	
 	public Config build() throws InvalidConfigException {
 		throw new InvalidConfigException();
 	}
@@ -85,9 +78,6 @@ public class ConfigFactory {
 			
 		case WORD2VEC:
 			return new Gson().fromJson(json, ConfigWord2Vec.class);
-			
-		case WORD2VEC_TFIDF:
-			return new Gson().fromJson(json, ConfigWord2VecTfidf.class);
 			
 		case DOC2VEC:
 			return new Gson().fromJson(json, ConfigDoc2Vec.class);
